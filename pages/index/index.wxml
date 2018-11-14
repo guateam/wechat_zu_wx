@@ -1,5 +1,87 @@
 <!--index.wxml-->
 <view class="page">
- <i-button type="primary" bind:click="handleClick">这是一个按钮</i-button>
- <button class="weui-btn" type="primary">页面主操作 Normal</button>
+  <swiper class="swiper" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="1000">
+    <block wx:for="{{movies}}" wx:for-index="index">
+      <swiper-item>
+        <image src="{{item.url}}" class="slide-image" mode="aspectFill" />
+      </swiper-item>
+    </block>
+  </swiper>
+  <i-panel class="cell-panel-demo">
+    <i-cell title="御足堂影院式足道" label="" value="08:00~23:00"></i-cell>
+  </i-panel>
+  <i-panel class="cell-panel-demo" title="">
+    <i-cell title="头格月雅城10幢113号" value="拨打电话">
+      <i-icon type="../../src/定位.png" slot="icon" />
+    </i-cell>
+  </i-panel>
+  <i-row i-class="demo-row">
+    <i-col span="5" i-class="demo-col">8：33.33%</i-col>
+    <i-col span="5" i-class="demo-col">8：33.33%</i-col>
+    <i-col span="4" i-class="demo-col">8：33.33%</i-col>
+    <i-col span="5" i-class="demo-col">8：33.33%</i-col>
+    <i-col span="5" i-class="demo-col">8：33.33%</i-col>
+  </i-row>
+  <swiper class="swiper-word" vertical="true" circular="true" autoplay="true" interval="2000" duration="500">
+    <block wx:for="{{movies}}" wx:for-index="index">
+      <swiper-item>
+        <p class="slide-word" mode="aspectFill">测试公告测试公告测试公告</p>
+      </swiper-item>
+    </block>
+  </swiper>
+  <i-tabs current="{{ current }}" bindchange="handleChange">
+    <i-tab key="1" title="项目分类"></i-tab>
+    <i-tab key="2" title="优惠活动"></i-tab>
+  </i-tabs>
+  <view wx:if="{{tab1}}" class='tab1'>
+    <i-row i-class="demo-row">
+      <i-col span="8" i-class="demo-col">项目名称</i-col>
+      <i-col span="8" i-class="demo-col">时长/分</i-col>
+      <i-col span="8" i-class="demo-col">门市价/元</i-col>
+    </i-row>
+    <i-row i-class="demo-row">
+      <i-col span="8" i-class="demo-col">拔火罐</i-col>
+      <i-col span="8" i-class="demo-col">45</i-col>
+      <i-col span="8" i-class="demo-col">188</i-col>
+    </i-row>
+    <i-row i-class="demo-row">
+      <i-col span="8" i-class="demo-col">拔火罐</i-col>
+      <i-col span="8" i-class="demo-col">45</i-col>
+      <i-col span="8" i-class="demo-col">188</i-col>
+    </i-row>
+    <i-row i-class="demo-row">
+      <i-col span="8" i-class="demo-col">拔火罐</i-col>
+      <i-col span="8" i-class="demo-col">45</i-col>
+      <i-col span="8" i-class="demo-col">188</i-col>
+    </i-row>
+  </view>
+  <view wx:if="{{tab2}}" class='tab2'>
+    <i-row i-class="demo-row">
+      <i-col span="8" i-class="demo-col">项目名称</i-col>
+      <i-col span="8" i-class="demo-col">原价/元</i-col>
+      <i-col span="8" i-class="demo-col">现价/元</i-col>
+    </i-row>
+    <i-row i-class="demo-row">
+      <i-col span="8" i-class="demo-col">拔火罐</i-col>
+      <i-col span="8" i-class="demo-col">45</i-col>
+      <i-col span="8" i-class="demo-col">188</i-col>
+    </i-row>
+    <i-row i-class="demo-row">
+      <i-col span="8" i-class="demo-col">拔火罐</i-col>
+      <i-col span="8" i-class="demo-col">45</i-col>
+      <i-col span="8" i-class="demo-col">188</i-col>
+    </i-row>
+    <i-row i-class="demo-row">
+      <i-col span="8" i-class="demo-col">拔火罐</i-col>
+      <i-col span="8" i-class="demo-col">45</i-col>
+      <i-col span="8" i-class="demo-col">188</i-col>
+    </i-row>
+  </view>
+  <view style="margin: 16px">精品服务推荐</view>
+  <i-card full title="拔火罐" extra="￥150/45分钟" thumb="https://i.loli.net/2017/08/21/599a521472424.jpg">
+  </i-card>
+  <i-card full title="拔火罐" extra="￥150/45分钟" thumb="https://i.loli.net/2017/08/21/599a521472424.jpg">
+  </i-card>
+  <i-card full title="拔火罐" extra="￥150/45分钟" thumb="https://i.loli.net/2017/08/21/599a521472424.jpg">
+  </i-card>
 </view>
