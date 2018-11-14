@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title>确认信息</title>
+    <link rel="stylesheet" href="../css/weui-min.css" />
+    <link rel="stylesheet" href="../css/example.css" />
+    <link rel="stylesheet" type="text/css" href="../css/overlay.css">
+    <link rel="stylesheet" href="../css/global.css" />
+    <style>
+    </style>
+</head>
+
+<body>
+    <div id="app" class="page" style="opacity: 1;">
+        <div class="page__hd">
+            <h1 class="page__title">订单信息</h1>
+        </div>
+        <div class="weui-cells__title">基本信息</div>
+        <div style="background-color: white">
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>预约时间</p>
+                </div>
+                <div class="weui-cell__ft" v-text="date('H:i',start_time)"></div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>预约人数</p>
+                </div>
+                <div class="weui-cell__ft">
+                    <a @click="change_people(-1)" style="font-size: 17px;color: #ffffff;padding-left: 7px;padding-right: 7px;border-radius: 4px;background-color:#2b85e4">-</a>
+                    <a v-text="people_num" style="padding-left:21px;padding-right:21px;background-color: white;text-align: center;border: none;font-size: 23px;color: #ac1d00"></a>
+                    <a @click="change_people(1)" style="font-size: 17px;color: #ffffff;padding-left: 5px;padding-right: 5px;border-radius: 4px;background-color:#2b85e4">+</a>
+                </div>
+            </div>
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>店内热线</p>
+                </div>
+                <div class="weui-cell__ft" v-text="shop_phone"></div>
+            </div>
+        </div>
+        <div class="weui-cells__title">服务项目</div>
+        <div class="weui-cells">
+            <div v-for="(item,idx) in list" class="weui-cell weui-cell_swiped">
+                <div class="weui-cell__bd" style="width:100%">
+                    <div class="weui-cell" style="width:100%">
+                        <div class="weui-cell__bd" style="width:100%;display: flex;align-items: center;">
+                            <div style="display:inline-block;position:relative; height: 80px;width: 70px;">
+                                <div @click="remove(item,idx)" style="height: 15px;width: 15px;border-radius: 50%;background-color: red;color: white;font-size: 0.6em;display: flex;align-items: center;justify-content: center;position: absolute;top: 0;right: 15px">X</div>
+                                <img :src="item.tech.photo" alt="" style="width: 50px;height: 50px;border-radius: 50%;object-fit: cover">
+                                <span v-text="item.tech.job_number"></span>
+                            </div>
+                            <div style="display:inline-block;width: 80px;text-align: center;" v-text="item.service.name"></div>
+                            <div style="display:inline-block;width: 160px;"><span v-text="'￥'+item.service.price/100"></span>/<span
+                                    v-text="item.service.duration+'分钟'"></span></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- <div class="weui-cell__ft">
+                    <a @click="remove(item.name)" class="weui-swiped-btn weui-swiped-btn_warn" href="javascript:">删除</a>
+                </div> -->
+            </div>
+
+            <div class="weui-cells__title">请留下手机号码</div>
+            <div class="weui-cell">
+                <div class="weui-cell__bd">
+                    <p>手机号(方便联系)</p>
+                </div>
+                <input type="text" v-model="input_phone" style="outline: none;border: none;text-align: right"
+                    placeholder="请输入手机号">
+            </div>
+        </div>
+
+        <div class="weui-cells__title">本次优惠</div>
+        <div class="weui-cells">
+            <div class="weui-cell weui-cell_swiped">
+                <div class="weui-cell__bd" style="transform: translateX(-68px)">
+                    <div class="weui-cell" onclick="navi('recharge.html')">
+                        <div v-for="pro in promotion" class="weui-cell__bd">
+                            <p style="margin-left: 20%">
+                                <span style="display:inline-block ;width:40px">会员</span>
+                                <span style="display:inline-block ;font-family: 华文雅黑;background-color: #fe736c;color: white;border-radius: 6px;padding: 0 2px;font-size: 15px">
+                                    充返
+                                </span>
+                                <span v-text="'充'+pro.need+'元 返'+pro.back+'元'" style="display:inline-block;font-size: 13px;font-weight: 100;color: gray;"></span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="weui-cells" style="margin-bottom: 80px">
+            <div class="weui-cells__title">支付方式</div>
+            <!--<a class="weui-cell weui-cell_access" href="javascript:;">-->
+            <!--<div class="weui-cell__hd"><img src="../src/线下支付.png" alt=""-->
+            <!--style="width:20px;margin-right:5px;display:block"></div>-->
+            <!--<div class="weui-cell__bd">-->
+            <!--<p>线下支付</p>-->
+            <!--</div>-->
+            <!--<div class="weui-cell__ft"></div>-->
+            <!--</a>-->
+            <a class="weui-cell weui-cell_access" href="javascript:;">
+                <div class="weui-cell__hd"><img src="../src/余额.png" alt="" style="width:20px;margin-right:5px;display:block"></div>
+                <div class="weui-cell__bd">
+                    <div @click="pay_way = 1" style="display: flex;align-items: center;justify-content: space-between;">余额支付
+                        <span style="font-size: 0.8em;color: #fe736c;margin-right: 8rem">剩余：
+                            <span v-text="'￥'+charge/100"></span>
+                        </span>
+                        <div style="width: 24px;height: 24px;overflow: hidden">
+                            <img style="width: 100%;height: 100%;" :src="pay_way == 1?'../src/choose.png':'../src/unchoose.png'">
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <a class="weui-cell weui-cell_access" href="javascript:;">
+                <div class="weui-cell__hd"><img src="../src/微信.png" alt="" style="width:20px;margin-right:5px;display:block"></div>
+                <div class="weui-cell__bd">
+                    <div @click="pay_way = 3" style="display: flex;align-items: center;justify-content: space-between;">微信支付
+                        <div style="width: 24px;height: 24px;overflow: hidden">
+                            <img style="width: 100%;height: 100%;" :src="pay_way == 3?'../src/choose.png':'../src/unchoose.png'">
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+
+        <div class="" style="background-color: white;position: fixed; bottom: 0;height: 50px;width: 100%;z-index:100;border-top: 1px solid #f2f2f2;display:flex;align-items: center">
+            <span style="margin-left: 20px;width: 80px;font-size:15px">预计支付</span>
+            <span style="color: #29a3a3;font-size: 22px" v-text="'￥'+total_price/100"></span>
+
+
+            <!--这里click我改成直接跳到新页面，原来的confirm重新写-->
+            <!--<button @click="confirm_od()"-->
+
+
+            <button @click="confirm_od()" style="position:absolute;right: 15px; width: 100px;height: 40px;border-radius: 5px;background-color: #2b85e4;color: white;outline: none;font-size: 0.9em">
+                确认支付
+            </button>
+        </div>
+        <div id="modal-overlay" v-show="overlay">
+            <div class="modal-data">
+                <img src="../src/loading.gif" />
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript" src="../js/jweixin.js"></script>
+    <!-- <script type="text/javascript" src="../js/example.js"></script> -->
+    <script type="text/javascript" src="../js/weui-min.js"></script>
+    <script type="text/javascript" src="../js/url.js"></script>
+    <script type="text/javascript" src="../js/jquery.js"></script>
+    <script type="text/javascript" src="../js/jquery.cookie.js"></script>
+    <script src="../js/vue.js"></script>
+    <script src="../js/date-format.js"></script>
+    <script type="text/javascript" src="../js/windowOpen.js"></script>
+
+    <script type="text/javascript">
+        function getQueryString(name) {
+            var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+            var r = window.location.search.substr(1).match(reg);
+            if (r != null) return unescape(r[2]);
+            return null;
+        }
+
+        let app = new Vue({
+            el: '#app',
+            data: {
+                id: "1", //之后登陆功能添加了就换成获取的open_id，目前写死.顾客的id
+                list: [],
+                charge: 0, //账户余额
+                promotion: [],
+                total_price: 0,
+                start_time: "",
+                people_num: 1,
+                input_phone: "",
+                shop_phone: "",
+                overlay: true,
+                pay_way: 3 //3--微信支付  1--余额支付
+            },
+            methods: {
+                change_people(val) {
+                    this.people_num += val;
+                    if (this.people_num > 6) this.people_num = 6;
+                    else if (this.people_num < 1) this.people_num = 1;
+                },
+                confirm_od() {
+                    var that = this;
+                    var item_id = [];
+                    //如果是余额支付
+                    if (this.pay_way == 1) {
+                        //余额不足的情况
+                        if (this.charge < this.total_price) {
+                            $(that).openWindow("", "您的余额不足，请前往充值页面或选择其他支付方式", ["好的"], () => {
+                                this.overlay = true;
+                                $.post("../php/addco.php", {
+                                    id: that.id,
+                                    phone: that.input_phone,
+                                    pay_way: 3, //支付方式  1--微信   3--会员卡
+                                    people_num: that.people_num,
+                                    pay: that.total_price,
+                                    state: 1, //产生的订单状态 4--支付完成  1--预约,暂未支付
+                                    obj: that.list,
+                                    select_time: getQueryString('selecttime'),
+                                    cant_pay: true,
+                                }).done((res) => {
+                                    res = JSON.parse(res);
+                                    if (res.status == 1)
+                                        window.location.href = "yuyueStatus.html?order_id=" +
+                                        res.order_id;
+                                })
+                            })
+                        } else {
+                            $(that).openWindow("", "确认下单吗？", ["不", "是的"], () => {
+
+                            })
+                        }
+                    }
+                    //如果是微信支付
+                    else if (this.pay_way == 3) {
+                        $(that).openWindow("", "确认下单吗？", ["不", "是的"], () => {
+                            if(that.input_phone == "")that.input_phone = "none";
+
+                            var url =encodeURIComponent(window.location.href + "&inputphone=" + that.input_phone +
+                                "&peoplenum=" + that.people_num);
+                            //var weixin_url = "http://1.jthysm.com/dashang/example/jsapiyy.php?pay=" + 39000
+                            //total_price以分为单位表示
+                            var weixin_url = "http://1.jthysm.com/dashang/example/jsapiyy.php?pay=" + that.total_price + "&backurl=" + url 
+                            window.location.href = weixin_url;
+                        })
+                    }
+                },
+
+                remove(obj, idx) {
+                    $(this).openWindow("", '确认移除该服务吗', ['不', '好的'], () => {
+                        this.total_price -= obj.service.price;
+                        this.list.splice(idx, 1);
+                        var url_str = "";
+                        if (this.list.length == 0) {
+                            window.location.href = "chooseProj.html";
+                        }
+                        //更新url参数
+                        for (i in this.list) {
+                            var jbnb = this.list[i]['tech']['job_number'];
+                            var item_id = this.list[i]['service']['ID'];
+                            if (i != 0) url_str += '|';
+                            url_str += "jobnumber_" + jbnb + "-id_" + item_id
+                        }
+                        window.location.href = "confirm-order.html?fn=" + url_str + '&selecttime=' +
+                            this.start_time;
+                    });
+                }
+            },
+            created() {
+                var that = this;
+                //------------------------------------------------------------
+                //微信支付的情况
+                var payret = getQueryString('payret');
+                //------------------------------------------------------------	
+                that.start_time = parseInt(getQueryString('selecttime'));
+                $.post('../php/getskill.php', {
+                    fn: getQueryString('fn'),
+                    id: that.id,
+                }).done((res) => {
+                    res = JSON.parse(res);
+                    if (res.status == 1) {
+                        that.list = res.data;
+                        that.shop_phone = res.phone;
+                        that.total_price = res.total_price;
+                        that.charge = res.charge;
+                        that.overlay = false;
+                    }   
+                    //微信的支付
+                    if (payret === "" || payret === undefined || payret == null) {
+                        //do nothing
+                    } else if (payret === "1") //这里表示支付成功，返回该页面
+                    {
+                        $(that).openWindow("", "您已成功预约", ["好的"], () => {
+                            that.overlay = true;
+                            $.post("../php/addco.php", {
+                                id: that.id,
+                                phone: getQueryString('inputphone'),
+                                pay_way: 1, //支付方式  1--微信   3--会员卡
+                                people_num: getQueryString('peoplenum'),
+                                pay: that.total_price,
+                                state: 4, //产生的订单状态 4--支付完成  1--预约
+                                obj: that.list,
+                                select_time: getQueryString('selecttime'),
+                            }).done((res) => {
+                                window.location.href = "index.html"
+                            })
+                        })
+                    } else if (payret === "2") //这里表示支付失败，返回该页面	
+                    {
+                        $(that).openWindow("", "支付失败", ["确定"], () => {
+                            that.overlay = true;
+                            $.post("../php/addco.php", {
+                                id: that.id,
+                                phone: getQueryString('inputphone'),
+                                pay_way: 1, //支付方式  1--微信   3--会员卡
+                                people_num: getQueryString('peoplenum'),
+                                pay: that.total_price,
+                                state: 1, //产生的订单状态 4--支付完成  1--预约,暂未支付
+                                obj: that.list,
+                                select_time: getQueryString('selecttime'),
+                                cant_pay: true,
+                            }).done((res) => {
+                                res = JSON.parse(res);
+                                if (res.state == 1)
+                                    window.location.href = "yuyueStatus.html?order_id=" +res.order_id;
+                            })
+                        })
+                    }
+                })
+
+                $.post('../php/getpromotion.php', {
+                    ajax_get: true
+                }).done((res) => {
+                    res = JSON.parse(res)
+                    if (res.status == 1) {
+                        that.promotion = res.data;
+                    }
+                })
+            }
+        })
+
+        function navi(url) {
+            window.location.href = url;
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title>确认打赏</title>
+    <link rel="stylesheet" href="../css/weui-min.css"/>
+    <link rel="stylesheet" href="../css/example.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/overlay.css">
+    <link rel="stylesheet" href="../css/global.css"/>
+	
+    <!--<link rel="stylesheet" type="text/css" href="../vendor/iview/dist/styles/iview.css">-->
+	<link rel="stylesheet" type="text/css" href="../css/iview.css">
+	
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+            background-color: white;
+        }
+
+        .row {
+            display: flex;
+            width: 50%;
+            float: left;
+        }
+
+        .box {
+            flex: 0 0 48%;
+            margin: 1%;
+            height: 100px;
+            border-radius: 10px;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            position: relative;
+            border: 1px black solid;
+            color: black;
+        }
+
+        .choosen-box {
+            flex: 0 0 48%;
+            margin: 1%;
+            height: 100px;
+            border-radius: 10px;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            position: relative;
+            color: #00e4e6;
+            border: 1px #00e4e6 solid
+        }
+        .ivu-select-selection{
+            border: none;
+            outline: none;
+        }
+        .ivu-select-selection{
+            outline: none;
+            border: none;
+        }
+
+        .ivu-select .ivu-icon, .ivu-icon-ios-arrow-down, .ivu-select-arrow:before {
+            display: none;
+        }
+
+        .ivu-select .ivu-icon .ivu-select-arrow:before {
+            content: none;
+        }
+
+        @media only screen and (max-width: 768px) {
+            .row {
+                width: 100%
+            }
+
+            .box {
+                flex: 0 0 31%;
+                height: 60px;
+                border-radius: 3px;
+                border: 1px #1aad19 solid;
+                color: #1aad19;
+            }
+
+            .choosen-box {
+                flex: 0 0 31%;
+                height: 60px;
+                border-radius: 3px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+<div id='app' style="width:100%;height:100%">
+ <!--    <row>
+        <i-select v-model="model1" style="width: 94%;margin-left: 3%;margin-top: 20px;margin-bottom: 20px;border: 1px #e0ebeb solid"
+                  size="large" placeholder="请选择本次打赏的技师">
+            <i-option v-for="item in jishi" :value="item.value" :key="item.value">{{ item.label }}</i-option>
+        </i-select>
+    </row> -->
+
+    <!--这部分还为静态，需要修改-->
+
+    <div class="row" style="margin-bottom: 15px">
+        <div class="box" style="font-size: 20px;" id="box1" @click="getMoney(1)">
+            <span >￥</span><span>5</span>
+        </div>
+        <div class="box" style="font-size: 20px"  id="box2" @click="getMoney(2)">
+            <span >￥</span><span>10</span>
+        </div>
+    </div>
+    <!--end-->
+    <!--打赏不需要更多金额-->
+    <!--<div class="weui-cells__title" v-on:click="userxuanzejine()">更多金额</div>-->
+    <!--<div class="weui-cells" v-if="xuanzejine">-->
+        <!--<div class="weui-cell weui-cell_swiped">-->
+            <!--<div class="weui-cell__bd">-->
+                <!--<div class="weui-cell">-->
+                    <!--<input type="text" type="number"-->
+                           <!--style="width: 94%;height: 38px;margin-left: 3%;outline: none;padding-left: 10px;border: 1px #e0ebeb solid"-->
+                           <!--placeholder="手动输入充值金额">-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
+	
+    <div class="weui-cells__title">优惠活动</div>
+    <div class="weui-cells">
+        <div class="weui-cell weui-cell_swiped">
+            <div class="weui-cell__bd" style="transform: translateX(-68px)">
+                <div class="weui-cell" onclick="navi('recharge.html')">
+                    <div class="weui-cell__bd">
+                        <p style="margin-left: 20%">
+                            <span style="display:inline-block ;width:40px">会员</span>
+                            <span style="display:inline-block ;font-family: 华文雅黑;background-color: #fe736c;color: white;border-radius: 6px;padding: 0 2px;font-size: 15px">
+                                    充返
+                                </span>
+                            <span style="display:inline-block;font-size: 13px;font-weight: 100;color: gray;">充500送500，充1000送2000</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div style="position: fixed;bottom: 20px;width: 100%;height: 40px;">
+        <button @click="dashang()"
+                style="width: 94%;margin-left: 3%;height: 40px;border-radius: 15px;background-color: #00e4e6;border: none;color: white">
+            确认打赏
+        </button>
+    </div>
+    <div id="modal-overlay" v-show="overlay">
+        <div class="modal-data">
+            <img src="../src/loading.gif"/>
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" src="../js/jweixin.js"></script>
+<!-- <script type="text/javascript" src="../js/example.js"></script>
+ --><script type="text/javascript" src="../js/weui-min.js"></script>
+
+<script type="text/javascript" src="../js/jquery.js"></script>
+
+<script src="../js/vue.js"></script>
+<script type="text/javascript" src="../js/windowOpen.js"></script>
+
+<!--<script type="text/javascript" src="../vendor/iview/dist/iview.min.js"></script>-->
+<script type="text/javascript" src="../js/iview.min.js"></script>
+
+<script>
+	function navi(url)
+	{
+		window.location.href = url;
+	}
+	
+	function getQueryString(name) 
+	{
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+    }
+	
+	function sleep(delay) 
+	{
+	  var start = (new Date()).getTime();
+	  while ((new Date()).getTime() - start < delay) 
+	  {
+		continue;
+	  }
+	}
+</script>
+
+<script>
+    /**
+
+     注意，大约在160行左右的post数据进行充值，user_id将在日后通过微信接口获得，目前只是静态数据，记得修改
+     */
+    let app = new Vue({
+        el: "#app",
+        data: {
+            xuanzejine: false,           
+            model1: '',
+            job_number: "",
+            pay: 0,
+            overlay: true,
+            box_list: [
+                0, 0, 0,
+                0, 0, 0,
+                0, 0, 0,
+            ],
+            fee_list: [
+                100, 200, 500,
+                1000, 2000, 5000,
+                10000, 20000, '自定义'
+            ],
+            fee: 0,
+            moneyList:[],
+        },
+        methods: 
+		{
+            getMoney(index)
+			{
+                if(this.moneyList.length == 0)
+				{
+                    this.moneyList.push($("#box"+index+">span:nth-child(2)").text());
+                }
+				else 
+				{
+                    this.moneyList.splice(0,this.moneyList.length);
+                    this.moneyList.push($("#box"+index+">span:nth-child(2)").text());
+                }
+                return index;
+            },  
+            userxuanzejine() 
+			{
+                this.xuanzejine = !this.xuanzejine;
+            },
+            choose(idx) 
+			{
+                var that = this;
+                for (var i = 0; i < that.box_list.length; i++) 
+				{
+                    if (i == idx) 
+					{
+                        //不能直接赋值，vue无法通过数组索引的方式检测到数据变化，必须用Vue.set来改变数据
+                        Vue.set(that.box_list, i, 1)//that.box_list[i] = 1;
+                        that.fee = that.fee_list[i];
+                    } 
+					else 
+					{
+                        Vue.set(that.box_list, i, 0)//that.box_list[i] = 0;
+                    }
+                }
+            },
+			
+            dashang() 
+			{
+                var that = this;
+                if(this.moneyList.length == 0)
+				{
+                     $(that).openWindow("注意", "请选择打赏金额", ['好的']);
+                }
+                else 
+				{
+					var jobnumber = getQueryString('job_number');					
+                    $(that).openWindow("确认", "打赏的金额:"+this.moneyList[0]+"元， "+"打赏的技师工号:"+jobnumber, ['好的'],()=>{
+					
+						var url = encodeURIComponent(window.location.href+"&money="+this.moneyList[0] * 100+"&jobnumber="+jobnumber);
+						//支付单位以分表示
+						var payurl = "http://1.jthysm.com/dashang/example/jsapiyy.php?pay=" + this.moneyList[0] * 100 + "&backurl=" + url; 						
+						//var payurl = "http://1.jthysm.com/dashang/example/jsapiyy.php?pay=" + this.moneyList[0] * 100;						
+						//alert(payurl);
+						
+                        //window.location.href = "http://1.jthysm.com/dashang/example/jsapiyy.php?pay=" + this.moneyList[0] + "&backurl=" + url; 
+						window.location.href = payurl;
+                        
+						/*
+						$.post('../php/dashang.php', 
+						{
+                            pay: this.moneyList[0] * 100,
+                            user_id: "test",
+                            job_number: jobnumber,
+                        }).done((res) => 
+						{
+                            res = JSON.parse(res);
+                            if (res.status == 0) {
+                                $(that).openWindow("", "打赏成功", ['好的'], () => {                                   
+                                    window.location.href = "index.html";
+                                })
+                            }
+						})
+						*/
+                    });
+                }
+            },
+			
+			
+        },
+        created() {			
+			var that = this;
+			
+			//------------------------------------------------------------
+			//微信支付的情况
+			var payret = getQueryString('payret');
+			//------------------------------------------------------------	
+			
+			//微信的支付
+			if (payret === "" || payret === undefined || payret == null) 
+			{
+				
+			} 
+			else if (payret === "1") //这里表示支付成功，返回该页面
+			{
+				$(that).openWindow("", "您已成功打赏", ["好的"], () => {
+					that.overlay = true;
+					
+					var money = getQueryString('money');
+					
+					var jobnumber = getQueryString('jobnumber');
+					
+					$.post('../php/dashang.php', 
+					{
+						pay: money,
+						user_id: "1",//user_id为微信用户的open_id
+						job_number: jobnumber,
+					}).done((res) => 
+					{
+						res = JSON.parse(res);
+						if (res.status == 1) {
+							window.location.href = "index.html";
+						}
+					})
+				})
+			} 
+			else if (payret === "2") //这里表示支付失败，返回该页面	
+			{
+				$(that).openWindow("", "支付失败", ["确定"], () => {	
+                    window.location.href = "dashangjishi.html"				
+				})
+			}
+			//------------------------------------------------------------	
+			
+			$.post("../php/getcustomer.php", {
+					phone: "13777579230"
+			}).done((res) => {
+				res = JSON.parse(res);
+				if (res.status == 1) {
+					that.name = res.name;
+					that.cash = res.cash;
+					that.overlay = false;
+				}
+			})	
+        },		
+    })
+
+
+
+    $('.box').on('click', function () {
+        $('div').siblings(".box").css({'color':'#1aad19','border':'1px #1aad19 solid'});
+        $(this).css({'color':'#00e4e6','border':'1px #00e4e6 solid'});
+    })
+    $('input').on('click', function () {
+        $(this).css({'color':'#00e4e6','border':'none'});
+        $('div').siblings(".box").css({'color':'#1aad19','border':'1px #1aad19 solid'});
+    })
+</script>
+
+</html>

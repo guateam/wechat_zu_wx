@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<title>选择项目</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+	<link rel="stylesheet" type="text/css" href="../css/iview.css" />
+	<link rel="stylesheet" type="text/css" href="../css/overlay.css">
+	<link rel="stylesheet" href="../css/global.css" />
+	<style type="text/css">
+		body {
+			width: 100%;
+			height: 100%;
+			background-color: white;
+		}
+
+		#header {
+			width: 100%;
+			height: 3rem;
+			background-color: #5cadff;
+			text-align: center;
+		}
+
+		.ivu-row {
+			background-color: white;
+		}
+
+		#allContent {
+			width: 100%;
+			height: 100%;
+		}
+
+		#content {
+			height: 100%;
+		}
+
+		#left {
+			width: 40px;
+			height: 3rem;
+			/*border:1px solid green;*/
+			display: inline-block;
+		}
+
+		#left div#choosen {
+			display: block;
+			width: 0.4rem;
+			height: 100%;
+			background-color: #5cadff;
+			text-align: center;
+			font-family: Consolas;
+		}
+
+		#left div#unchoosen {
+			display: block;
+			text-align: center;
+			width: 0.4rem;
+			height: 100%;
+			background-color: #ffffff;
+			font-family: Consolas;
+		}
+        #left #choosen2 {
+            background-color: #f2f2f2
+        }
+
+        #left #unchoosen2 {
+        }
+
+		#right_con {}
+
+		#circle {
+			position: relative;
+			top: 1rem;
+			/*border:1px solid red;*/
+			width: 1.5rem;
+			height: 1.5rem;
+			border-radius: 1.5rem;
+			background: #d6d6d6;
+		}
+
+		#bottom {
+			position: fixed;
+			bottom: 0px;
+			width: 100%;
+			height: 2.5rem;
+			background-color: #5cadff;
+			text-align: center;
+			color: white;
+
+		}
+	</style>
+</head>
+
+<body>
+	<div id="app">
+		<div id="header">
+			<span style="position: relative;top: 0.9rem;color: white;font-size: 1.1rem;">选择项目</span>
+		</div>
+		<div id="allContent">
+			<row id="content">
+				<i-col span="5">
+					<div id="left">
+						<div v-for="tech in data" @click="choose_tech(tech.job_number)" :id="tech.choosen?'choosen':'unchoosen'">
+							<span style="position: relative;font-size:1.2em;left:0.4rem;color:#5cadff;display: block;width: 5rem;height: 100%;display: flex;align-items: center;justify-content: center;" v-text="tech.job_number" :id="tech.choosen?'choosen2':'unchoosen2'" @click="choose_tech(tech.job_number)"></span>
+						</div>
+					</div>
+				</i-col>
+				<i-col span="19">
+					<row v-for="(item,idx) in data[choosen_job_number]['skill']">
+						<i-col span="6"><img style="width: 100%;height: 100%;padding-top: 5%;padding-left: 5%;" :src="item.image" /></i-col>
+						<i-col span="14" offset="1">
+							<div style="height: 80%;">
+								<p style="font-size: 1.2rem;" v-text="item.name"></p>
+								<p style="color: red; font-size:0.9rem" v-text="item.price+'元 /'+item.duration+'分钟'"></p>
+							</div>
+						</i-col>
+						<i-col span="3">
+							<p id="circle" @click="choose_sv(item.job_number,idx)">
+								<img style="width: 100%;" :src="item.choosen?'../src/choose.png':'../src/unchoose.png'">
+							</p>
+						</i-col>
+					</row>
+				</i-col>
+			</row>
+		</div>
+		<div @click='next()' id="bottom" style="position: fixed;bottom: 0;display: flex;align-items: center;justify-content: center;font-size: 1.5em;z-index: 100">选好了
+		</div>
+		<div id="modal-overlay" v-show="overlay">
+			<div class="modal-data">
+				<img src="../src/loading.gif" />
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript" src="../js/jquery.js "></script>
+<script type="text/javascript" src="../js/vue.js "></script>
+<script type="text/javascript" src="../js/iview.js"></script>
+<script src="../js/jquery.cookie.js"></script>
+<script type="text/javascript" src="../js/windowOpen.js"></script>
+<script src="../js/url.js"></script>
+<script src="../js/date-format.js"></script>
+<script type="text/javascript ">
+	let app = new Vue({
+		el: '#app',
+		data: {
+			data: {
+				"1": {
+					'skill': {}
+				}
+			},
+			overlay: true,
+			choosen_job_number: "1", //已经选中的技师工号
+			choosen_sv: [], //选择的服务，当技师选择页面选择了技师时，下标:工号,值:技能下标
+			//			当技师选择页面没有选择技师时,不是数组，值：技能下标
+			type: 0, //进入该页面的方式，0--技师选择页面没有选技师   1--选了技师
+			url_sv: "",
+			url_tc: "",
+			url_time: "",
+		},
+		methods: {
+			choose_tech(job_number) {
+				Vue.set(this.data[this.choosen_job_number], 'choosen', false);
+				Vue.set(this.data[job_number], 'choosen', true);
+                Vue.set(this.data[this.choosen_job_number], 'choosen2', false);
+                Vue.set(this.data[job_number], 'choosen2', true);
+				this.choosen_job_number = job_number;
+			},
+			choose_sv(jbnb, index) {
+				if (this.type == 1) {
+					var old_idx = this.choosen_sv[jbnb];
+					if (!(old_idx === '')) {
+						Vue.set(this.data[jbnb]['skill'][index], 'choosen', true);
+						Vue.set(this.data[jbnb]['skill'][old_idx], 'choosen', false);
+                        Vue.set(this.data[jbnb]['skill'][index], 'choosen2', true);
+                        Vue.set(this.data[jbnb]['skill'][old_idx], 'choosen2', false);
+						this.choosen_sv[jbnb] = index;
+					}
+					if (old_idx === index) {
+						Vue.set(this.data[jbnb]['skill'][index], 'choosen', false);
+                        Vue.set(this.data[jbnb]['skill'][index], 'choosen2', false);
+						this.choosen_sv[jbnb] = "";
+					} else {
+						Vue.set(this.data[jbnb]['skill'][index], 'choosen', true);
+                        Vue.set(this.data[jbnb]['skill'][index], 'choosen2', true);
+                        this.choosen_sv[jbnb] = index;
+					}
+				} else if (this.type == 0) {
+					var old_idx = this.choosen_sv;
+					if (!(old_idx === '')) {
+						Vue.set(this.data['all']['skill'][index], 'choosen', true);
+						Vue.set(this.data['all']['skill'][old_idx], 'choosen', false);
+                        Vue.set(this.data['all']['skill'][index], 'choosen2', true);
+                        Vue.set(this.data['all']['skill'][old_idx], 'choosen2', false);
+						this.choosen_sv = index;
+					}
+					if (old_idx === index) {
+						Vue.set(this.data['all']['skill'][index], 'choosen', false);
+                        Vue.set(this.data['all']['skill'][index], 'choosen2', false);
+						this.choosen_sv = "";
+					} else {
+						Vue.set(this.data['all']['skill'][index], 'choosen', true);
+                        Vue.set(this.data['all']['skill'][index], 'choosen2', true);
+						this.choosen_sv = index;
+					}
+				}
+
+			},
+			//进入付款页面 或者 回到技师选择页面
+			next() {
+				//是否进行了选择，如果没有选择过，不能点击按钮
+				var is_choosen = false;
+				//最终选择的服务
+				var final_choose = "";
+				//已经选好了技师，直接进入付钱页面
+				if (this.type == 1) {
+					for (var k in this.choosen_sv) {
+						var choosen_index = this.choosen_sv[k]
+						if (!(choosen_index === "")) {
+							//获取选中的服务id
+							var svid = this.data[k]['skill'][choosen_index]['id'];
+							if(final_choose == '')
+								final_choose+= k + '-' + svid;
+							else
+								final_choose+= '-'+k + '-' + svid;
+								
+							//final_choose.push('jobnumber_' + k + '-id_' + svid)
+							is_choosen = true;
+						}
+					}
+					if (!is_choosen) {
+						$(this).openWindow("", "请至少选择一项服务", ['好的']);
+						return;
+					}
+					//点击确认下单后，将所选信息保存至cookie
+					//换成url参数
+					// $.cookie('fn', final_choose, {
+					// 	path: '/'
+					// });
+					// $.cookie('tc', this.url_tc, {
+					// 	path: '/'
+					// });
+					// $.cookie('select_time', this.url_time, {
+					// 	path: '/'
+					// });
+					window.location.href = "confirm-order.html?fn="+final_choose+"&selecttime="+this.url_time
+				}
+				//还未选择技师，回到技师选择界面
+				else if (this.type == 0) {
+					if (!(this.choosen_sv === "")) {
+						is_choosen = true;
+					}
+					if (!is_choosen) {
+						$(this).openWindow("", "请至少选择一项服务", ['好的']);
+						return;
+					}
+					// $.cookie('sv', this.data['all']['skill'][this.choosen_sv]['id'], {
+					// 	path: '/'
+					// });
+					window.location.href = "jishixuanze.html?select_time=" + this.url_time + "&sv=" + this.data['all']['skill'][this
+						.choosen_sv
+					]['id'] + "&tc=" + this.url_tc;
+				}
+			}
+		},
+		created() {
+			var that = this;
+
+			//获取cookie中保存的技师选择
+			// this.url_tc = $.cookie('tc')
+			// this.url_time = $.cookie('select_time');
+			// if (this.url_tc === undefined) {
+			// 	this.url_tc = '';
+			// }
+			// if(this.url_time === undefined){
+			// 	this.url_time = '';
+			// }
+			//获取url中保存的各种选择
+			url_time = getQueryString('select_time');
+			url_sv = getQueryString('sv');
+			url_tc = getQueryString('tc');
+
+			if (!(url_time === "" || url_time === undefined || url_time == null)) {
+				this.url_time = url_time;
+			}
+			if (!(url_tc === '' || url_tc === undefined || url_tc == null)) {
+				this.url_tc = url_tc.split(',');
+				this.type = 1;
+			}
+			if (!(url_sv === "" || url_sv === undefined || url_sv == null)) {
+				this.url_sv = url_sv;
+			}
+
+
+			$.post("../php/chooseProj.php", {
+				tc: this.url_tc
+			}).done((res) => {
+				res = JSON.parse(res);
+				//判断进入该页面的方式
+				//0--还未选择技师
+				//1--选择过技师
+				if (this.url_tc === undefined || this.url_tc == '') that.type = 0;
+				else that.type = 1;
+
+				if (res.status == 1) {
+					that.data = res.data;
+					var i = 0;
+					for (k in that.data) {
+						if (i == 0) that.choosen_job_number = k;
+						i++;
+						if (that.type == 1) {
+							that.choosen_sv[k] = "";
+						} else if (that.type == 0) {
+							that.choosen_sv = "";
+						}
+
+					}
+					if (!(url_sv === "" || url_sv === undefined || url_sv == null)) {
+						for (i = 0; i < this.url_tc.length; i++) {
+							jbnb = this.url_tc[i]
+							for(j=0;j<this.data[jbnb]['skill'].length;j++){
+								if(this.url_sv == this.data[jbnb]['skill'][j]['id']){
+									this.choose_sv(jbnb, j);
+								}
+							}
+						}
+					}
+
+					that.overlay = false;
+				}
+			})
+		}
+	})
+</script>
+
+</html>

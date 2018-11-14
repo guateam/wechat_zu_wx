@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title>我的会员卡</title>
+    <style>
+        .weui-tabbar {
+            display: -webkit-box;
+            display: -webkit-flex;
+            display: flex;
+            position: absolute;
+            z-index: 500;
+            bottom: 0;
+            width: 100%;
+            background-color: #F7F7FA;
+        }
+
+        .weui-tabbar:before {
+            content: " ";
+            position: absolute;
+            left: 0;
+            top: 0;
+            right: 0;
+            height: 1px;
+            border-top: 1px solid #C0BFC4;
+            color: #C0BFC4;
+            -webkit-transform-origin: 0 0;
+            transform-origin: 0 0;
+            -webkit-transform: scaleY(0.5);
+            transform: scaleY(0.5);
+        }
+
+        .weui-tabbar__item {
+            display: block;
+            -webkit-box-flex: 1;
+            -webkit-flex: 1;
+            flex: 1;
+            padding: 5px 0 0;
+            font-size: 0;
+            color: #808080;
+            text-align: center;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+
+        .weui-tabbar__item.weui-bar__item_on .weui-tabbar__icon,
+        .weui-tabbar__item.weui-bar__item_on .weui-tabbar__icon>i,
+        .weui-tabbar__item.weui-bar__item_on .weui-tabbar__label {
+            color: #09BB07;
+        }
+
+        .weui-tabbar__icon {
+            display: inline-block;
+            width: 27px;
+            height: 27px;
+        }
+
+        i.weui-tabbar__icon,
+        .weui-tabbar__icon>i {
+            font-size: 24px;
+            color: #808080;
+        }
+
+        .weui-tabbar__icon img {
+            width: 100%;
+            height: 100%;
+        }
+
+        .weui-tabbar__label {
+            text-align: center;
+            color: #808080;
+            font-size: 10px;
+            line-height: 1.8;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="../css/overlay.css">
+</head>
+
+<body>
+    <div id="app">
+        <div class="box" style="width: 90%;margin-left: 5%;border: 1px solid #fff0f6;background-image: url(../src/card-background.jpg);background-repeat: no-repeat;border-radius: 5px;display: flex;align-items: center;justify-content: center;position:relative;height: 180px;">
+            <span style="font-size: 1.4em;position: absolute;top: 12px;left: 20px" v-text="name"></span>
+            <img :src="head" alt="" style="width: 100px;height: 100px;border-radius: 50%">
+            <!-- <p style="font-size: 2em;margin-left: 32px">至尊金卡，至尊享受</p> -->
+        </div>
+        <div style="width: 90%;margin-left: 5%;height: 180px;background-color: #f2f2f2;margin-top: 33px;border-radius: 5px;padding-top: 12px;position: relative;line-height: 1.6;">
+            <!-- <h1 style="font-size: 0.8em;margin: 5px" v-text="'全场享受原价的'+discount+'%'"></h1>
+        <h1 style="margin: 5px;font-size: 0.8em" v-text="'每项服务获得额外'+extra_time+'分钟时间'"></h1> -->
+            <h1 style="position: absolute;margin: 5px;font-size: 1.1em">距下一级<span style="font-size: 1em;color: #fe736c;"
+                    v-text="next_name"></span>仅需再充值</h1>
+            <div style="text-align:center;vertical-align: middle;width:100%;height:100%">
+                <span style="position: absolute;top:50%;left:50%;width:100%;transform:translate(-50%,-50%);text-align: center; font-size: 1.3em;color: #409eff" v-text="'￥'+lv_up"></span>
+            </div>
+
+        </div>
+        <div class="weui-tabbar" style="margin-left: -9px">
+            <a href="../html/index.html" class="weui-tabbar__item">
+                <img src="../src/主页.png" data-original="../src/主页.png" alt="" class="weui-tabbar__icon">
+                <p class="weui-tabbar__label">首页</p>
+            </a>
+            <a href="../html/order.html" class="weui-tabbar__item">
+                <img src="../src/订单.png" data-original="../src/订单激活.png" alt="" class="weui-tabbar__icon">
+                <p class="weui-tabbar__label">订单</p>
+            </a>
+            <a href="../html/customer.html" class="weui-tabbar__item weui-bar__item_on">
+                <img src="../src/我的激活.png" data-original="../src/我的激活.png" alt="" class="weui-tabbar__icon">
+                <p class="weui-tabbar__label">我的</p>
+            </a>
+        </div>
+        <div id="modal-overlay" v-show="overlay">
+            <div class="modal-data">
+                <img src="../src/loading.gif" />
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../js/weui-min.js"></script>
+<script type="text/javascript" src="../js/jquery.js"></script>
+
+<script type="text/javascript" src="../js/vue.min.js"></script>
+
+<script>
+    let app = new Vue({
+        el: "#app",
+        data: {
+            discount: "",
+            extra_time: '',
+            lv_up: "",
+            name: "",
+            next_name: "",
+            overlay: true,
+            head: "",
+        },
+        created() {
+            var that = this;
+            $.post('../php/get_card_info.php', {
+                user_id: "apple"
+            }).done((data) => {
+                data = JSON.parse(data)
+                console.log(data);
+                if (data.status == 1) {
+                    var info = data.data;
+                    console.log(info)
+                    that.head = data.head
+                    that.lv_up = info.exp;
+                    that.name = info.nowlv;
+                    that.next_name = info.nxlv
+                    that.overlay = false
+                } else {
+                    var info = data.data;
+                    that.head = data.head;
+                    that.discount = 100;
+                    that.extra_time = 0;
+                    that.lv_up = "任意";
+                    that.name = "非会员";
+                    that.next_name = info.next_lv
+                    that.overlay = false
+                }
+            })
+        }
+    })
+</script>
+
+</html>

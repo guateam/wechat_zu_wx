@@ -1,0 +1,460 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title>个人详情</title>
+    <!--<link rel="stylesheet" type="text/css" href="../vendor/iview/dist/styles/iview.css">-->
+	<link rel="stylesheet" type="text/css" href="../css/iview.css">
+	
+    <link rel="stylesheet" href="../css/weui-min.css"/>
+
+    <link rel="stylesheet" href="../css/example.css"/>
+
+    <link rel="stylesheet" href="../css/example.css"/>
+    <link rel="stylesheet" type="text/css" href="../css/overlay.css">
+    <link rel="stylesheet" href="../css/global.css"/>
+    <style type="text/css">
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        img {
+            display: block;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        #comment-list li {
+            display: flex;
+            margin-top: 1.3em;
+        }
+
+        .guest {
+            width: 82%;
+        }
+
+        .thumb img {
+            width: 23%;
+            margin-right: 0.5%;
+            display: inline-block;
+        }
+
+        #origin-img {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+        }
+
+        #origin-img .swiper-slide img {
+            width: 100%;
+            vertical-align: middle;
+        }
+
+        .swiper-pagination {
+            top: 1em;
+            bottom: auto;
+            color: #fff;
+        }
+
+        #tag {
+            border-radius: 15px;
+            border: 1px #f99 solid;
+            background-color: white;
+            margin: 5px 5px 5px 5px;
+
+            padding: 6px 6px 6px 6px;
+            color: #f99
+        }
+    </style>
+</head>
+
+<body>
+<div id="app" style="width:100%;height: 100%;">
+    <div style="width: 100%;height: 21%;display: flex;align-items: center;margin-right:8px;background-color: #eee;border-bottom: 1px #ddd solid;line-height: 1.6;">
+        <div style="margin-left: 20px;display: flex;flex:0 0 20%;">
+            <img :src="data.technician.head" alt="" style="width: 80px;height: 80px;border-radius: 50%;">
+        </div>
+        <div style="margin-left: 10px;">
+            <div style="display: flex;justify-content: space-between;width: 100%">
+                <div>
+                    <h2>{{job_number}} </h2>
+                    <h3 style="font-weight: 200;color: #fe736c;">服务：<span v-text="data.order_num"></span>次</h3>
+                </div>
+                <div>
+                    <Rate disabled allow-half v-model="total_rate" style="font-size: 15px">
+                        <span style="color: #f5a623; margin-left: -20px">{{total_rate}}分</span>
+                    </Rate>
+                </div>
+            </div>
+            <div onclick="navi('jishijianjie.html')">
+                <p style="overflow: hidden;text-overflow: ellipsis;display: -webkit-box;-webkit-line-clamp: 2;-webkit-box-orient: vertical;">
+                    {{data.technician.description}}
+                </p>
+            </div>
+        </div>
+    </div>
+    <div class="weui-flex"
+         style="justify-content: center;align-items: center;height: 13%;width: 100%;background-color: white;border-bottom: 1px #f2f2f2 solid;">
+        <div class="box weui-flex" style="width: 100%; height: 100%;justify-content: center;align-items: center;">
+            <div class="item weui-flex__item" style="text-align: center;border-right: 1px solid #f2f2f2">
+                <h1 style="color: #33cccc;font-size: 24px">{{data.technician.service}}</h1>
+                <div style="display: flex;justify-content: center;align-items: center;margin-top: 10px"><img
+                        src="../src/总接单数.png"
+                        alt=""> 总接单数
+                </div>
+            </div>
+            <div class="item weui-flex__item" style="text-align: center;border-right: 1px solid #f2f2f2">
+                <h1 style="color: #ff9933;font-size: 24px"><span style="font-size: 14px"></span>{{job_number}}</h1>
+                <div style="display: flex;justify-content: center;align-items: center;margin-top: 10px"><img
+                        src="../src/网红技师.png"
+                        alt=""> {{data.technician.level}}
+                </div>
+            </div>
+            <div class="item weui-flex__item" style="text-align: center;" onclick="navi('jishijianjie.html')">
+                <img style="margin-left:40%;margin-right:40%;width: 30px;height:30px;" src="../src/user.png">
+                <div style="display: flex;justify-content: center;align-items: center;margin-top:7px">
+                    <img src="../src/收藏数量.png" alt=""><span style="color: red;">技师简介</span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="weui-flex list"
+         style="justify-content: center;align-items: center;height: 14%;width: 100%;background-color: white;border-bottom: 1px #f2f2f2 solid;margin-top: 8px;margin-bottom: 8px">
+        <div class="box weui-flex guest" style="width: 100%; height: 100%;align-items: center;">
+            <div style=" position: relative; left: -1rem;top: 0rem;" onClick="navi('pyquan.html')">
+                <span style="text-align: center;padding-left: 1.5rem;">个人相册</span>
+            </div>
+            <div class="item weui-flex__item thumb" thumblist="list1"
+                 style="text-align: center;height: 100%;display: flex;flex: 0 0 18%"
+                 v-for='(item, index) in data.technician.photo' v-if="index<4">
+                <!-- <ul id="comment-list"> -->
+                <!-- <li class="list"> -->
+                <!-- <div class="guest"> -->
+                <!-- <div class="thumb" thumblist="list1"> -->
+                <!--<img @click="show_pic(index)" v-bind:src="item" style="height: 100%;width: 100%;">-->
+                <img onClick="navi('pyquan.html')"
+                     style="position: relative;top: 12.5%; height: 75%;width: 75%;display: block;object-fit: cover;"
+                     :src="item['img']">
+                <!-- </div> -->
+                <!-- </div> -->
+                <!-- </li> -->
+                <!-- </ul> -->
+            </div>
+            <div class="item weui-flex__item thumb"
+                 style="text-align: center;height: 100%;display: flex;flex:0 0 5%;background-image: url(../src/go2.png);background-repeat: no-repeat;background-position: center">
+            </div>
+        </div>
+    </div>
+    <!--这个页面的视频播放不需要了，朋友圈能看就好-->
+    <!--<div v-if="data.technician.vcr != ''" class="weui-flex" style="justify-content: center;align-items: center;width: 100%;background-color: white;border-bottom: 1px #f2f2f2 solid;margin-top: 10px">-->
+    <!--<video alt="" style="height: 200px;width: 100%;" controls>-->
+    <!--<source v-bind:src="data.technician.vcr" type="video/mp4">-->
+    <!--</video>-->
+    <!--</div>-->
+    <div style="height: 5%;width: 100%;background-color: white;display: flex;align-items: center">
+        <span style="margin-left: 10px">评价</span>
+        <span style="margin-left: 20px;color: #ff0033;">
+                <rate show-text allow-half v-model="total_rate" disabled style="font-size: 15px">
+                    <span style="color: #f5a623; margin-left: -20px">{{total_rate}}分</span>
+                </rate>
+                （共{{count}}条）
+            </span>
+    </div>
+    <div style="height: 5%;width: 100%;background-color: white;display: flex;align-items: center">
+        <span id="tag" v-for="tag in tags" v-text="tag.tag_name+'('+tag.count+')'"></span>
+    </div>
+    <div class="weui-panel weui-panel_access" style="background-color: white;border-radius: 5px;margin-bottom: 20%">
+        <div class="display-block" style="border-bottom: 1px solid #f2f2f2;" v-for='item in data.feedback'>
+            <a href="javascript:void(0);" class="weui-media-box weui-media-box_appmsg ">
+                <div class="weui-media-box__hd"
+                     :style="'background-image: url('+item.head+');border-radius: 50%;background-color: #ffcc99;background-size:cover;margin-bottom: 20px;width: 30px;height: 30px;'">
+                </div>
+                <div class="weui-media-box__bd">
+                    <h4 class="weui-media-box__title" style="font-size: 16px;margin-bottom:5px;color: #000000">
+                        {{item.name}}</h4>
+                    <h4 class="weui-media-box__title" style="font-size: 14px">
+                        <div style="margin-bottom:5px">
+                            <span style="color:#a1a1a1;margin-right:2px;font-size:10px;margin-top:5px;margin-bottom: 5px">评分</span>
+                            <rate allow-half v-model="item.score" disabled style="font-size: 15px">
+                                <!-- <span style="color: #f5a623; margin-left: -20px">{{item.rate}}分</span> -->
+                            </rate>
+                        </div>
+                    </h4>
+                    <p class="weui-media-box__desc">{{item.comment}}</p>
+                </div>
+                <div class="weui-media-box__bd" style="height: 3rem;display:  flex;flex-direction: column;justify-content:  space-between;align-items:  flex-end;">
+                    <span v-text="date('Y-m-d H:i:s',item.time)" class="weui-media-box__title" style="font-size:12px;color: #a1a1a1"></span>
+                    <div class="" style="font-size: 12px;padding: 5px;border: rgb(26,173,25) 1px solid;border-radius: 10px;color: rgb(26, 173, 25);">评论
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <div style="height:1px"></div>
+
+    <div style="height: 10%;width: 100%;position: fixed;bottom: 0;background-color: white;display: flex;">
+        <div style="height: 100%;flex: 0 0 25%;display: flex;align-items: center;justify-content: center;border-right: 1px solid #f2f2f2"
+             @click="navi('index.html')">
+            <div style="width: 40px">
+                <img src="../src/主页激活.png" alt="" style="height: 25px;width:25px">
+                <h1 style="font-size: 14px;font-weight: 200;">主页</h1>
+            </div>
+        </div>
+        <div style="height: 100%;flex: 0 75%;display: flex;align-items: center;justify-content: center">
+            <button @click="down_order"
+                    style="width: 85%;height: 70%;background-color: #ff3399;color: white;border-radius: 5px;font-size: 18px">
+                选{{data.technician.gender}}
+            </button>
+        </div>
+    </div>
+    <div style="height: 60px;width:60px;position: fixed;background-color: white;bottom: 70px;right: 30px; display: flex;align-items: center;justify-content: center;border-radius: 50%;border: 1px #fe736c solid;"
+         onclick="call()">
+        <div style="width: 100%;height: 100%;text-align: center;display: flex;justify-content: space-between;flex-direction: column;align-items: center;">
+            <img src="../src/分享.png" alt="" style="height: 25px;width:25px;margin-top: 5px">
+            <h1 style="font-size: 14px;font-weight: 200;margin-bottom: 10px;color: #fe736c">分享</h1>
+        </div>
+    </div>
+    <div id="modal-overlay" v-show="overlay">
+        <div class="modal-data">
+            <img src="../src/loading.gif" style="margin: 0 auto"/>
+        </div>
+    </div>
+</div>
+<!-- Swiper -->
+<div class="swiper-container" id="origin-img">
+    <div class="swiper-wrapper"></div>
+    <div class="swiper-pagination"></div>
+</div>
+</body>
+<script type="text/javascript" src="../js/jweixin.js"></script>
+<!-- <script type="text/javascript" src="../js/example.js"></script> -->
+<script type="text/javascript" src="../js/weui-min.js"></script>
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" src="../js/vue.js"></script>
+<script type="text/javascript" src="../js/windowOpen.js"></script>
+<script type="text/javascript" src="../js/swiper.min.js"></script>
+<script type="text/javascript" src="../js/date-format.js"></script>
+<!--<script type="text/javascript" src="../vendor/soshm/dist/soshm.min.js"></script>-->
+<script type="text/javascript" src="../js/soshm.min.js"></script>
+
+<!--<script type="text/javascript" src="../vendor/iview/dist/iview.min.js"></script>-->
+<script type="text/javascript" src="../js/iview.min.js"></script>
+
+<script>
+    imgsdata = {
+        "list1": [],
+    }
+
+    var swiper = new Swiper('.swiper-container', {
+        zoom: true,
+        width: window.innerWidth,
+        virtual: true,
+        spaceBetween: 20,
+        pagination: {
+            el: '.swiper-pagination',
+            type: 'fraction',
+        },
+        on: {
+            click: function () {
+                $('#origin-img').fadeOut('fast');
+                this.virtual.slides.length = 0;
+                this.virtual.cache = [];
+                swiperStatus = false;
+
+            },
+        },
+
+    });
+
+    //切换图状态禁止页面缩放	
+    document.addEventListener('touchstart', function (event) {
+        if (event.touches.length > 1 && swiperStatus) {
+            event.preventDefault();
+        }
+    })
+    var lastTouchEnd = 0;
+    document.addEventListener('touchend', function (event) {
+        var now = (new Date()).getTime();
+        if (now - lastTouchEnd <= 300) {
+            event.preventDefault();
+        }
+        lastTouchEnd = now;
+    }, false)
+
+    document.addEventListener('touchmove', function (e) {
+        if (swiperStatus) {
+            e.preventDefault();
+        }
+    })
+</script>
+<script type="text/javascript">
+    //获取url参数
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+    }
+
+    function getPar(par) {
+        //获取当前URL
+        var local_url = document.location.href;
+        //获取要取得的get参数位置
+        var get = local_url.indexOf(par + "=");
+        if (get == -1) {
+            return false;
+        }
+        //截取字符串
+        var get_par = local_url.slice(par.length + get + 1);
+        //判断截取后的字符串是否还有其他get参数
+        var nextPar = get_par.indexOf("&");
+        if (nextPar != -1) {
+            get_par = get_par.slice(0, nextPar);
+        }
+        return get_par;
+    }
+
+    let app = new Vue({
+        el: '#app',
+        data: {
+            data: {},
+            count: 0,
+            job_number: "",
+            time: "",
+            sv: "",
+            tc: [],
+            tags: [],
+            overlay: true,
+            skill_list: [],
+            is_busy: false,
+            total_rate: 0,
+        },
+        methods: {
+            down_order() {
+                var that = this;
+                if (this.tc.indexOf(this.job_number) == -1) {
+                    this.tc.push(this.job_number);
+                }
+                if (getQueryString('mode') == "dashang") {
+                    window.location.href = "dashangjishi.html?job_number=" + this.job_number
+                } else {
+                    window.location.href = "jishixuanze.html?" + "select_time=" + this.time + "&sv=" +
+                        this.sv + "&tc=" + this.tc;
+                }
+            },
+            show_pic(index) {
+                clickIndex = index;
+                imgs = imgsdata['list1'];
+                for (i = 0; i < imgs.length; i++) {
+                    swiper.virtual.appendSlide('<div class="swiper-zoom-container"><img src="' + imgs[i] +
+                        '" /></div>');
+                }
+                swiper.slideTo(clickIndex);
+                $('#origin-img').fadeIn('fast');
+                swiperStatus = true;
+            },
+            choose_service(name) {
+                var that = this;
+                for (var i in that.skill_list) {
+                    if (that.skill_list[i].name == name) {
+                        that.skill_list[i].check = !that.skill_list[i].check;
+                        break;
+                    }
+                }
+            }
+        },
+        created() {
+            var that = this;
+
+            that.job_number = getPar('job_number');
+            //获取url参数，在技师选择的相关页面中，存储选择情况有限考虑url参数，当离开技师选择相关页面后
+            //再次进入技师选择界面不会附带url参数，上次选择的情况看cookie。当用户点击立即下单之后，根据
+            //url参数储存cookie
+            url_time = getQueryString('select_time');
+            url_sv = getQueryString('sv');
+            url_tc = getQueryString('tc');
+
+            if (!(url_time === "" || url_time == null || url_time === undefined)) {
+                this.time = url_time;
+            }
+            if (!(url_sv === "" || url_sv == null || url_sv === undefined)) {
+                this.sv = url_sv;
+            }
+            if (!(url_tc === "" || url_tc == null || url_tc === undefined)) {
+                this.tc = url_tc.split(',');
+            }
+
+            var back = {};
+            $.ajax({
+                type: 'POST',
+                async: false,
+                data: {
+                    id: that.job_number,
+                    time: that.time
+                },
+                dataType: 'json',
+                url: '../php/gettechnicianpage.php',
+            }).done((data) => {
+                if (data.status == 1) {
+                    that.tags = data.tag
+                    back = data.data
+                    that.data = back
+                    imgsdata.list1 = that.data.technician.photo;
+                    that.is_busy = that.data.technician.busy == '1' ? true : false;
+                    if (that.data.technician.vcr === null) {
+                        console.log("null！！！！")
+                        that.data.technician.vcr = '';
+                    }
+                    that.count = that.data.feedback.length
+                    if (that.count > 0) {
+                        var total_rate = 0;
+                        for (var i in that.data.feedback) {
+                            var info = that.data.feedback[i];
+                            total_rate += parseInt(info.score);
+                            console.log(total_rate);
+                        }
+                        that.total_rate = total_rate / that.count;
+                    }
+                    var skills = that.data.technician.skills
+                    for (var i in skills) {
+                        that.skill_list.push({
+                            "check": false,
+                            "name": skills[i].name,
+                            'id': skills[i].id,
+                        })
+                    }
+
+                }
+                that.overlay = false
+            })
+
+        }
+    })
+
+    function call() {
+        soshm.popIn({
+            title: '技师分享',
+            sites: ['weixin', 'weixintimeline', 'weibo', 'qzone', 'qq'],
+            url: location.href,
+            digest: ''
+        });
+    }
+
+    function navi(url) {
+        window.location.href = url + "?id=" + getQueryString('job_number');
+    }
+</script>
+
+</html>

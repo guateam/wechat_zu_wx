@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title>消费记录</title>
+    <link rel="stylesheet" href="../css/weui-min.css" />
+    <link rel="stylesheet" href="../css/example.css" />
+    <link rel="stylesheet" type="text/css" href="../css/overlay.css">
+</head>
+
+<body>
+    <div class="weui-cells__title">消费记录</div>
+    <div class="weui-cells" id="app">
+        <div class="weui-flex" style="height: 40px;border-bottom: 1px #f2f2f2 solid;">
+            <div class="weui-flex weui-flex__item" style="flex: 0 0 40%;">
+                <div style="background-color: white;width: 100%;line-height: 1.6;display: flex;align-items: center;justify-content: center">时间</div>
+            </div>
+            <div class="weui-flex weui-flex__item" style="flex: 0 0 30%;">
+                <div style="background-color: white;width: 100%;line-height: 1.6;display: flex;align-items: center;justify-content: center">指定人</div>
+            </div>
+            <div class="weui-flex weui-flex__item" style="flex: 0 0 30%;">
+                <div style="background-color: white;width: 100%;line-height: 1.6;display: flex;align-items: center;justify-content: center">金额/元</div>
+            </div>
+        </div>
+        <div class="weui-flex" style="height: 40px;border-bottom: 1px #f2f2f2 solid;" v-for="item in record">
+            <div class="weui-flex weui-flex__item" style="flex: 0 0 40%;">
+                <div style="background-color: white;width: 100%;line-height: 1.6;display: flex;align-items: center;justify-content: center" v-text="item.generated_time"></div>
+            </div>
+            <div class="weui-flex weui-flex__item" style="flex: 0 0 30%;">
+                <div style="background-color: white;width: 100%;line-height: 1.6;display: flex;align-items: center;justify-content: center;color: #ff6666; " v-text="item.job_number"></div>
+            </div>
+            <div class="weui-flex weui-flex__item" style="flex: 0 0 30%;">
+                <div style="background-color: white;width: 100%;line-height: 1.6;display: flex;align-items: center;justify-content: center" v-text="item.charge"></div>
+            </div>
+        </div>
+        <div id="modal-overlay" v-show="overlay">
+            <div class="modal-data">
+                <img src="../src/loading.gif" />
+            </div>
+        </div>
+    </div>
+
+</body>
+<script type="text/javascript" src="../js/jweixin.js"></script>
+<!-- <script type="text/javascript" src="../js/example.js"></script> -->
+<script type="text/javascript" src="../js/weui-min.js"></script>
+
+<script type="text/javascript" src="../js/jquery.js"></script>
+
+<script type="text/javascript" src="../js/vue.min.js"></script>
+
+<script type="text/javascript">
+    $(function() {
+        $('.weui-tabbar__item').on('click', function() {
+            $(this).addClass('weui-bar__item_on').siblings('.weui-bar__item_on').removeClass('weui-bar__item_on');
+            $(this).children('.weui-tabbar__icon').attr("src", $(this).children('.weui-tabbar__icon').attr('data-original'));
+        });
+    });
+
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+    }
+    let app = new Vue({
+        el: "#app",
+        data: {
+            overlay: true,
+            record: [],
+        },
+        methods: {
+
+        },
+        created() {
+            var that = this;
+            $.post('../php/getcharge.php', {
+                phone: getQueryString('phone'),
+            }).done((res) => {
+                res = JSON.parse(res);
+                if (res.status == 1) {
+                    for (var i in res.data) {
+                        var info = res.data[i];
+                        that.record.push(info);
+                    }
+                    that.overlay = false;
+                } else if (res.status == -1) {
+
+                    that.overlay = false;
+                }
+            })
+        }
+    })
+</script>
+
+</html>

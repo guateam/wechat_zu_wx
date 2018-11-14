@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title>我的评价</title>
+    <link rel="stylesheet" href="../css/weui-min.css" />
+    <link rel="stylesheet" href="../css/example.css" />
+    <link rel="stylesheet" type="text/css" href="../css/overlay.css">
+</head>
+
+<body>
+    <div class="page__hd">
+        <h1 class="page__title">我的评价</h1>
+    </div>
+    <div class="page__bd" id="app">
+        <div v-for="record in records" class="weui-form-preview">
+            <div class="weui-form-preview__hd">
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">服务项目</label>
+                    <em class="weui-form-preview__value" v-text="record.name"></em>
+                </div>
+            </div>
+            <div class="weui-form-preview__bd">
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">技师</label>
+                    <span class="weui-form-preview__value"><a href="#" style="color:#ee5e7b;" v-text="record.job_number"></a></span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">日期</label>
+                    <span class="weui-form-preview__value" v-text="date('Y-m-d H:i',record.generated_time)"></span>
+                </div>
+                <div class="weui-form-preview__item">
+                    <label class="weui-form-preview__label">评论内容</label>
+                    <span class="weui-form-preview__value" v-text="record.comment"></span>
+                </div>
+            </div>
+            <div class="weui-form-preview__ft">
+                <a class="weui-form-preview__btn weui-form-preview__btn_primary" href="javascript:"></a>
+            </div>
+        </div>
+        <br>
+        <div id="modal-overlay" v-show="overlay">
+            <div class="modal-data">
+                <img src="../src/loading.gif" />
+            </div>
+        </div>
+    </div>
+</body>
+<script type="text/javascript" src="../js/jweixin.js"></script>
+<!-- <script type="text/javascript" src="../js/example.js"></script> -->
+<script type="text/javascript" src="../js/weui-min.js"></script>
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" src="../js/vue.min.js"></script>
+<script type="text/javascript" src="../js/date-format.js"></script>
+
+<script type="text/javascript">
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+    }
+
+    let app = new Vue({
+        el: "#app",
+        data: {
+            overlay: true,
+            records: [{
+                name: "",
+                generated_time: "",
+                comment: "",
+                job_number: "",
+            }],
+        },
+        methods: {
+
+        },
+        created() {
+            var that = this
+            $.post("../php/getrate.php", {
+                id: getQueryString('id')
+            }).done((res) => {
+                res = JSON.parse(res);
+                if (res.status == 1) {
+                    res = res.data;
+                    that.records = res;
+
+                } else {
+                    that.records = [{
+                        name: "无",
+                        generated_time: "无",
+                        comment: "暂无评价",
+                        job_number: "无",
+                    }]
+                }
+                that.overlay = false;
+            })
+        }
+    })
+</script>
+
+</html>

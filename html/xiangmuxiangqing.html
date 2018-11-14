@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title>项目详情</title>
+    
+	<!--<link rel="stylesheet" type="text/css" href="../vendor/iview/dist/styles/iview.css">-->
+	<link rel="stylesheet" type="text/css" href="../css/iview.css">	
+	
+    <link rel="stylesheet" type="text/css" href="../css/global.css">
+    <style>
+        .ivu-collapse{
+            margin-bottom: 15%;
+        }
+        /* 定义模态对话框外面的覆盖层样式 */
+
+        #modal-overlay {
+            position: fixed;
+            /* 使用绝对定位或固定定位  */
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            z-index: 1000;
+            background-color: #fff;
+        }
+
+        /* 模态框样式 */
+
+        .modal-data {
+            margin: 80% auto;
+            padding: 15px;
+            text-align: center;
+            opacity: 0.5;
+        }
+
+        .info {
+            color: #8f384f;
+        }
+
+        #big-img {
+            position: absolute;
+            /* 使用绝对定位或固定定位  */
+            left: 0px;
+            top: 0px;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            z-index: 500;
+            background-color: #000;
+        }
+
+        textarea {
+            resize: none
+        }
+
+        textarea:focus {
+            outline: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="app">
+        <img :src="info['img']" v-if="info['img']!=''" alt="" style="width: 100%;height: 31%;">
+        <img src="../src/项目详情头图.png" v-else  alt="" style="width: 100%;height: 31%;">
+        <row>
+            <div style="margin-top: 5px;margin-bottom: 10px;display: flex;justify-content: space-between">
+                <div style="margin-left: 10px">
+                    <h1 style="font-size: 2.7em;font-weight: 200" v-text="info['name']"></h1>
+                    <!-- <h2 style="font-size: 1.3em;font-weight: 100;">销量：233</h2> -->
+                </div>
+                <div style="margin-right: 10px">
+                    <h2 style="font-size: 1.5em;font-weight: 200" v-text="'￥'+info['price']"></h2>
+                    <h2 style="font-size: 1.5em;font-weight: 200" v-text="info['time']+'分钟'"></h2>
+                </div>
+            </div>
+        </row>
+        <row>
+            <Collapse accordion>
+                <Panel name="1">
+                    服务流程
+                    <p slot="content" v-html="info['procedure']"></p>
+                </Panel>
+                <Panel name="2">
+                    注意事项
+                    <p slot="content" v-html="info['attention']"></p>
+                </Panel>
+                <Panel name="3">
+                    项目特色
+                    <p slot="content" v-html="info['benefit']">
+                    </p>
+                </Panel>
+            </Collapse>
+        </row>
+        <div @Click="navi('jishixuanze.html?sv='+id)" style="position: fixed;bottom: 0;width: 100%;height:10%;background-color: #409eff;display: flex;align-items: center;justify-content: center;font-size: 2em;font-weight: 400;color: white">我要预约</div>
+
+        <div id="modal-overlay" v-show="overlay">
+            <div class="modal-data">
+                <img src="../src/loading.gif" />
+            </div>
+        </div>
+    </div>
+
+</body>
+<script src="../js/jquery.js"></script>
+<script src="../js/vue.js"></script>
+
+<!--<script type="text/javascript" src="../vendor/iview/dist/iview.min.js"></script>-->
+<script type="text/javascript" src="../js/iview.min.js"></script>
+
+<script type="text/javascript" src="../js/windowOpen.js"></script>
+<script>
+    new Vue({
+        el: '#app',
+        data() {
+            return {
+                id: getQueryString('id'),
+                info: [],
+                overlay:true,
+            }
+        },
+        methods:{
+            navi(url){
+                window.location.href = url;
+            }
+        },
+        created() {
+            var that = this;
+            $.post("../php/getservicedetail.php", {
+                id: this.id
+            }).done((res) => {
+                res = JSON.parse(res);
+                if (res.status == 1) {
+                    that.info = res.data;
+                    that.overlay = false;
+                } else {
+                    $(this).openWindow("", "没有该服务", ["好的"],()=>{
+                        window.history.go(-1);
+                    })
+                    // swal({
+                    //     text: "没有该服务，将在2秒内返回上一页...",
+                    //     type:"error",
+                    //     width: 230,
+                    //     timer: 2000,
+                    //     allowOutsideClick: false,
+                    //     allowEscapeKey: false,
+                    //     showConfirmButton: false,
+                    //     showCancelButton: false,
+                    // }).then((res) => {
+                    //     if (res.dismiss === swal.DismissReason.timer)
+                    //         window.history.go(-1);
+                    // })
+                }
+
+            })
+        }
+    })
+    function getQueryString(name) {
+        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
+        var r = window.location.search.substr(1).match(reg);
+        if (r != null) return unescape(r[2]);
+        return null;
+    }
+    // function overlay(state = true) {
+    //     var e1 = document.getElementById('modal-overlay');
+    //     if(state)e1.style.visibility="visible"
+    //     else e1.style.visibility="hidden"
+    // }
+</script>
+
+</html>

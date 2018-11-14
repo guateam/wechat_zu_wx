@@ -1,0 +1,385 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no">
+    <title>选择时间</title>
+    <link rel="stylesheet" href="../css/weui-min.css" />
+    <link rel="stylesheet" href="../css/example.css" />
+    <link rel="stylesheet" type="text/css" href="../css/overlay.css">
+    <link rel="stylesheet" href="../css/global.css" />
+	
+    <!--<link rel="stylesheet" type="text/css" href="../vendor/iview/dist/styles/iview.css">-->
+	<link rel="stylesheet" type="text/css" href="../css/iview.css">
+	
+    <style type="text/css">
+        .ivu-tabs-nav-scroll {
+            display: flex;
+            justify-content: center;
+        }
+
+        .ivu-col-span-6 {
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .hidden-row {
+            background-color: #fff;
+            /* border-top: 1px #a1a1a1 solid;
+            border-bottom: 1px #a1a1a1 solid; */
+            padding: 3px;
+
+        }
+
+        .hidden-row p#unchoosen-block {
+            width: 100%;
+            height: 1.5rem;
+            text-align: center;
+            border-top: 1px #2d8cf0 solid;
+            border-left: 1px #2d8cf0 solid;
+            border-right: 1px #2d8cf0 solid;
+            border-bottom: 1px #2d8cf0 solid;
+            border-radius: 3px;
+            color: #2d8cf0;
+        }
+
+        .hidden-row p#choosen-block {
+            width: 100%;
+            height: 1.5rem;
+            text-align: center;
+            border-top: 1px #2d8cf0 solid;
+            border-left: 1px #2d8cf0 solid;
+            border-right: 1px #2d8cf0 solid;
+            border-bottom: 1px #2d8cf0 solid;
+            border-radius: 3px;
+            color: #fff;
+            background-color: #2d8cf0;
+        }
+
+        .hidden-row p#disable-block {
+            width: 100%;
+            height: 1.5rem;
+            background-color: #aaa;
+            /* filter:alpha(opacity:30);  */
+            opacity: 0.2;
+            color: #000;
+            padding: 2px;
+            border-top: 1px #a1a1a1 solid;
+            border-left: 1px #a1a1a1 solid;
+            border-right: 1px #a1a1a1 solid;
+            border-bottom: 1px #a1a1a1 solid;
+            border-radius: 3px;
+            text-align: center;
+        }
+
+        #choosen-block {
+            width: 5rem;
+            height: 2rem;
+            background-color: #2d8cf0;
+            padding: 2px;
+            text-align: center;
+            border-top: 1px #2d8cf0 solid;
+            border-left: 1px #2d8cf0 solid;
+            border-right: 1px #2d8cf0 solid;
+            border-bottom: 1px #2d8cf0 solid;
+            border-radius: 3px;
+            color: #fff;
+        }
+
+        #disable-block {
+
+            width: 5rem;
+            height: 2rem;
+
+            background-color: #aaa;
+            /* filter:alpha(opacity:30);  */
+            opacity: 0.2;
+            color: #000;
+            padding: 2px;
+            border-top: 1px #a1a1a1 solid;
+            border-left: 1px #a1a1a1 solid;
+            border-right: 1px #a1a1a1 solid;
+            border-bottom: 1px #a1a1a1 solid;
+            border-radius: 3px;
+            text-align: center;
+        }
+
+        #unchoosen-block {
+            width: 5rem;
+            height: 2rem;
+            border: 0.03rem #2d8cf0 solid;
+            padding: 2px;
+            text-align: center;
+            color: #2d8cf0;
+            border-radius: 3px;
+        }
+
+        #button {
+            position: fixed;
+            bottom: 0px;
+            width: 100%;
+            height: 3rem;
+            text-align: center;
+            background-color: #2d8cf0;
+            color: #fff;
+            font-size: 1.1rem;
+            padding-top: 0.5rem;
+        }
+    </style>
+</head>
+
+<body>
+    <div id='app' style="width:100%;height:100%">
+        <row>
+            <tabs @on-click="reset" v-model="tabs[0]">
+                <!-- 3天内的选择 -->
+                <tab-pane v-for="(d,index) in [today,today+(3600*24),today+(3600*48)]" :name="index" :label="date('m-d',d)">
+                    <tabs @on-click="divide('',0,0,d)" v-model="tabs[1]">
+                        <!-- 上半天的选择 -->
+                        <tab-pane :label="open +'~17:30'" name="day">
+                            <row v-for="(row,idx) in time_block">
+                                <!-- 基础时间块 -->
+                                <row>
+                                    <i-col span="6" v-for="(block,idx2) in row" v-if="block.time <= (today+3600*17+60*30)">
+                                        <span @click="divide(block,idx,idx2,d)" :id="(allow && block.allow) ? (block.choosen?'choosen-block':'unchoosen-block'):'disable-block' ">
+                                            <span style="position: relative;top: 0.3rem;" v-text="date('H:i',block.time)"></span>
+                                        </span>
+                                    </i-col>
+                                </row>
+                                <!-- 隐藏层的时间块 -->
+                                <row class="hidden-row" :gutter="16" v-show="divide_line[idx]==1">
+                                    <i-col span="4" v-for="(block,idx) in divide_block">
+                                        <p @click="choose_small(idx)" v-text="date('H:i',block.time)" :id="(allow && block.allow) ? (block.choosen?'choosen-block':'unchoosen-block'):'disable-block' "
+                                            style="padding-top: 0.2rem;width: 100%; "></p>
+                                    </i-col>
+                                </row>
+                            </row>
+                        </tab-pane>
+                        <!-- 下半天的选择 -->
+                        <tab-pane :label="'18:00~'+close" name="night">
+                            <row v-for="(row,idx) in time_block">
+                                <!-- 基础时间块 -->
+                                <row>
+                                    <i-col span="6" v-for="(block,idx2) in row" v-if="block.time>(today+3600*17+60*30)">
+                                        <span @click="divide(block,idx,idx2,d)" :id="(allow && block.allow) ? (block.choosen?'choosen-block':'unchoosen-block'):'disable-block' ">
+                                            <span style="position: relative;top: 0.3rem;" v-text="date('H:i',block.time)"></span>
+                                        </span>
+                                    </i-col>
+                                </row>
+                                <!-- 隐藏层的时间块 -->
+                                <row class="hidden-row" :gutter="16" v-show="divide_line[idx]==1">
+                                    <i-col span="4" v-for="(block,idx) in divide_block">
+                                        <p @click="choose_small(idx)" v-text="date('H:i',block.time)" :id="(allow && block.allow) ? (block.choosen?'choosen-block':'unchoosen-block'):'disable-block' "
+                                            style="padding-top: 0.2rem;width: 100%; "></p>
+                                    </i-col>
+                                </row>
+                            </row>
+                        </tab-pane>
+                    </tabs>
+                </tab-pane>
+
+            </tabs>
+        </row>
+        <div @click="confirm()" id="button">
+            确认选择
+        </div>
+        <div id="modal-overlay" v-show="overlay">
+            <div class="modal-data">
+                <img src="../src/loading.gif" />
+            </div>
+        </div>
+    </div>
+</body>
+
+<script type="text/javascript" src="../js/jquery.js"></script>
+<script type="text/javascript" src="../js/jquery.cookie.js"></script>
+<script src="../js/vue.js"></script>
+<script type="text/javascript" src="../js/windowOpen.js"></script>
+<!-- 将时间戳转化为时间字符串格式 -->
+<script type="text/javascript" src="../js/date-format.js"></script>
+
+<!--<script type="text/javascript" src="../vendor/iview/dist/iview.min.js"></script>-->
+<script type="text/javascript" src="../js/iview.min.js"></script>
+
+<script src = "../js/url.js"></script>
+<script>
+    let app = new Vue({
+        el: "#app",
+        data: {
+            tabs:[0,'day'],//默认选中的tabs标签页,分别为最外层tabs和内层tabs
+            open: "",
+            close: "",
+            today: "",
+            time_block: [], //营业时间块
+            divide_block: [], //细分后的半小时内的时间块
+            divide_line: [0, 0, 0, 0, 0, 0], //是否显示细分的行
+            leap: 1800, //时间选择间隔，1800秒 = 30分钟
+            overlay: true,
+            choosen_block: [], //选中的基础时间块下标
+            choosen_small_block: [], //选中的细分时间块下标
+            choosen_day: "", //最终选定的预约日期，时间戳
+            choosen_time: "", //最终选定的预约时间
+            url_time:"",//url记录的选择时间
+            url_sv:"",//url记录的选择服务
+            url_tc:"",//url记录的选择技师
+        },
+        methods: {
+            //取消选择所有块
+            unchoose_all() {
+                if (this.choosen_block.length > 0) {
+                    old_i = this.choosen_block[0];
+                    old_j = this.choosen_block[1];
+                    Vue.set(
+                        this.time_block[old_i],
+                        old_j, {
+                            time: this.time_block[old_i][old_j].time,
+                            choosen: 0,
+                            allow: this.time_block[old_i][old_j].allow
+                        }
+                    )
+                    this.choosen_block = [];
+                }
+                if (this.choosen_small_block.length > 0) {
+                    old_i = this.choosen_small_block[0];
+                    Vue.set(
+                        this.divide_block,
+                        old_i, {
+                            time: this.divide_block[old_i].time,
+                            choosen: 0,
+                            allow: this.divide_block[old_i].allow
+                        }
+                    )
+                    this.choosen_small_block = [];
+                }
+                this.divide_line = [0, 0, 0, 0, 0, 0, 0, 0];
+            },
+            //选择某个时间块，改变样式
+            choose(i, j) {
+                this.unchoose_all();
+                //更新选中的时间块
+                this.choosen_block = [i, j]
+                Vue.set(
+                    this.time_block[i],
+                    j, {
+                        time: this.time_block[i][j].time,
+                        choosen: 1,
+                        allow: this.time_block[i][j].allow
+                    }
+                )
+            },
+            //选择小时间块
+            choose_small(i) {
+                //不响应禁止选择的时间块
+                if (!this.divide_block[i].allow) return;
+                //取消之前选择的小时间块
+                if (this.choosen_small_block.length > 0) {
+                    old_i = this.choosen_small_block[0];
+                    Vue.set(
+                        this.divide_block,
+                        old_i, {
+                            time: this.divide_block[old_i].time,
+                            choosen: 0,
+                            allow: this.divide_block[old_i].allow
+                        }
+                    )
+                }
+                //更新选中的小时间块
+                this.choosen_small_block = [i]
+                Vue.set(
+                    this.divide_block,
+                    i, {
+                        time: this.divide_block[i].time,
+                        choosen: 1,
+                        allow: this.divide_block[i].allow
+                    }
+                )
+                this.choosen_time = this.divide_block[i].time;
+            },
+            //显示细分的小时间块
+            divide(block, idx, idx2, day) {
+                this.choosen_day = day;
+                if (block === undefined || block == '') {
+                    this.unchoose_all()
+                    this.divide_block = [];
+                    return;
+                }
+                if (!block.allow) return;
+
+                var that = this;
+                $.post("../php/divide.php", {
+                    block: block,
+                    idx: idx,
+                    idx2: idx2,
+                    length: that.time_block.length,
+                    day: day
+                }).done((res) => {
+                    res = JSON.parse(res);
+                    that.divide_block = res.block;
+                    this.choose(idx, idx2);
+                    this.choose_small(res.first);
+                    that.divide_line = res.tp;
+                })
+            },
+            //切换时间时候，重置时间块的可选状态
+            reset(mode) {
+                var that = this;
+                $.post("../php/reset_time_block.php", {
+                    mode: mode,
+                    block: that.time_block
+                }).done((res) => {
+                    res = JSON.parse(res);
+                    that.time_block = res.block;
+
+                    //重置选择状态
+                    this.unchoose_all();
+                })
+            },
+            confirm() {
+                if (this.choosen_small_block.length == 0){
+                    $(this).openWindow("","请选择时间",['好的']);
+                }
+                else{
+                    // $.cookie('select_time', this.choosen_day+this.choosen_time,{path: '/' });
+                    var str_cho= date("Y-m-d H:i:s",this.choosen_time);
+
+                    window.location.href="jishixuanze.html?select_time="+this.choosen_time+"&sv="+this.url_sv+"&tc="+this.url_tc;
+                }
+            }
+        },
+        created() {
+            var that = this
+
+            url_time = getQueryString('select_time');
+            url_sv = getQueryString('sv');
+            url_tc = getQueryString('tc');
+
+            if(!(url_time === "" || url_time === undefined || url_time == null)){
+                this.url_time = url_time;
+            }
+            if(!(url_sv === ""||  url_sv === undefined || url_sv == null)){
+                this.url_sv = url_sv;
+            }
+			if(!(url_tc === ""||  url_tc === undefined || url_tc == null)){
+                this.url_tc = url_tc;
+            }
+
+            $.post("../php/time_select_page.php").done((res) => {
+                res = JSON.parse(res);
+                if (res.status == 1) {
+                    that.open = res.data[0]['open']
+                    that.close = res.data[0]['close']
+                    that.today = res.data[0]['today']
+                    that.allow = parseInt(res.data[0]['pre'])
+                    that.time_block = res.data[0]['time_block']
+                    if(date("H:i",Date.parse(new Date())/1000)>'17:30')that.tabs[1] = 'night';
+                    that.overlay = false;
+                }
+            })
+        },
+    })
+</script>
+
+</html>
