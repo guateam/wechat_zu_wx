@@ -15,13 +15,38 @@
       <i-icon type="../../src/定位.png" slot="icon" />
     </i-cell>
   </i-panel>
-  <i-row i-class="demo-row">
-    <i-col span="5" i-class="demo-col">8：33.33%</i-col>
-    <i-col span="5" i-class="demo-col">8：33.33%</i-col>
-    <i-col span="4" i-class="demo-col">8：33.33%</i-col>
-    <i-col span="5" i-class="demo-col">8：33.33%</i-col>
-    <i-col span="5" i-class="demo-col">8：33.33%</i-col>
-  </i-row>
+  <view class="items">
+    <view class='items-items'>
+      <view class='items-img first'>
+        <image src="../../src/技师预约.png" alt="" class='items-items-image'></image>
+      </view>
+      <view>技师预约</view>
+    </view>
+    <view class='items-items'>
+      <view class='items-img second '>
+        <image src="../../src/包厢预约.png" alt=""></image>
+      </view>
+      <view>包厢预约</view>
+    </view>
+    <view class='items-items'>
+      <view class='items-img third'>
+        <image src="../../src/企业文化.png" alt=""></image>
+      </view>
+      <view>企业文化</view>
+    </view>
+    <view class='items-items'>
+      <view class='items-img forth'>
+        <image src="../../src/会员充值.png" alt=""></image>
+      </view>
+      <view>会员充值</view>
+    </view>
+    <view class='items-items'>
+      <view class='items-img fifth'>
+        <image src="../../src/打赏技师.png" alt=""></image>
+      </view>
+      <view>打赏技师</view>
+    </view>
+  </view>
   <swiper class="swiper-word" vertical="true" circular="true" autoplay="true" interval="2000" duration="500">
     <block wx:for="{{movies}}" wx:for-index="index">
       <swiper-item>

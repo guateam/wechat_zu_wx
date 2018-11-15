@@ -1,2 +1,2 @@
 <!--pages/order/order.wxml-->
-<text>pages/order/order.wxml</text>
+<web-view src="http://localhost/wechat_zu/html/order.html"></web-view>
