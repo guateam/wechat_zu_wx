@@ -21,7 +21,7 @@
     <view class='phone'></view>
   </view>
   <view class="items">
-    <view class='items-items'>
+    <view class='items-items' bindtap="jishiyuyue">
       <view class='items-img first'>
         <image src="../../src/技师预约.png" alt="" class='items-items-image'></image>
       </view>

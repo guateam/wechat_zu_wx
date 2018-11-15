@@ -49,9 +49,9 @@ Page({
     });
   },
   //事件处理函数
-  bindViewTap: function() {
+  jishiyuyue: function () {
     wx.navigateTo({
-      url: '../logs/logs'
+      url: '../jishiyuyue/jishiyuyue'
     })
   },
   onLoad: function() {

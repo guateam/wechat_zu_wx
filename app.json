@@ -2,7 +2,8 @@
   "pages": [
     "pages/index/index",
     "pages/order/order",
-    "pages/my/my"
+    "pages/my/my",
+    "pages/jishiyuyue/jishiyuyue"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -19,8 +20,8 @@
       {
         "pagePath": "pages/index/index",
         "text": "首页",
-        "selectedIconPath":"src/主页激活.png",
-        "iconPath":"src/主页.png"
+        "selectedIconPath": "src/主页激活.png",
+        "iconPath": "src/主页.png"
       },
       {
         "pagePath": "pages/order/order",
