@@ -1,7 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp()
-
+var sliderWidth = 144 // 需要设置slider的宽度，用于计算中间位置
 Page({
   data: {
     movies: [{
@@ -18,7 +18,11 @@ Page({
       }
     ],
     current: '1',
-    tab1: true
+    tab1: true,
+    tabs: ["项目分类", "优惠活动"],
+    activeIndex: 0,
+    sliderOffset: 0,
+    sliderLeft: 0
   },
   handleChange({ detail }) {
     var index = detail.key
@@ -51,6 +55,15 @@ Page({
     })
   },
   onLoad: function() {
+    var that = this;
+    wx.getSystemInfo({
+      success: function (res) {
+        that.setData({
+          sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
+          sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
+        });
+      }
+    });
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -77,6 +90,12 @@ Page({
         }
       })
     }
+  },
+  tabClick: function (e) {
+    this.setData({
+      sliderOffset: e.currentTarget.offsetLeft,
+      activeIndex: e.currentTarget.id
+    });
   },
   swipclick: function(e) {
     //点击图片触发事件
