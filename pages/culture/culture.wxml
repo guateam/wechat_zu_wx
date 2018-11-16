@@ -1,0 +1,2 @@
+<!--pages/culture/culture.wxml-->
+<web-view src="http://localhost/wechat_zu/html/qiyewenhua.html"></web-view>

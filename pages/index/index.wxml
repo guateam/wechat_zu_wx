@@ -15,10 +15,10 @@
     </i-cell>
   </i-panel>
   <view class="address-phone">
-    <view class='address'>
-      这里是地址
+    <view class='address' bindtap="openmap">
+      头格月雅城10幢113号
     </view>
-    <view class='phone'></view>
+    <view class='phone' bindtap='phone'></view>
   </view>
   <view class="items">
     <view class='items-items' bindtap="jishiyuyue">
@@ -33,19 +33,19 @@
       </view>
       <view>包厢预约</view>
     </view>
-    <view class='items-items'>
+    <view class='items-items' bindtap='culture'>
       <view class='items-img third'>
         <image src="../../src/企业文化.png" alt=""></image>
       </view>
       <view>企业文化</view>
     </view>
-    <view class='items-items'>
+    <view class='items-items' bindtap='recharge'>
       <view class='items-img forth'>
         <image src="../../src/会员充值.png" alt=""></image>
       </view>
       <view>会员充值</view>
     </view>
-    <view class='items-items'>
+    <view class='items-items' bindtap='dashangjishi'>
       <view class='items-img fifth'>
         <image src="../../src/打赏技师.png" alt=""></image>
       </view>
@@ -114,32 +114,32 @@
     </view>
   </view>
   <view class="weui-panel weui-panel_access">
-            <view class="weui-panel__hd">精品服务推荐</view>
-            <view class="weui-panel__bd">
-                <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
-                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                        <image class="weui-media-box__thumb" src="../../src/技师预约.png" />
-                    </view>
-                    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg carditems">
-                        <view class='carditems-name'>拔火罐</view>
-                        <view class='carditems-other'>
-                        <view class='carditems-pay'>￥150</view>
-                        <view class='carditems-time'>45分钟</view>
-                        </view>
-                    </view>
-                </navigator>
-                <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
-                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                        <image class="weui-media-box__thumb" src="../../src/技师预约.png" />
-                    </view>
-                    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg carditems">
-                        <view class='carditems-name'>拔火罐</view>
-                        <view class='carditems-other'>
-                        <view class='carditems-pay'>￥150</view>
-                        <view class='carditems-time'>45分钟</view>
-                        </view>
-                    </view>
-                </navigator>
-            </view>
+    <view class="weui-panel__hd">精品服务推荐</view>
+    <view class="weui-panel__bd">
+      <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+        <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+          <image class="weui-media-box__thumb" src="../../src/技师预约.png" />
         </view>
+        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg carditems">
+          <view class='carditems-name'>拔火罐</view>
+          <view class='carditems-other'>
+            <view class='carditems-pay'>￥150</view>
+            <view class='carditems-time'>45分钟</view>
+          </view>
+        </view>
+      </navigator>
+      <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+        <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+          <image class="weui-media-box__thumb" src="../../src/技师预约.png" />
+        </view>
+        <view class="weui-media-box__bd weui-media-box__bd_in-appmsg carditems">
+          <view class='carditems-name'>拔火罐</view>
+          <view class='carditems-other'>
+            <view class='carditems-pay'>￥150</view>
+            <view class='carditems-time'>45分钟</view>
+          </view>
+        </view>
+      </navigator>
+    </view>
+  </view>
 </view>

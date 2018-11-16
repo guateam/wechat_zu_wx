@@ -3,7 +3,10 @@
     "pages/index/index",
     "pages/order/order",
     "pages/my/my",
-    "pages/jishiyuyue/jishiyuyue"
+    "pages/jishiyuyue/jishiyuyue",
+    "pages/culture/culture",
+    "pages/recharge/recharge",
+    "pages/dashangjishi/dashangjishi"
   ],
   "window": {
     "backgroundTextStyle": "light",

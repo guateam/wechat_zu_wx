@@ -24,7 +24,9 @@ Page({
     sliderOffset: 0,
     sliderLeft: 0
   },
-  handleChange({ detail }) {
+  handleChange({
+    detail
+  }) {
     var index = detail.key
     console.log(index)
     this.setData({
@@ -43,21 +45,60 @@ Page({
     }
   },
 
-  handleChangeScroll({ detail }) {
+  handleChangeScroll({
+    detail
+  }) {
     this.setData({
       current_scroll: detail.key
     });
   },
   //事件处理函数
-  jishiyuyue: function () {
+  openmap: function() {
+    wx.getLocation({
+      type: 'gcj02', //返回可以用于wx.openLocation的经纬度
+      success(res) {
+        const latitude = res.latitude
+        const longitude = res.longitude
+        wx.openLocation({
+          latitude: 30.3036750000,
+          longitude: 120.3032260000,
+          scale: 18,
+          name: '御足堂影院式足道',
+          address: '头格月雅城10幢'
+        })
+
+      }
+    })
+  },
+  phone: function() {
+    wx.makePhoneCall({
+      phoneNumber: '13336130250',
+    })
+  },
+  jishiyuyue: function() {
     wx.navigateTo({
       url: '../jishiyuyue/jishiyuyue'
+    })
+  },
+  culture: function() {
+    wx.navigateTo({
+      url: '../culture/culture',
+    })
+  },
+  recharge: function () {
+    wx.navigateTo({
+      url: '../recharge/recharge',
+    })
+  },
+  dashangjishi: function () {
+    wx.navigateTo({
+      url: '../dashangjishi/dashangjishi',
     })
   },
   onLoad: function() {
     var that = this;
     wx.getSystemInfo({
-      success: function (res) {
+      success: function(res) {
         that.setData({
           sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth) / 2,
           sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
@@ -91,7 +132,7 @@ Page({
       })
     }
   },
-  tabClick: function (e) {
+  tabClick: function(e) {
     this.setData({
       sliderOffset: e.currentTarget.offsetLeft,
       activeIndex: e.currentTarget.id
