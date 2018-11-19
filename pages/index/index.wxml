@@ -2,23 +2,23 @@
 <!--index.wxml-->
 <view class="page">
   <movable-area style="width:100%;height:100%">
-    <swiper class="swiper" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="1000">
-      <block wx:for="{{movies}}" wx:for-index="index">
-        <swiper-item>
-          <image src="{{item.url}}" class="slide-image" mode="aspectFill" />
+    <swiper  class="swiper" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="1000">
+      <block wx:for="{{top_pic}}" wx:for-index="index">
+        <swiper-item bindtap="head_to" data-link="{{item.dir}}">
+          <image src="{{yuming+item.url}}" class="slide-image" mode="aspectFill" />
         </swiper-item>
       </block>
     </swiper>
     <i-panel class="cell-panel-demo">
       <i-cell>
-        <view class='name'>御足堂影院式足道
-          <text class='time'> 08:00~23:00 </text>
+        <view class='name' >{{data.name}}
+          <text class='time'>{{data.open_time}}~{{data.close_time}} </text>
         </view>
       </i-cell>
     </i-panel>
     <view class="address-phone">
       <view class='address' bindtap="openmap">
-        头格月雅城10幢113号
+        {{data.position}}
       </view>
       <view class='phone' bindtap='phone'></view>
     </view>
@@ -29,17 +29,18 @@
         </view>
         <view class='items-items-word'>技师预约</view>
       </view>
+      <button open-type="getUserInfo" bindgetuserinfo="button_userinfo">授权</button>
       <view class='items-items'>
         <view class='items-img second '>
           <image src="../../src/包厢预约.png" alt=""></image>
         </view>
         <view class='items-items-word'>包厢预约</view>
       </view>
-      <view class='items-items' bindtap='culture'>
+      <view class='items-items' bindtap='tea'>
         <view class='items-img third'>
           <image src="../../src/企业文化.png" alt=""></image>
         </view>
-        <view class='items-items-word'>企业文化</view>
+        <view class='items-items-word'>茶艺预约</view>
       </view>
       <view class='items-items' bindtap='recharge'>
         <view class='items-img forth'>
@@ -55,9 +56,9 @@
       </view>
     </view>
     <swiper class="swiper-word" vertical="true" circular="true" autoplay="true" interval="2000" duration="500">
-      <block wx:for="{{movies}}" wx:for-index="index">
+      <block wx:for="{{items3}}" wx:for-index="index">
         <swiper-item>
-          <p class="slide-word" mode="aspectFill">测试公告测试公告测试公告</p>
+          <p class="slide-word" mode="aspectFill">{{item.text}}</p>
         </swiper-item>
       </block>
     </swiper>
@@ -79,37 +80,20 @@
               <i-col span="8" i-class="demo-col">时长/分</i-col>
               <i-col span="8" i-class="demo-col">门市价/元</i-col>
             </i-row>
-            <i-row i-class="demo-row">
-              <i-col span="8" i-class="demo-col">拔火罐</i-col>
-              <i-col span="8" i-class="demo-col">45</i-col>
-              <i-col span="8" i-class="demo-col pay">￥188</i-col>
-            </i-row>
-            <i-row i-class="demo-row">
-              <i-col span="8" i-class="demo-col">拔火罐</i-col>
-              <i-col span="8" i-class="demo-col">45</i-col>
-              <i-col span="8" i-class="demo-col pay">￥188</i-col>
-            </i-row>
-            <i-row i-class="demo-row">
-              <i-col span="8" i-class="demo-col">拔火罐</i-col>
-              <i-col span="8" i-class="demo-col">45</i-col>
-              <i-col span="8" i-class="demo-col pay">￥188</i-col>
+            <i-row i-class="demo-row" wx:for="{{items2}}">
+              <i-col span="8" i-class="demo-col">{{item.name}}</i-col>
+              <i-col span="8" i-class="demo-col">{{item.time}}</i-col>
+              <i-col span="8" i-class="demo-col pay">￥{{item.price}}</i-col>
             </i-row>
           </view>
           <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
             <i-row i-class="demo-row">
-              <i-col span="8" i-class="demo-col">项目名称</i-col>
-              <i-col span="8" i-class="demo-col">原价/元</i-col>
-              <i-col span="8" i-class="demo-col">现价/元</i-col>
+              <i-col span="12" i-class="demo-col">项目名称</i-col>
+              <i-col span="12" i-class="demo-col">原价/元</i-col>
             </i-row>
-            <i-row i-class="demo-row">
-              <i-col span="8" i-class="demo-col">拔火罐</i-col>
-              <i-col span="8" i-class="demo-col">245</i-col>
-              <i-col span="8" i-class="demo-col paynow">￥188</i-col>
-            </i-row>
-            <i-row i-class="demo-row">
-              <i-col span="8" i-class="demo-col">拔火罐</i-col>
-              <i-col span="8" i-class="demo-col">245</i-col>
-              <i-col span="8" i-class="demo-col paynow">￥188</i-col>
+            <i-row i-class="demo-row" wx:for="{{items1}}">
+              <i-col span="12" i-class="demo-col">{{item.name}}</i-col>
+              <i-col span="12" i-class="demo-col">￥{{item.price}}</i-col>
             </i-row>
           </view>
         </view>
@@ -118,27 +102,15 @@
     <view class="weui-panel weui-panel_access">
       <view class="weui-panel__hd">精品服务推荐</view>
       <view class="weui-panel__bd">
-        <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+        <navigator wx:for="{{items2}}" url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" bindtap="head_to" data-link="xiangmuxiangqing.html?id={{item.id}}">
           <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-            <image class="weui-media-box__thumb" src="../../src/技师预约.png" />
+            <image class="weui-media-box__thumb" src="{{yuming+item.img}}" />
           </view>
           <view class="weui-media-box__bd weui-media-box__bd_in-appmsg carditems">
-            <view class='carditems-name'>拔火罐</view>
+            <view class='carditems-name'>{{item.name}}</view>
             <view class='carditems-other'>
-              <view class='carditems-pay'>￥150</view>
-              <view class='carditems-time'>45分钟</view>
-            </view>
-          </view>
-        </navigator>
-        <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
-          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-            <image class="weui-media-box__thumb" src="../../src/技师预约.png" />
-          </view>
-          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg carditems">
-            <view class='carditems-name'>拔火罐</view>
-            <view class='carditems-other'>
-              <view class='carditems-pay'>￥150</view>
-              <view class='carditems-time'>45分钟</view>
+              <view class='carditems-pay'>￥{{item.price}}</view>
+              <view class='carditems-time'>{{item.time}}分钟</view>
             </view>
           </view>
         </navigator>

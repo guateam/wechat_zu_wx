@@ -1,2 +1,2 @@
 <!--pages/order/order.wxml-->
-<web-view src="http://a.lobopay.cn/wechat/html/qiyewenhua.html"></web-view>
+<web-view src="http://a.lobopay.cn/wechat/html/order.html"></web-view>

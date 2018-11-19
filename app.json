@@ -6,7 +6,9 @@
     "pages/jishiyuyue/jishiyuyue",
     "pages/culture/culture",
     "pages/recharge/recharge",
-    "pages/dashangjishi/dashangjishi"
+    "pages/dashangjishi/dashangjishi",
+    "pages/tea/tea",
+    "pages/many/many"
   ],
   "window": {
     "backgroundTextStyle": "light",

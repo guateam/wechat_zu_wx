@@ -1,2 +1,2 @@
 <!--pages/my/my.wxml-->
-<web-view src="http://localhost/wechat_zu/html/customer.html"></web-view>
+<web-view src="http://localhost/wechat/html/customer.html"></web-view>
