@@ -33,12 +33,18 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
+			"current": 1,
 			"list": [
 				{
 					"id": 0,
 					"name": "测试bug",
 					"pathName": "pages/culture/culture",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "测试",
+					"pathName": "pages/movable-view/movable-view",
 					"query": ""
 				}
 			]

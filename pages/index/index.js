@@ -17,12 +17,30 @@ Page({
         url: '../../src/wash-foot04.jpg'
       }
     ],
+    x: 300,
+    y: 450,
     current: '1',
     tab1: true,
     tabs: ["项目分类", "优惠活动"],
     activeIndex: 0,
     sliderOffset: 0,
     sliderLeft: 0
+  },
+  onShareAppMessage: function(res) {
+    if (res.from === 'button') {
+      // 来自页面内转发按钮
+      console.log(res.target)
+    }
+    return {
+      title: '御足堂影院式足道',
+      path: '/page/index/index',
+      success: function(res) {
+        // 转发成功
+      },
+      fail: function(res) {
+        // 转发失败
+      }
+    }
   },
   handleChange({
     detail
@@ -44,7 +62,12 @@ Page({
       })
     }
   },
-
+  tap: function(e) {
+    this.setData({
+      x: 30,
+      y: 30
+    });
+  },
   handleChangeScroll({
     detail
   }) {
@@ -85,12 +108,12 @@ Page({
       url: '../culture/culture',
     })
   },
-  recharge: function () {
+  recharge: function() {
     wx.navigateTo({
       url: '../recharge/recharge',
     })
   },
-  dashangjishi: function () {
+  dashangjishi: function() {
     wx.navigateTo({
       url: '../dashangjishi/dashangjishi',
     })
