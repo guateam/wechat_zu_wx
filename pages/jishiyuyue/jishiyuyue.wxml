@@ -1,1 +1,1 @@
-<web-view src="http://a.lobopay.cn/wechat/html/jishixuanze.html"></web-view>
+<web-view src="http://172.20.10.3/wechat/html/jishixuanze.html?openid={{openid}}"></web-view>
