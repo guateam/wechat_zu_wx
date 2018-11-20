@@ -1,2 +1,2 @@
 <!--pages/recharge/recharge.wxml-->
-<web-view src="http://a.lobopay.cn/wechat/html/recharge.html"></web-view>
+<web-view src="http://localhost/wechat/html/recharge.html?openid={{openid}}"></web-view>

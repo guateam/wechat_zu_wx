@@ -4,13 +4,14 @@ const app = getApp()
 var sliderWidth = 144 // 需要设置slider的宽度，用于计算中间位置
 Page({
   data: {
-    yuming:'http://a.lobopay.cn',//图片的域名
+    yuming: 'http://a.lobopay.cn', //图片的域名
     x: 300,
     y: 450,
-    userInfo:"",
+    userInfo: "",
     top_pic: [],
     items1: {},
     items2: {},
+    openid: '',
     data: {},
     value2: 0,
     animate: false,
@@ -90,66 +91,21 @@ Page({
       }
     })
   },
-  button_userinfo(e){
-    console.log(e.detail.userInfo)
-    wx.setStorageSync('userInfo', e.detail.userInfo);//存储userInfo
-    var APPID ='wxe1e434222057b10e';
-    var APPSECRET = 'c5283cabffbbe714ba1c333fcead2487';
-    wx.login({
-      success: function (res) {
-        if (res.code) {
-          var l = "https://api.weixin.qq.com/sns/jscode2session?appid=" + APPID + "&secret=" + APPSECRET + "&js_code="+res.code+"&grant_type=authorization_code";
-
-          wx.request({
-            url: l,
-            data: {},
-            header: {
-              'content-type': 'application/json'
-            },
-            success: function (res) {
-              openid = res.data.openid //返回openid
-            }
-          })
-
-
-          // wx.request({
-          //   url: "http://localhost/wechat_zu_wx/php/openid.php",
-          //   data: {
-          //     url:l
-          //   },
-          //   method: 'POST', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT  
-          //   header: {
-          //     'content-type': 'application/x-www-form-urlencoded'
-          //   },
-          //   success: function (res) {
-          //     var obj = {};
-          //     obj.openid = res.data.openid;
-          //     obj.expires_in = Date.now() + res.data.expires_in;
-          //     //console.log(obj);
-          //     wx.setStorageSync('user', obj);//存储openid  
-          //   }
-          // });
-        } else {
-          console.log('获取用户登录态失败！' + res.errMsg)
-        }
-      }
-    });
-  },
   phone: function () {
     wx.makePhoneCall({
       phoneNumber: this.data.data.phone,
     })
   },
-  tea:function(){
+  tea: function () {
     wx.navigateTo({
       url: '../tea/tea'
     })
   },
-  head_to:function(e){
+  head_to: function (e) {
     var link = e.currentTarget.dataset.link;
     var arg = link.split('?');
     wx.navigateTo({
-      url: '../many/many?link='+arg[0]+'&'+arg[1]
+      url: '../many/many?link=' + arg[0] + '&' + arg[1]
     })
   },
   jishiyuyue: function () {
@@ -164,19 +120,18 @@ Page({
   },
   recharge: function () {
     wx.navigateTo({
-      url: '../recharge/recharge',
+      url: '../recharge/recharge?openid=' + app.globalData.openid,
     })
   },
   dashangjishi: function () {
     wx.navigateTo({
-      url: '../dashangjishi/dashangjishi',
+      url: '../dashangjishi/dashangjishi?openid=' + app.globalData.openid,
     })
   },
   onLoad: function () {
     var that = this;
     var id = '1'
     var back = {};
-
     wx.getSystemInfo({
       success: function (res) {
         that.setData({
@@ -219,12 +174,12 @@ Page({
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
-      url: 'http://localhost/wechat/php/getmainpage.php',
+      url: 'http://172.20.10.3/wechat/php/getmainpage.php',
       success: function (data) {
         data = data.data;
         if (data.status == 1) {
           that.setData({
-            top_pic:data.top_pic,
+            top_pic: data.top_pic,
           })
           back = data.data
           console.log(back)
@@ -245,7 +200,7 @@ Page({
           that.setData({
             items3: back.notice.data
           })
-          
+
         }
         if (back.shop.status == 1) {
           that.setData({

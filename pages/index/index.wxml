@@ -29,7 +29,6 @@
         </view>
         <view class='items-items-word'>技师预约</view>
       </view>
-      <button open-type="getUserInfo" bindgetuserinfo="button_userinfo">授权</button>
       <view class='items-items'>
         <view class='items-img second '>
           <image src="../../src/包厢预约.png" alt=""></image>
