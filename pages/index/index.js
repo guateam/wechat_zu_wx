@@ -4,6 +4,7 @@ const app = getApp()
 var sliderWidth = 144 // 需要设置slider的宽度，用于计算中间位置
 Page({
   data: {
+    loading:false,
     yuming: 'http://a.lobopay.cn', //图片的域名
     x: 300,
     y: 450,

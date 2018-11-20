@@ -1,8 +1,11 @@
 <!-- <movable> -->
 <!--index.wxml-->
 <view class="page">
+  <view class='loading' wx:if="{{loading}}">
+    <image src='../../src/loading.gif'></image>
+  </view>
   <movable-area style="width:100%;height:100%">
-    <swiper  class="swiper" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="1000">
+    <swiper class="swiper" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="1000">
       <block wx:for="{{top_pic}}" wx:for-index="index">
         <swiper-item bindtap="head_to" data-link="{{item.dir}}">
           <image src="{{yuming+item.url}}" class="slide-image" mode="aspectFill" />
@@ -11,7 +14,7 @@
     </swiper>
     <i-panel class="cell-panel-demo">
       <i-cell>
-        <view class='name' >{{data.name}}
+        <view class='name'>{{data.name}}
           <text class='time'>{{data.open_time}}~{{data.close_time}} </text>
         </view>
       </i-cell>
@@ -37,7 +40,7 @@
       </view>
       <view class='items-items' bindtap='tea'>
         <view class='items-img third'>
-          <image src="../../src/企业文化.png" alt=""></image>
+          <image src="../../src/茶艺预约.png" alt=""></image>
         </view>
         <view class='items-items-word'>茶艺预约</view>
       </view>
