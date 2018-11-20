@@ -27,10 +27,10 @@ App({
             },
             success: function (res) {
               var opid = res.data.openid //返回openid
-              wx.getUserInfo({
+              that.globalData.openid = opid;
+               wx.getUserInfo({
                 success: function (res) {
                   that.globalData.personInfo = res.userInfo;
-                  that.globalData.openid = opid;
                   wx.request({
                     url: "http://172.20.10.3/wechat/php/if_register.php",
                     data: {
