@@ -33,7 +33,7 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": -1,
+			"current": 2,
 			"list": [
 				{
 					"id": 0,
@@ -46,6 +46,11 @@
 					"name": "测试",
 					"pathName": "pages/movable-view/movable-view",
 					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "支付编译",
+					"pathName": "pages/pay/pay"
 				}
 			]
 		}

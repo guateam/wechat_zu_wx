@@ -1,0 +1,3 @@
+<!--pages/welcome/welcome.wxml-->
+<text>pages/welcome/welcome.wxml</text>
+<button open-type="getUserInfo" bindgetuserinfo="userinfo"> </button>

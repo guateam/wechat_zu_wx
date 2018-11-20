@@ -8,7 +8,9 @@
     "pages/recharge/recharge",
     "pages/dashangjishi/dashangjishi",
     "pages/tea/tea",
-    "pages/many/many"
+    "pages/many/many",
+    "pages/pay/pay",
+    "pages/welcome/welcome"
   ],
   "window": {
     "backgroundTextStyle": "light",

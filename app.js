@@ -3,6 +3,8 @@ App({
   globalData:{
     personInfo:"",
     openid:"",
+    appid:"wxe1e434222057b10e",
+    appsecret:"c5283cabffbbe714ba1c333fcead2487"
   },
   onLaunch: function () {
     // 展示本地存储能力
@@ -16,8 +18,8 @@ App({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         if (res.code) {
-          var APPID = 'wxe1e434222057b10e';
-          var APPSECRET = 'c5283cabffbbe714ba1c333fcead2487';
+           var APPID = 'wxe1e434222057b10e';
+           var APPSECRET = 'c5283cabffbbe714ba1c333fcead2487';
           var l = "https://api.weixin.qq.com/sns/jscode2session?appid=" + APPID + "&secret=" + APPSECRET + "&js_code=" + res.code + "&grant_type=authorization_code";
           wx.request({
             url: l,
