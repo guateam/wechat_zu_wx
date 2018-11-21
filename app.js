@@ -1,6 +1,7 @@
 //app.js
 App({
   globalData:{
+    postdir:'172.20.10.3',
     personInfo:"",
     openid:"",
     appid:"wxe1e434222057b10e",
@@ -35,7 +36,7 @@ App({
                 success: function (res) {
                   that.globalData.personInfo = res.userInfo;
                   wx.request({
-                    url: "http://192.168.43.113/wechat/php/if_register.php",
+                    url: "http://" +app.globalData.postdir + " /wechat/php/if_register.php",
                     data: {
                       openid: opid,
                     },
@@ -48,7 +49,7 @@ App({
                       if(result.status == 0){
                         //保存用户信息到数据库
                         wx.request({
-                          url: "http://192.168.43.113/wechat/php/upload_customer.php",
+                          url: "http://" +app.globalData.postdir + " /wechat/php/upload_customer.php",
                           data: {
                             openid: opid,
                             username: res.userInfo.nickName,

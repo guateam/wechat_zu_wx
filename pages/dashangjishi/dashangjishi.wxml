@@ -1,2 +1,2 @@
 <!--pages/dashangjishi/dashangjishi.wxml-->
-<web-view src="http://192.168.43.113/wechat/html/dashangjishi.html?openid={{openid}}"></web-view>
+<web-view src="http://{{postdir}}/wechat/html/dashangjishi.html?openid={{openid}}"></web-view>

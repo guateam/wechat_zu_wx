@@ -1,4 +1,5 @@
 // pages/culture/culture.js
+const app = getApp();
 Page({
 
   /**

@@ -6,7 +6,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    openid:app.globalData.openid
+    openid: app.globalData.openid
   },
 
   /**
@@ -14,9 +14,10 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      openid:app.globalData.openid,
-      // url: options.weburl //获取H5页面传递过来的weburl
-      });
+      openid: app.globalData.openid,
+      postdir: app.globalData.postdir,
+    });
+
   },
 
   /**
