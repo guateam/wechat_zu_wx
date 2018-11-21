@@ -11,7 +11,13 @@
     "pages/tea/tea",
     "pages/many/many",
     "pages/pay/pay",
-    "pages/newpg/newpg"
+    "pages/customer-info/customer-info",
+    "pages/card/card",
+    "pages/recharge-record/recharge-record",
+    "pages/history-tip/history-tip",
+    "pages/nopay_order/nopay_order",
+    "pages/dingdanxiangqing/dingdanxiangqing",
+    "pages/yuyueStatus/yuyueStatus"
   ],
   "window": {
     "backgroundTextStyle": "light",

@@ -26,7 +26,7 @@ Page({
       postdir: app.globalData.postdir,
     })
     wx.request({
-      url: "http://" + app.globalData.postdir + " /wechat/php/pay.php",
+      url: "http://" + app.globalData.postdir + "/wechat/php/pay.php",
       method: "POST",
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -81,7 +81,7 @@ Page({
   dashang(fee, jobnumber) {
     var that = this;
     wx.request({
-      url: 'http://" +app.globalData.postdir + " /wechat/php/dashang.php',
+      url: 'http://' +app.globalData.postdir + '/wechat/php/dashang.php',
       data: {
         pay: fee,
         user_id: app.globalData.openid,
@@ -143,7 +143,7 @@ Page({
   pay_unpaid(options) {
     var that = this;
     wx.request({
-      url: 'http://" +app.globalData.postdir + " /wechat/php/pay_unpaid.php',
+      url: 'http://' +app.globalData.postdir + '/wechat/php/pay_unpaid.php',
       data: {
         order_id: options.orderid,
       },
@@ -162,7 +162,7 @@ Page({
   recharge(options) {
     var that = this;
     wx.request({
-      url: 'http://" +app.globalData.postdir + " /wechat/php/recharge.php',
+      url: 'http://' +app.globalData.postdir + ' /wechat/php/recharge.php',
       data: {
         charge: options.total_fee,
         user_id: app.globalData.openid, //user_id为open_id
