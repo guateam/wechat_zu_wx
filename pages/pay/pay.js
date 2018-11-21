@@ -106,7 +106,7 @@ Page({
       pay_way = 0;
     }
     wx.request({
-      url: app.globalData.posttp + app.globalData.postdir + " /wechat/php/addco.php",
+      url: app.globalData.posttp + app.globalData.postdir + "/wechat/php/addco.php",
       data: {
         id: app.globalData.openid,
         phone: options.phone,
@@ -127,7 +127,7 @@ Page({
         res = res.data;
         if (state == 1) {
           wx.showModal({
-            content: '，中断支付，预约订单已经创建，请前往 【我的预约】页面查看详情',
+            content: '中断支付，预约订单已经创建，请前往 【我的预约】页面查看详情',
             success: (then) => {
               wx.switchTab({
                 url: '../index/index',

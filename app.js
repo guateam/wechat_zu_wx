@@ -1,7 +1,7 @@
 //app.js
 App({
   globalData:{
-    postdir:'172.20.10.3',
+    postdir:'a.lobopay.cn',
     posttp:"http://",
     personInfo:"",
     openid:"",
