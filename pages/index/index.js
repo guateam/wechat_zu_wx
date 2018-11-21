@@ -175,7 +175,7 @@ Page({
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
-      url: 'http://172.20.10.3/wechat/php/getmainpage.php',
+      url: 'https://a.lobopay.cn/wechat/php/getmainpage.php',
       success: function (data) {
         data = data.data;
         if (data.status == 1) {

@@ -10,7 +10,8 @@
     "pages/dashangjishi/dashangjishi",
     "pages/tea/tea",
     "pages/many/many",
-    "pages/pay/pay"
+    "pages/pay/pay",
+    "pages/newpg/newpg"
   ],
   "window": {
     "backgroundTextStyle": "light",

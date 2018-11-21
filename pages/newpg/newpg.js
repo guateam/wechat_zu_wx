@@ -1,4 +1,5 @@
-// pages/welcome/welcome.js
+// pages/newpg/newpg.js
+const app = getApp();
 Page({
 
   /**
@@ -11,22 +12,8 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  userinfo(e){
-    if (e.detail.errMsg == "getUserInfo:fail auth deny"){
-      wx.navigateBack({
-        delta:-1
-      })
-    }else{
-      getApp().globalData.userinfo = e.detail.userinfo;
-      wx.switchTab({
-        url: '../index/index'
-      })
-    }
-    
-  },
-
   onLoad: function (options) {
-
+    this.setData({ openid: app.globalData.openid });
   },
 
   /**
