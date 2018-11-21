@@ -15,7 +15,9 @@
     "pages/card/card",
     "pages/recharge-record/recharge-record",
     "pages/history-tip/history-tip",
-    "pages/nopay_order/nopay_order"
+    "pages/nopay_order/nopay_order",
+    "pages/dingdanxiangqing/dingdanxiangqing",
+    "pages/yuyueStatus/yuyueStatus"
   ],
   "window": {
     "backgroundTextStyle": "light",
