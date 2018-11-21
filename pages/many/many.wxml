@@ -1,2 +1,2 @@
 <!--pages/recharge/recharge.wxml-->
-<web-view src="http://{{posturl}}/wechat/html/{{url}}"></web-view>
+<web-view src="http://{{postdir}}/wechat/html/{{url}}"></web-view>

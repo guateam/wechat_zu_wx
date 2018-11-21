@@ -33,7 +33,7 @@
         <view class='items-items-word'>技师预约</view>
       </view>
       <view class='items-items' bindtap='phone'>
-        <view class='items-img second'>
+        <view class='items-img second '>
           <image src="../../src/包厢预约.png" alt=""></image>
         </view>
         <view class='items-items-word'>包厢预约</view>

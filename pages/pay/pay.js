@@ -26,7 +26,7 @@ Page({
       postdir: app.globalData.postdir,
     })
     wx.request({
-      url: "http://" + app.globalData.postdir + "/wechat/php/pay.php",
+      url: app.globalData.posttp + app.globalData.postdir + "/wechat/php/pay.php",
       method: "POST",
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -81,7 +81,7 @@ Page({
   dashang(fee, jobnumber) {
     var that = this;
     wx.request({
-      url: 'http://' +app.globalData.postdir + '/wechat/php/dashang.php',
+      url: app.globalData.posttp +app.globalData.postdir + '/wechat/php/dashang.php',
       data: {
         pay: fee,
         user_id: app.globalData.openid,
@@ -106,7 +106,7 @@ Page({
       pay_way = 0;
     }
     wx.request({
-      url: "http://" + app.globalData.postdir + " /wechat/php/addco.php",
+      url: app.globalData.posttp + app.globalData.postdir + "/wechat/php/addco.php",
       data: {
         id: app.globalData.openid,
         phone: options.phone,
@@ -127,7 +127,7 @@ Page({
         res = res.data;
         if (state == 1) {
           wx.showModal({
-            content: '，中断支付，预约订单已经创建，请前往 【我的预约】页面查看详情',
+            content: '中断支付，预约订单已经创建，请前往 【我的预约】页面查看详情',
             success: (then) => {
               wx.switchTab({
                 url: '../index/index',
@@ -143,7 +143,7 @@ Page({
   pay_unpaid(options) {
     var that = this;
     wx.request({
-      url: 'http://' +app.globalData.postdir + '/wechat/php/pay_unpaid.php',
+      url: app.globalData.posttp +app.globalData.postdir + '/wechat/php/pay_unpaid.php',
       data: {
         order_id: options.orderid,
       },
@@ -162,7 +162,7 @@ Page({
   recharge(options) {
     var that = this;
     wx.request({
-      url: 'http://' +app.globalData.postdir + ' /wechat/php/recharge.php',
+      url: app.globalData.posttp +app.globalData.postdir + ' /wechat/php/recharge.php',
       data: {
         charge: options.total_fee,
         user_id: app.globalData.openid, //user_id为open_id
