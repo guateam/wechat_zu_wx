@@ -12,7 +12,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   userinfo(e){
-    
+    getApp().globalData.userinfo = e.detail.userinfo;
+    wx.switchTab({
+      url: '../index/index'
+    })
   },
 
   onLoad: function (options) {

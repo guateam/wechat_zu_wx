@@ -1,5 +1,6 @@
 {
   "pages": [
+    "pages/welcome/welcome",
     "pages/index/index",
     "pages/order/order",
     "pages/my/my",
@@ -9,8 +10,7 @@
     "pages/dashangjishi/dashangjishi",
     "pages/tea/tea",
     "pages/many/many",
-    "pages/pay/pay",
-    "pages/welcome/welcome"
+    "pages/pay/pay"
   ],
   "window": {
     "backgroundTextStyle": "light",

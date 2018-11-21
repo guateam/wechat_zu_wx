@@ -1,3 +1,2 @@
 <!--pages/welcome/welcome.wxml-->
-<text>pages/welcome/welcome.wxml</text>
-<button open-type="getUserInfo" bindgetuserinfo="userinfo"> </button>
+<button open-type="getUserInfo" bindgetuserinfo="userinfo"> 授权</button>

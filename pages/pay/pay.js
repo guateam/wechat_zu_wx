@@ -24,21 +24,6 @@ Page({
     this.setData({
       openid: app.globalData.openid
     })
-    //随机字符串
-    var rdstr = that.random_str();
-    var ip = "172.20.10.3";
-    var order_id ="1415659990";
-    var total_fee = 1;
-    var openid = "o5C5W408oLTSgSSyz_CVvXJT_FPk";
-
-    var ori_sign = "appid=" + app.globalData.appid + "&body=商品&mch_id=1517624211&nonce_str=" + rdstr +
-      "&notify_url=http://www.weixin.qq.com/wxpay/pay.php" + "&openid=" + openid +
-      "&out_trade_no=" + order_id +
-      "&spbill_create_ip=" +ip+ "&total_fee=" + total_fee +
-      "&trade_type=JSAPI&key=11111111111111111111111111111111";
-
-    var sign = hex_md5(ori_sign);
-    
     wx.request({
       url: "http://172.20.10.3/wechat/php/pay.php",
       method: "POST",
@@ -47,26 +32,158 @@ Page({
       },
       data: {
         appid: app.globalData.appid,
-        mch_id: "1517624211",
-        nonce_str: rdstr,
-        sign: sign,
-        body: "商品",
-        out_trade_no: order_id, //
-        total_fee: total_fee,
-        spbill_create_ip: ip, //
-        notify_url: "http://www.weixin.qq.com/wxpay/pay.php", //
-        trade_type: "JSAPI",
-        openid: openid,
-        total_fee:total_fee
+        total_fee: options.total_fee,
+        openid: app.globalData.openid,
       },
       success: (result) => {
-          console.log(result);
+        console.log(result);
+        if (result.data.state == 1) {
+          wx.requestPayment({
+            timeStamp: result.data.timeStamp,
+            nonceStr: result.data.nonceStr,
+            package: result.data.package,
+            signType: result.data.signType,
+            paySign: result.data.paySign,
+            success: (msg) => {
+              console.log("success");
+              if (options.type == "dashang") {
+                that.dashang(options.total_fee, options.jobnumber);
+              } else if (options.type == "pay_unpaid") {
+                that.pay_unpaid(options)
+              } else if (options.type == "recharge") {
+                that.recharge(options)
+              } else {
+                that.yuyue(options, 4)
+              }
+            },
+            fail: (msg) => {
+              if (msg.errMsg == "requestPayment:fail cancel") {
+                console.log('取消支付')
+                if (options.type != 'dashang') {
+                  that.yuyue(options, 1);
+                } else {
+                  wx.switchTab({
+                    url: '../index/index',
+                  })
+                }
+              } else {
+                console.log("支付失败" + msg.errMsg)
+              }
+            }
+          })
+        }
       }
     })
 
 
   },
-
+  dashang(fee, jobnumber) {
+    wx.request({
+      url: 'http://172.20.10.3/wechat/php/dashang.php',
+      data: {
+        pay: fee,
+        user_id: app.globalData.openid,
+        job_number: jobnumber
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      method: "POST",
+      success: (result) => {
+        resut = result.data;
+        if (result.status == 1) {
+          wx.switchTab({
+            url: '../index/index',
+          })
+        }
+      }
+    })
+  },
+  yuyue(options, state) {
+    wx.request({
+      url: "http://172.20.10.3/wechat/php/addco.php",
+      data: {
+        id: app.globalData.openid,
+        phone: options.phone,
+        pay_way: 1, //支付方式  1--微信   3--会员卡
+        people_num: options.peoplenum,
+        pay: options.total_fee,
+        state: state, //产生的订单状态 4--支付完成  1--预约
+        obj: options.list,
+        select_time: options.select_time,
+        service_type: options.type, //产生的service_order的类型为服务还是茶水
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      method: "POST",
+      success: (res) => {
+        res = res.data;
+        if (state == 1) {
+          wx.showModal({
+            content: '，中断支付，预约订单已经创建，请前往 【我的预约】页面查看详情',
+            success: (then) => {
+              wx.switchTab({
+                url: '../index/index',
+              })
+            }
+          })
+        } else {
+          wx.switchTab({
+            url: '../index/index',
+          })
+        }
+      }
+    })
+  },
+  pay_unpaid(options) {
+    wx.request({
+      url: 'http://172.20.10.3/wechat/php/pay_unpaid.php',
+      data: {
+        order_id: options.orderid,
+      },
+      header: {
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      method: "POST",
+      success: (result) => {
+        result = result.data;
+        if (result.status == 1) {
+          wx.switchTab({
+            url: '../index/index',
+          })
+        }
+      }
+    })
+  },
+  recharge(options) {
+    wx.request({
+      url: 'http://172.20.10.3/php/recharge.php',
+      data: {
+        charge: options.total_fee,
+        user_id: app.globalData.openid, //user_id为open_id
+        job_number: options.jobnumber,
+        pay: 1
+      },
+      success: (res) => {
+        res = res.data;
+        if (res.status == 1) {
+          wx.switchTab({
+            url: '../index/index',
+          })
+        } else {
+          wx.showModal({
+            content: '充值失败，将返回首页',
+            success: (then) => {
+              wx.switchTab({
+                url: '../index/index',
+              })
+            }
+          })
+        }
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
