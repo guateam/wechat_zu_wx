@@ -1,2 +1,2 @@
 <!--pages/newpg/newpg.wxml-->
-<web-view src="http://172.20.10.3/wechat/html/customer.html?openid={{openid}}"></web-view>
+<web-view src="http://{{postdir}}/wechat/html/customer.html?openid={{openid}}"></web-view>

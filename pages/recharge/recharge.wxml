@@ -1,2 +1,2 @@
 <!--pages/recharge/recharge.wxml-->
-<web-view src="http://172.20.10.3/wechat/html/recharge.html?openid={{openid}}"></web-view>
+<web-view src="http://{{postdir}}/wechat/html/recharge.html?openid={{openid}}"></web-view>

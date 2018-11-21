@@ -131,6 +131,9 @@ Page({
   },
   onLoad: function () {
     var that = this;
+    this.setData({
+      postdir:app.globalData.postdir
+    })
     var id = '1'
     var back = {};
     wx.getSystemInfo({
@@ -175,7 +178,7 @@ Page({
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
-      url: 'https://a.lobopay.cn/wechat/php/getmainpage.php',
+      url: 'http://'+app.globalData.postdir+'/wechat/php/getmainpage.php',
       success: function (data) {
         data = data.data;
         if (data.status == 1) {

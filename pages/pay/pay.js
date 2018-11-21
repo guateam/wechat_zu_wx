@@ -22,10 +22,11 @@ Page({
   onLoad: function (options) {
     var that = this;
     this.setData({
-      openid: app.globalData.openid
+      openid: app.globalData.openid,
+      postdir: app.globalData.postdir,
     })
     wx.request({
-      url: "http://172.20.10.3/wechat/php/pay.php",
+      url: "http://" + app.globalData.postdir + " /wechat/php/pay.php",
       method: "POST",
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -80,7 +81,7 @@ Page({
   dashang(fee, jobnumber) {
     var that = this;
     wx.request({
-      url: 'http://172.20.10.3/wechat/php/dashang.php',
+      url: 'http://" +app.globalData.postdir + " /wechat/php/dashang.php',
       data: {
         pay: fee,
         user_id: app.globalData.openid,
@@ -101,11 +102,11 @@ Page({
   yuyue(options, state) {
     var that = this;
     var pay_way = 1;
-    if(state == 1){
+    if (state == 1) {
       pay_way = 0;
     }
     wx.request({
-      url: "http://172.20.10.3/wechat/php/addco.php",
+      url: "http://" + app.globalData.postdir + " /wechat/php/addco.php",
       data: {
         id: app.globalData.openid,
         phone: options.phone,
@@ -114,7 +115,7 @@ Page({
         pay: options.total_fee,
         state: state, //产生的订单状态 4--支付完成  1--预约
         obj: options.list,
-        pay_way:1,//1-微信支付  3--会员卡支付  0-未支付
+        pay_way: 1,//1-微信支付  3--会员卡支付  0-未支付
         select_time: options.select_time,
         service_type: options.type, //产生的service_order的类型为服务还是茶水
       },
@@ -142,7 +143,7 @@ Page({
   pay_unpaid(options) {
     var that = this;
     wx.request({
-      url: 'http://172.20.10.3/wechat/php/pay_unpaid.php',
+      url: 'http://" +app.globalData.postdir + " /wechat/php/pay_unpaid.php',
       data: {
         order_id: options.orderid,
       },
@@ -161,7 +162,7 @@ Page({
   recharge(options) {
     var that = this;
     wx.request({
-      url: 'http://172.20.10.3/wechat/php/recharge.php',
+      url: 'http://" +app.globalData.postdir + " /wechat/php/recharge.php',
       data: {
         charge: options.total_fee,
         user_id: app.globalData.openid, //user_id为open_id
@@ -185,7 +186,7 @@ Page({
       }
     })
   },
-  pay_success(){
+  pay_success() {
     wx.showModal({
       content: '支付成功，将返回主页',
       success: (then) => {

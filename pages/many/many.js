@@ -1,4 +1,5 @@
 // pages/recharge/recharge.js
+const app = getApp();
 Page({
 
   /**
@@ -14,7 +15,8 @@ Page({
   onLoad: function (options) {
     var dir = options.link + '?id=' + options.id;
     this.setData({
-      url: dir
+      url: dir,
+      postdir: app.globalData.postdir,
     })
   },
 
