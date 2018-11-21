@@ -59,7 +59,7 @@ Page({
             fail: (msg) => {
               if (msg.errMsg == "requestPayment:fail cancel") {
                 console.log('取消支付')
-                if (options.type != 'dashang') {
+                if (options.type != 'dashang' && options.type != "pay_unpaid" && options.type != "recharge") {
                   that.yuyue(options, 1);
                 } else {
                   wx.switchTab({
@@ -78,6 +78,7 @@ Page({
 
   },
   dashang(fee, jobnumber) {
+    var that = this;
     wx.request({
       url: 'http://172.20.10.3/wechat/php/dashang.php',
       data: {
@@ -90,16 +91,19 @@ Page({
       },
       method: "POST",
       success: (result) => {
-        resut = result.data;
+        result = result.data;
         if (result.status == 1) {
-          wx.switchTab({
-            url: '../index/index',
-          })
+          that.pay_success();
         }
       }
     })
   },
   yuyue(options, state) {
+    var that = this;
+    var pay_way = 1;
+    if(state == 1){
+      pay_way = 0;
+    }
     wx.request({
       url: "http://172.20.10.3/wechat/php/addco.php",
       data: {
@@ -110,6 +114,7 @@ Page({
         pay: options.total_fee,
         state: state, //产生的订单状态 4--支付完成  1--预约
         obj: options.list,
+        pay_way:1,//1-微信支付  3--会员卡支付  0-未支付
         select_time: options.select_time,
         service_type: options.type, //产生的service_order的类型为服务还是茶水
       },
@@ -129,14 +134,13 @@ Page({
             }
           })
         } else {
-          wx.switchTab({
-            url: '../index/index',
-          })
+          that.pay_success();
         }
       }
     })
   },
   pay_unpaid(options) {
+    var that = this;
     wx.request({
       url: 'http://172.20.10.3/wechat/php/pay_unpaid.php',
       data: {
@@ -149,16 +153,15 @@ Page({
       success: (result) => {
         result = result.data;
         if (result.status == 1) {
-          wx.switchTab({
-            url: '../index/index',
-          })
+          that.pay_success();
         }
       }
     })
   },
   recharge(options) {
+    var that = this;
     wx.request({
-      url: 'http://172.20.10.3/php/recharge.php',
+      url: 'http://172.20.10.3/wechat/php/recharge.php',
       data: {
         charge: options.total_fee,
         user_id: app.globalData.openid, //user_id为open_id
@@ -168,9 +171,7 @@ Page({
       success: (res) => {
         res = res.data;
         if (res.status == 1) {
-          wx.switchTab({
-            url: '../index/index',
-          })
+          that.pay_success();
         } else {
           wx.showModal({
             content: '充值失败，将返回首页',
@@ -181,6 +182,16 @@ Page({
             }
           })
         }
+      }
+    })
+  },
+  pay_success(){
+    wx.showModal({
+      content: '支付成功，将返回主页',
+      success: (then) => {
+        wx.switchTab({
+          url: '../index/index',
+        })
       }
     })
   },

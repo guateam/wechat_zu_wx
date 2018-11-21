@@ -4,7 +4,8 @@ App({
     personInfo:"",
     openid:"",
     appid:"wxe1e434222057b10e",
-    appsecret:"c5283cabffbbe714ba1c333fcead2487"
+    appsecret:"c5283cabffbbe714ba1c333fcead2487",
+    yuming: 'http://a.lobopay.cn', //图片的域名
   },
   onLaunch: function () {
     // 展示本地存储能力
