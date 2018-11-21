@@ -1,2 +1,2 @@
 <!--pages/order/order.wxml-->
-<web-view src="http://172.20.10.3/wechat/html/order.html?openid={{openid}}"></web-view>
+<web-view src="http://192.168.43.113/wechat/html/order.html?openid={{openid}}"></web-view>

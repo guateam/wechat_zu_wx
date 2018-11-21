@@ -25,7 +25,7 @@ Page({
       openid: app.globalData.openid
     })
     wx.request({
-      url: "http://172.20.10.3/wechat/php/pay.php",
+      url: "http://192.168.43.113/wechat/php/pay.php",
       method: "POST",
       header: {
         'content-type': 'application/x-www-form-urlencoded'
@@ -80,7 +80,7 @@ Page({
   dashang(fee, jobnumber) {
     var that = this;
     wx.request({
-      url: 'http://172.20.10.3/wechat/php/dashang.php',
+      url: 'http://192.168.43.113/wechat/php/dashang.php',
       data: {
         pay: fee,
         user_id: app.globalData.openid,
@@ -105,7 +105,7 @@ Page({
       pay_way = 0;
     }
     wx.request({
-      url: "http://172.20.10.3/wechat/php/addco.php",
+      url: "http://192.168.43.113/wechat/php/addco.php",
       data: {
         id: app.globalData.openid,
         phone: options.phone,
@@ -142,7 +142,7 @@ Page({
   pay_unpaid(options) {
     var that = this;
     wx.request({
-      url: 'http://172.20.10.3/wechat/php/pay_unpaid.php',
+      url: 'http://192.168.43.113/wechat/php/pay_unpaid.php',
       data: {
         order_id: options.orderid,
       },
@@ -161,7 +161,7 @@ Page({
   recharge(options) {
     var that = this;
     wx.request({
-      url: 'http://172.20.10.3/wechat/php/recharge.php',
+      url: 'http://192.168.43.113/php/recharge.php',
       data: {
         charge: options.total_fee,
         user_id: app.globalData.openid, //user_id为open_id

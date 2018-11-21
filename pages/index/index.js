@@ -119,6 +119,9 @@ Page({
       url: '../culture/culture',
     })
   },
+  stopTouchMove: function () {
+    return false;
+  },
   recharge: function () {
     wx.navigateTo({
       url: '../recharge/recharge?openid=' + app.globalData.openid,
@@ -175,7 +178,7 @@ Page({
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
-      url: 'https://a.lobopay.cn/wechat/php/getmainpage.php',
+      url: 'http://192.168.43.113/wechat/php/getmainpage.php',
       success: function (data) {
         data = data.data;
         if (data.status == 1) {
