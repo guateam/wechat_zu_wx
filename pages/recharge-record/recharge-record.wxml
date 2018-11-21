@@ -1,0 +1,2 @@
+<!--pages/recharge-record/recharge-record.wxml-->
+<web-view src="http://{{postdir}}/wechat/html/recharge-record.html?openid={{openid}}"></web-view>

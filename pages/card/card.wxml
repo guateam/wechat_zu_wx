@@ -1,0 +1,2 @@
+<!--pages/card/card.wxml-->
+<web-view src="http://{{postdir}}/wechat/html/card.html?openid={{openid}}"></web-view>
