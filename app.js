@@ -1,7 +1,7 @@
 //app.js
 App({
   globalData:{
-    postdir:'a.lobopay.cn',
+    postdir:'172.20.10.3',
     posttp:"http://",
     personInfo:"",
     openid:"",
@@ -33,6 +33,7 @@ App({
             success: function (res) {
               var opid = res.data.openid //返回openid
               that.globalData.openid = opid;
+              that.globalData.session_key = res.data.session_key
                wx.getUserInfo({
                 success: function (res) {
                   that.globalData.personInfo = res.userInfo;
@@ -49,6 +50,10 @@ App({
                       result = result.data;
                       if(result.status == 0){
                         //保存用户信息到数据库
+                        wx.showModal({
+                          title: '申请',
+                          content: '您是第一次使用本店服务，需要绑定手机号，请点击确认并授权',
+                        })
                         wx.request({
                           url: app.globalData.posttp + app.globalData.postdir + " /wechat/php/upload_customer.php",
                           data: {

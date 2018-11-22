@@ -1,2 +1,3 @@
 <!--pages/welcome/welcome.wxml-->
 <button open-type="getUserInfo" bindgetuserinfo="userinfo"> 授权</button>
+<button open-type="getPhoneNumber" bindgetphonenumber="phonenum">绑定手机号</button>

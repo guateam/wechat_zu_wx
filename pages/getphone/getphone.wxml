@@ -1,0 +1,2 @@
+<!--pages/getphone/getphone.wxml-->
+<button open-type="getPhoneNumber" bindgetphonenumber="phonenum">绑定手机号</button>

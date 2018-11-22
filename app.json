@@ -17,7 +17,8 @@
     "pages/history-tip/history-tip",
     "pages/nopay_order/nopay_order",
     "pages/dingdanxiangqing/dingdanxiangqing",
-    "pages/yuyueStatus/yuyueStatus"
+    "pages/yuyueStatus/yuyueStatus",
+    "pages/getphone/getphone"
   ],
   "window": {
     "backgroundTextStyle": "light",
