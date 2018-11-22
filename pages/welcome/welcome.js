@@ -19,8 +19,40 @@ Page({
       })
     }else{
       getApp().globalData.userinfo = e.detail.userinfo;
-      wx.switchTab({
-        url: '../index/index'
+      wx.request({
+        url: app.globalData.posttp + app.globalData.postdir + "/wechat/php/if_register.php",
+        data: {
+          openid: app.globalData.openid,
+        },
+        header: {
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        method: "POST",
+        success: function (result) {
+          result = result.data;
+          if (result.status == 0) {
+            //保存用户信息到数据库
+            wx.request({
+              url: app.globalData.posttp + app.globalData.postdir + "/wechat/php/upload_customer.php",
+              data: {
+                openid: app.globalData.opid,
+                username: e.detail.userInfo.nickName,
+                gender: e.detail.userInfo.gender,
+                head: e.detail.userInfo.avatarUrl
+              },
+              header: {
+                'content-type': 'application/x-www-form-urlencoded'
+              },
+              method: "POST",
+              success: function (res) {
+                res = res.data;
+                wx.switchTab({
+                  url: '../index/index'
+                })
+              }
+            })
+          }
+        }
       })
     }
     

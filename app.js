@@ -23,9 +23,9 @@ App({
         if (res.code) {
           var APPID = 'wxe1e434222057b10e';
           var APPSECRET = 'c5283cabffbbe714ba1c333fcead2487';
-          var l = "https://api.weixin.qq.com/sns/jscode2session?appid=" + APPID + "&secret=" + APPSECRET + "&js_code=" + res.code + "&grant_type=authorization_code";
+          var getopenid_url = "https://api.weixin.qq.com/sns/jscode2session?appid=" + APPID + "&secret=" + APPSECRET + "&js_code=" + res.code + "&grant_type=authorization_code";
           wx.request({
-            url: l,
+            url: getopenid_url,
             data: {},
             header: {
               'content-type': 'application/json'
@@ -34,43 +34,43 @@ App({
               var opid = res.data.openid //返回openid
               that.globalData.openid = opid;
               that.globalData.session_key = res.data.session_key
-              wx.getUserInfo({
-                success: function (res) {
-                  that.globalData.personInfo = res.userInfo;
-                  wx.request({
-                    url: that.globalData.posttp + that.globalData.postdir + "/wechat/php/if_register.php",
-                    data: {
-                      openid: opid,
-                    },
-                    header: {
-                      'content-type': 'application/x-www-form-urlencoded'
-                    },
-                    method: "POST",
-                    success: function (result) {
-                      result = result.data;
-                      if (result.status == 0) {
-                        //保存用户信息到数据库
-                        wx.request({
-                          url: that.globalData.posttp + that.globalData.postdir + "/wechat/php/upload_customer.php",
-                          data: {
-                            openid: opid,
-                            username: res.userInfo.nickName,
-                            gender: res.userInfo.gender,
-                            head: res.userInfo.avatarUrl
-                          },
-                          header: {
-                            'content-type': 'application/x-www-form-urlencoded'
-                          },
-                          method: "POST",
-                          success: function (res) {
-                            res = res.data;
-                          }
-                        })
-                      }
-                    }
-                  })
-                }
-              })
+              // wx.getUserInfo({
+              //   success: function (res) {
+              //     that.globalData.personInfo = res.userInfo;
+              //     wx.request({
+              //       url: that.globalData.posttp + that.globalData.postdir + "/wechat/php/if_register.php",
+              //       data: {
+              //         openid: opid,
+              //       },
+              //       header: {
+              //         'content-type': 'application/x-www-form-urlencoded'
+              //       },
+              //       method: "POST",
+              //       success: function (result) {
+              //         result = result.data;
+              //         if (result.status == 0) {
+              //           //保存用户信息到数据库
+              //           wx.request({
+              //             url: that.globalData.posttp + that.globalData.postdir + "/wechat/php/upload_customer.php",
+              //             data: {
+              //               openid: opid,
+              //               username: res.userInfo.nickName,
+              //               gender: res.userInfo.gender,
+              //               head: res.userInfo.avatarUrl
+              //             },
+              //             header: {
+              //               'content-type': 'application/x-www-form-urlencoded'
+              //             },
+              //             method: "POST",
+              //             success: function (res) {
+              //               res = res.data;
+              //             }
+              //           })
+              //         }
+              //       }
+              //     })
+              //   }
+              // })
             }
           })
         } else {
