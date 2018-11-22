@@ -35,7 +35,7 @@ Page({
             wx.request({
               url: app.globalData.posttp + app.globalData.postdir + "/wechat/php/upload_customer.php",
               data: {
-                openid: app.globalData.opid,
+                openid: app.globalData.openid,
                 username: e.detail.userInfo.nickName,
                 gender: e.detail.userInfo.gender,
                 head: e.detail.userInfo.avatarUrl
