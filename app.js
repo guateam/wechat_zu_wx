@@ -38,7 +38,7 @@ App({
                 success: function (res) {
                   that.globalData.personInfo = res.userInfo;
                   wx.request({
-                    url: app.globalData.posttp + app.globalData.postdir + " /wechat/php/if_register.php",
+                    url: that.globalData.posttp + that.globalData.postdir + "/wechat/php/if_register.php",
                     data: {
                       openid: opid,
                     },
@@ -50,12 +50,8 @@ App({
                       result = result.data;
                       if(result.status == 0){
                         //保存用户信息到数据库
-                        wx.showModal({
-                          title: '申请',
-                          content: '您是第一次使用本店服务，需要绑定手机号，请点击确认并授权',
-                        })
                         wx.request({
-                          url: app.globalData.posttp + app.globalData.postdir + " /wechat/php/upload_customer.php",
+                          url: that.globalData.posttp + that.globalData.postdir + " /wechat/php/upload_customer.php",
                           data: {
                             openid: opid,
                             username: res.userInfo.nickName,
