@@ -1,12 +1,12 @@
 //app.js
 App({
-  globalData:{
-    postdir:'172.20.10.3',
-    posttp:"http://",
-    personInfo:"",
-    openid:"",
-    appid:"wxe1e434222057b10e",
-    appsecret:"c5283cabffbbe714ba1c333fcead2487",
+  globalData: {
+    postdir: '172.20.10.3',
+    posttp: "http://",
+    personInfo: "",
+    openid: "",
+    appid: "wxe1e434222057b10e",
+    appsecret: "c5283cabffbbe714ba1c333fcead2487",
     yuming: 'http://a.lobopay.cn', //图片的域名
   },
   onLaunch: function () {
@@ -21,8 +21,8 @@ App({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         if (res.code) {
-           var APPID = 'wxe1e434222057b10e';
-           var APPSECRET = 'c5283cabffbbe714ba1c333fcead2487';
+          var APPID = 'wxe1e434222057b10e';
+          var APPSECRET = 'c5283cabffbbe714ba1c333fcead2487';
           var l = "https://api.weixin.qq.com/sns/jscode2session?appid=" + APPID + "&secret=" + APPSECRET + "&js_code=" + res.code + "&grant_type=authorization_code";
           wx.request({
             url: l,
@@ -34,7 +34,7 @@ App({
               var opid = res.data.openid //返回openid
               that.globalData.openid = opid;
               that.globalData.session_key = res.data.session_key
-               wx.getUserInfo({
+              wx.getUserInfo({
                 success: function (res) {
                   that.globalData.personInfo = res.userInfo;
                   wx.request({
@@ -48,10 +48,10 @@ App({
                     method: "POST",
                     success: function (result) {
                       result = result.data;
-                      if(result.status == 0){
+                      if (result.status == 0) {
                         //保存用户信息到数据库
                         wx.request({
-                          url: that.globalData.posttp + that.globalData.postdir + " /wechat/php/upload_customer.php",
+                          url: that.globalData.posttp + that.globalData.postdir + "/wechat/php/upload_customer.php",
                           data: {
                             openid: opid,
                             username: res.userInfo.nickName,
