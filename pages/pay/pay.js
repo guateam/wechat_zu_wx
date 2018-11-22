@@ -25,50 +25,88 @@ Page({
       openid: app.globalData.openid,
       postdir: app.globalData.postdir,
     })
+    //先检查手机号是否录入
     wx.request({
-      url: app.globalData.posttp + app.globalData.postdir + "/wechat/php/pay.php",
+      url: app.globalData.posttp + app.globalData.postdir + "/wechat/php/getcustomer.php",
       method: "POST",
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
       data: {
-        appid: app.globalData.appid,
-        total_fee: options.total_fee,
-        openid: app.globalData.openid,
+        openid: app.globalData.openid
       },
-      success: (result) => {
-        console.log(result);
-        if (result.data.state == 1) {
-          wx.requestPayment({
-            timeStamp: result.data.timeStamp,
-            nonceStr: result.data.nonceStr,
-            package: result.data.package,
-            signType: result.data.signType,
-            paySign: result.data.paySign,
-            success: (msg) => {
-              console.log("success");
-              if (options.type == "dashang") {
-                that.dashang(options.total_fee, options.jobnumber);
-              } else if (options.type == "pay_unpaid") {
-                that.pay_unpaid(options)
-              } else if (options.type == "recharge") {
-                that.recharge(options)
-              } else {
-                that.yuyue(options, 4)
-              }
+      success: (done) => {
+        done = done.data;
+        //若无该顾客，返回主页
+        if (done.status == 0) {
+          wx.navigateTo({
+            url: '../index/index',
+          })
+        }
+        //若无录入手机号，跳转至手机号录入页面
+        if (done.phone_number == '') {
+          var url = "../getphone/getphone?";
+          var i = 0;
+          for (var key in options) {
+            if (i == 0) {
+              url += (key + '=' + options[key])
+              i++;
+            } else {
+              url += ('&' + key + '=' + options[key])
+            }
+          }
+          wx.navigateTo({
+            url: url,
+          })
+        //否则继续支付
+        } else {
+          wx.request({
+            url: app.globalData.posttp + app.globalData.postdir + "/wechat/php/pay.php",
+            method: "POST",
+            header: {
+              'content-type': 'application/x-www-form-urlencoded'
             },
-            fail: (msg) => {
-              if (msg.errMsg == "requestPayment:fail cancel") {
-                console.log('取消支付')
-                if (options.type != 'dashang' && options.type != "pay_unpaid" && options.type != "recharge") {
-                  that.yuyue(options, 1);
-                } else {
-                  wx.switchTab({
-                    url: '../index/index',
-                  })
-                }
-              } else {
-                console.log("支付失败" + msg.errMsg)
+            data: {
+              appid: app.globalData.appid,
+              total_fee: options.total_fee,
+              openid: app.globalData.openid,
+            },
+            success: (result) => {
+              console.log(result);
+              if (result.data.state == 1) {
+                wx.requestPayment({
+                  timeStamp: result.data.timeStamp,
+                  nonceStr: result.data.nonceStr,
+                  package: result.data.package,
+                  signType: result.data.signType,
+                  paySign: result.data.paySign,
+                  success: (msg) => {
+                    console.log("success");
+                    if (options.type == "dashang") {
+                      that.dashang(options.total_fee, options.jobnumber);
+                    } else if (options.type == "pay_unpaid") {
+                      that.pay_unpaid(options)
+                    } else if (options.type == "recharge") {
+                      that.recharge(options)
+                    } else {
+                      that.yuyue(options, 4)
+                    }
+                  },
+                  fail: (msg) => {
+                    if (msg.errMsg == "requestPayment:fail cancel") {
+                      console.log('取消支付')
+                      if (options.type != 'dashang' && options.type != "pay_unpaid" && options.type != "recharge") {
+                        that.yuyue(options, 1);
+                      } else {
+                        wx.switchTab({
+                          url: '../index/index',
+                        })
+                      }
+                    } else {
+                      console.log("支付失败" + msg.errMsg)
+                    }
+                  }
+                })
               }
             }
           })
@@ -77,11 +115,12 @@ Page({
     })
 
 
+
   },
   dashang(fee, jobnumber) {
     var that = this;
     wx.request({
-      url: app.globalData.posttp +app.globalData.postdir + '/wechat/php/dashang.php',
+      url: app.globalData.posttp + app.globalData.postdir + '/wechat/php/dashang.php',
       data: {
         pay: fee,
         user_id: app.globalData.openid,
@@ -143,7 +182,7 @@ Page({
   pay_unpaid(options) {
     var that = this;
     wx.request({
-      url: app.globalData.posttp +app.globalData.postdir + '/wechat/php/pay_unpaid.php',
+      url: app.globalData.posttp + app.globalData.postdir + '/wechat/php/pay_unpaid.php',
       data: {
         order_id: options.orderid,
       },
@@ -162,7 +201,7 @@ Page({
   recharge(options) {
     var that = this;
     wx.request({
-      url: app.globalData.posttp +app.globalData.postdir + ' /wechat/php/recharge.php',
+      url: app.globalData.posttp + app.globalData.postdir + ' /wechat/php/recharge.php',
       data: {
         charge: options.total_fee,
         user_id: app.globalData.openid, //user_id为open_id
