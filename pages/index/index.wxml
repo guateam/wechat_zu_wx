@@ -59,7 +59,7 @@
     </view>
     <swiper class="swiper-word" vertical="true" circular="true" autoplay="true" interval="2000" duration="500">
       <block wx:for="{{items3}}" wx:for-index="index">
-        <swiper-item>
+        <swiper-item catchtouchmove="stopTouchMove">
           <p class="slide-word" mode="aspectFill">{{item.text}}</p>
         </swiper-item>
       </block>

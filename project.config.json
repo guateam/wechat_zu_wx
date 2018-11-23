@@ -33,24 +33,25 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 2,
+			"current": 1,
 			"list": [
 				{
 					"id": 0,
 					"name": "测试bug",
-					"pathName": "pages/culture/culture",
+					"pathName": "pages/my/my",
 					"query": ""
 				},
 				{
-					"id": -1,
+					"id": 1,
 					"name": "测试",
-					"pathName": "pages/movable-view/movable-view",
+					"pathName": "pages/getphone/getphone",
 					"query": ""
 				},
 				{
 					"id": -1,
 					"name": "支付编译",
-					"pathName": "pages/pay/pay"
+					"pathName": "pages/pay/pay",
+					"query": ""
 				}
 			]
 		}

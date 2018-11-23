@@ -119,6 +119,9 @@ Page({
       url: '../culture/culture',
     })
   },
+  stopTouchMove: function () {
+    return false;
+  },
   recharge: function () {
     wx.navigateTo({
       url: '../recharge/recharge?openid=' + app.globalData.openid,
