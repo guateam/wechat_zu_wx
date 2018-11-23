@@ -1,2 +1,5 @@
 <!--pages/getphone/getphone.wxml-->
-<button open-type="getPhoneNumber" bindgetphonenumber="phonenum">绑定手机号</button>
+<view class='pic-box'>
+<image src="../../src/技师预约.png"></image>
+</view>
+<button open-type="getPhoneNumber" bindgetphonenumber="phonenum" class="weui-btn" type="primary">绑定手机号</button>
