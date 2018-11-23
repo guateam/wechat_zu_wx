@@ -17,6 +17,7 @@ Page({
     this.setData({
       url: dir,
       postdir: app.globalData.postdir,
+      posttp:app.globalData.posttp,
     })
   },
 

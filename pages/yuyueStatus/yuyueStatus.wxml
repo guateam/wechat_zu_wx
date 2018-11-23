@@ -1,2 +1,2 @@
 <!--pages/yuyueStatus/yuyueStatus.wxml-->
-<web-view src="http://{{postdir}}/wechat/html/yuyueStatus.html?openid={{openid}}&order_id={{id}}"></web-view>
+<web-view src="{{posttp}}{{postdir}}/wechat/html/yuyueStatus.html?openid={{openid}}&order_id={{id}}"></web-view>

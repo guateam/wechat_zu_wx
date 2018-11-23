@@ -1,2 +1,2 @@
 <!--pages/dingdanxiangqing/dingdanxiangqing.wxml-->
-<web-view src="http://{{postdir}}/wechat/html/dingdanxiangqing.html?openid={{openid}}&id={{id}}"></web-view>
+<web-view src="{{posttp}}{{postdir}}/wechat/html/dingdanxiangqing.html?openid={{openid}}&id={{id}}"></web-view>

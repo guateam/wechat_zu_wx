@@ -1,1 +1,1 @@
-<web-view src="http://{{postdir}}/wechat/html/jishixuanze.html?openid={{openid}}"></web-view>
+<web-view src="{{posttp}}{{postdir}}/wechat/html/jishixuanze.html?openid={{openid}}"></web-view>

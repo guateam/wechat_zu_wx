@@ -1,2 +1,2 @@
 <!--pages/culture/culture.wxml-->
-<web-view src="http://{{postdir}}/wechat/html/qiyewenhua.html"></web-view>
+<web-view src="{{posttp}}{{postdir}}/wechat/html/qiyewenhua.html"></web-view>

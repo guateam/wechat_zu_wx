@@ -1,2 +1,2 @@
 <!--pages/my/my.wxml-->
-<web-view src="http://{{postdir}}/wechat/html/customer.html?openid={{openid}}&dt={{rnd}}"></web-view>
+<web-view src="{{posttp}}{{postdir}}/wechat/html/customer.html?openid={{openid}}&dt={{rnd}}"></web-view>

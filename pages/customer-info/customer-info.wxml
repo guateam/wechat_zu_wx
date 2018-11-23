@@ -1,2 +1,2 @@
 <!--pages/customer-info/customer-info.wxml-->
-<web-view src="http://{{postdir}}/wechat/html/customer-info.html?openid={{openid}}"></web-view>
+<web-view src="{{posttp}}{{postdir}}/wechat/html/customer-info.html?openid={{openid}}"></web-view>

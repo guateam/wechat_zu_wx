@@ -16,6 +16,7 @@ Page({
     this.setData({
       openid:options.openid,
       postdir: app.globalData.postdir,
+      posttp:app.globalData.posttp,
       });
   },
 

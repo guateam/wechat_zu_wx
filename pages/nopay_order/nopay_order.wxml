@@ -1,2 +1,2 @@
 <!--pages/nopay_order/nopay_order.wxml-->
-<web-view src="http://{{postdir}}/wechat/html/nopay_order.html?openid={{openid}}"></web-view>
+<web-view src="{{posttp}}{{postdir}}/wechat/html/nopay_order.html?openid={{openid}}"></web-view>

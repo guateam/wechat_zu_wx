@@ -14,9 +14,10 @@ Page({
    */
   onLoad: function (options) {
     this.setData({
-      openid:app.globalData.openid,
-      postdir:app.globalData.postdir,
-      })
+      posttp: app.globalData.posttp,
+      postdir: app.globalData.postdir,
+      openid: app.globalData.openid,
+    })
   },
 
   /**

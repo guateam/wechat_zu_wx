@@ -1,2 +1,2 @@
 <!--pages/history-tip/history-tip.wxml-->
-<web-view src="http://{{postdir}}/wechat/html/history_tip.html?openid={{openid}}"></web-view>
+<web-view src="{{posttp}}{{postdir}}/wechat/html/history_tip.html?openid={{openid}}"></web-view>
