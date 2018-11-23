@@ -1,7 +1,7 @@
 //app.js
 App({
   globalData: {
-    postdir: '192.168.43.113',
+    postdir: '172.20.10.3',
     posttp: "http://",
     personInfo: "",
     openid: "",
