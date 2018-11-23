@@ -51,6 +51,10 @@ Page({
                 })
               }
             })
+          }else{
+            wx.switchTab({
+              url: '../index/index'
+            })
           }
         }
       })
