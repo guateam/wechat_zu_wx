@@ -38,11 +38,11 @@
         </view>
         <view class='items-items-word'>包厢预约</view>
       </view>
-      <view class='items-items' bindtap='tea'>
+      <view class='items-items' bindtap='culture'>
         <view class='items-img third'>
           <image src="../../src/茶艺预约.png" alt=""></image>
         </view>
-        <view class='items-items-word'>茶艺预约</view>
+        <view class='items-items-word'>企业文化</view>
       </view>
       <view class='items-items' bindtap='recharge'>
         <view class='items-img forth'>
