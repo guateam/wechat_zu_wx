@@ -7,6 +7,7 @@ Page({
    */
   data: {
     openid:'',
+    rnd:'',
   },
 
   /**
@@ -16,6 +17,7 @@ Page({
     this.setData({
       openid:app.globalData.openid,
       postdir: app.globalData.postdir,
+      rnd: (new Date()).valueOf()
       })
   },
 
@@ -30,7 +32,10 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    this.setData({
+      rnd: (new Date()).valueOf()
+    })
+    this.onLoad();
   },
 
   /**
