@@ -101,6 +101,8 @@
         </view>
       </view>
     </view>
+	
+	<!--
     <view class="weui-panel weui-panel_access">
       <view class="weui-panel__hd">精品服务推荐</view>
       <view class="weui-panel__bd">
@@ -125,6 +127,7 @@
         <text style="font-size: 14px;font-weight: 200;color: #fe736c;line-height:1.2">分享</text>
       </button>
     </movable-view>
+	-->
   </movable-area>
 </view>
 <!-- </movable> -->
