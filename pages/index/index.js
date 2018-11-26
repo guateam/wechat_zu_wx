@@ -31,7 +31,7 @@ Page({
       console.log(res.target)
     }
     return {
-      title: '御足堂影院式足道',
+      title: '蒲公英网约',
       path: '/page/index/index',
       success: function (res) {
         // 转发成功
