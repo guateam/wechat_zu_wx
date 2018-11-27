@@ -1,2 +1,6 @@
 <!--pages/welcome/welcome.wxml-->
-<button open-type="getUserInfo" bindgetuserinfo="userinfo"> 授权</button>
+<view class='pic-box'>
+<image src="{{yuming}}/photo/pgy_1.jpg" style="width:100%"></image>
+</view>
+
+<button open-type="getUserInfo" bindgetuserinfo="userinfo" class="weui-btn" type="primary"> 请授权</button>

@@ -4,9 +4,9 @@ const app = getApp()
 var sliderWidth = 144 // 需要设置slider的宽度，用于计算中间位置
 Page({
   data: {
-    loading:false,
+    loading: false,
     //yuming: 'http://a.lobopay.cn', //图片的域名
-	yuming: 'https://yzt.wangjiyu.cn',
+    yuming: 'https://yzt.wangjiyu.cn',
     x: 300,
     y: 450,
     userInfo: "",
@@ -135,8 +135,62 @@ Page({
   },
   onLoad: function () {
     var that = this;
+    app.globalData.userinfo_success = false;
+    if (app.globalData.userinfo_success != true) {
+      wx.getUserInfo({
+        success: function (res) {
+          if (res.errMsg == "getUserInfo:fail auth deny") {
+            app.globalData.userinfo_success = false;
+            wx.navigateBack({
+              delta: -1
+            })
+          } else {
+            getApp().globalData.userinfo = res.userinfo;
+            app.globalData.userinfo_success = true;
+            wx.request({
+              url: app.globalData.posttp + app.globalData.postdir + "/wechat/php/if_register.php",
+              data: {
+                openid: app.globalData.openid,
+              },
+              header: {
+                'content-type': 'application/x-www-form-urlencoded'
+              },
+              method: "POST",
+              success: function (result) {
+                result = result.data;
+                if (result.status == 0) {
+                  //保存用户信息到数据库
+                  wx.request({
+                    url: app.globalData.posttp + app.globalData.postdir + "/wechat/php/upload_customer.php",
+                    data: {
+                      openid: app.globalData.openid,
+                      username: e.detail.userInfo.nickName,
+                      gender: e.detail.userInfo.gender,
+                      head: e.detail.userInfo.avatarUrl
+                    },
+                    header: {
+                      'content-type': 'application/x-www-form-urlencoded'
+                    },
+                    method: "POST",
+                    success: function (res) {
+                      res = res.data;
+                    }
+                  })
+                }
+              }
+            })
+          }
+        },
+        fail: function () {
+          app.globalData.userinfo_success = false;
+          wx.navigateTo({
+            url: '../welcome/welcome',
+          })
+        }
+      })
+    }
     this.setData({
-      postdir:app.globalData.postdir
+      postdir: app.globalData.postdir
     })
     var id = '1'
     var back = {};
@@ -182,7 +236,7 @@ Page({
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
-      url: app.globalData.posttp+app.globalData.postdir+'/wechat/php/getmainpage.php',
+      url: app.globalData.posttp + app.globalData.postdir + '/wechat/php/getmainpage.php',
       success: function (data) {
         data = data.data;
         if (data.status == 1) {

@@ -1,6 +1,5 @@
 {
-  "pages": [
-    "pages/welcome/welcome",
+  "pages": [    
     "pages/index/index",
     "pages/order/order",
     "pages/my/my",
@@ -18,7 +17,8 @@
     "pages/nopay_order/nopay_order",
     "pages/dingdanxiangqing/dingdanxiangqing",
     "pages/yuyueStatus/yuyueStatus",
-    "pages/getphone/getphone"
+    "pages/getphone/getphone",
+    "pages/welcome/welcome"
   ],
   "window": {
     "backgroundTextStyle": "light",
