@@ -2,4 +2,4 @@
 <view class='pic-box'>
 <image src="../../src/技师预约.png"></image>
 </view>
-<button open-type="getPhoneNumber" bindgetphonenumber="phonenum" class="weui-btn" type="primary">绑定手机号</button>
+<button open-type="getPhoneNumber" bindgetphonenumber="phonenum" class="weui-btn" type="primary">请绑定手机号</button>

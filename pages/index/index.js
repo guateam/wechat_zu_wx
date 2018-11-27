@@ -32,7 +32,7 @@ Page({
     }
     return {
       title: '蒲公英网约',
-      path: '/page/index/index',
+      path: '/pages/index/index',
       success: function (res) {
         // 转发成功
       },

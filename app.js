@@ -1,13 +1,17 @@
 //app.js
 App({
-  globalData: {
-    postdir: '172.20.10.3',
-    posttp: "http://",
-    personInfo: "",
-    openid: "",
-    appid: "wxe1e434222057b10e",
-    appsecret: "c5283cabffbbe714ba1c333fcead2487",
-    yuming: 'http://a.lobopay.cn', //图片的域名
+  globalData:{
+    //postdir:'172.20.10.3',
+    //postdir: 'a.lobopay.cn',
+    postdir: 'yzt.wangjiyu.cn',
+    //posttp:"http://",
+    posttp: "https://",
+    personInfo:"",
+    openid:"",
+    appid:"wxe1e434222057b10e",
+    appsecret:"c5283cabffbbe714ba1c333fcead2487",
+    //yuming: 'http://a.lobopay.cn', //图片的域名
+    yuming: 'https://yzt.wangjiyu.cn', //图片的域名
   },
   onLaunch: function () {
     // 展示本地存储能力
@@ -18,19 +22,22 @@ App({
 
     // 登录
     wx.login({
-      success: res => {
+      complete: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         if (res.code) {
           var APPID = 'wxe1e434222057b10e';
           var APPSECRET = 'c5283cabffbbe714ba1c333fcead2487';
           var getopenid_url = "https://api.weixin.qq.com/sns/jscode2session?appid=" + APPID + "&secret=" + APPSECRET + "&js_code=" + res.code + "&grant_type=authorization_code";
           wx.request({
-            url: getopenid_url,
-            data: {},
-            header: {
-              'content-type': 'application/json'
+            method:"POST",
+            url: that.globalData.posttp + that.globalData.postdir + "/wechat/php/get_openid.php",
+            data: {
+              code:res.code
             },
-            success: function (res) {
+            header: {
+              'content-type': 'application/x-www-form-urlencoded'
+            },
+            complete: function (res) {
               var opid = res.data.openid //返回openid
               that.globalData.openid = opid;
               that.globalData.session_key = res.data.session_key
