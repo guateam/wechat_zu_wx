@@ -164,9 +164,9 @@ Page({
                     url: app.globalData.posttp + app.globalData.postdir + "/wechat/php/upload_customer.php",
                     data: {
                       openid: app.globalData.openid,
-                      username: e.detail.userInfo.nickName,
-                      gender: e.detail.userInfo.gender,
-                      head: e.detail.userInfo.avatarUrl
+                      username: res.userinfo.nickName,
+                      gender: res.userinfo.gender,
+                      head: res.userinfo.avatarUrl
                     },
                     header: {
                       'content-type': 'application/x-www-form-urlencoded'

@@ -75,7 +75,7 @@
           </block>
           <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
         </view>
-        <view class="weui-tab__panel">
+        <!-- <view class="weui-tab__panel">
           <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
             <i-row i-class="demo-row">
               <i-col span="8" i-class="demo-col">项目名称</i-col>
@@ -98,7 +98,7 @@
               <i-col span="12" i-class="demo-col">￥{{item.price}}</i-col>
             </i-row>
           </view>
-        </view>
+        </view> -->
       </view>
     </view>
 	
