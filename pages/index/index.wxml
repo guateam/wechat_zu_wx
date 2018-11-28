@@ -50,11 +50,11 @@
         </view>
         <view class='items-items-word'>会员</view>
       </view>
-      <view class='items-items' bindtap='recharge'>
+      <view class='items-items' bindtap='dashangjishi'>
         <view class='items-img fifth'>
           <image src="../../src/打赏技师.png" alt=""></image>
         </view>
-        <view class='items-items-word'>打赏</view>
+        <view class='items-items-word'>奖励</view>
       </view>
     </view>
     <swiper class="swiper-word" vertical="true" circular="true" autoplay="true" interval="2000" duration="500">

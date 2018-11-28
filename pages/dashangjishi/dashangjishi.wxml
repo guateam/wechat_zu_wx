@@ -1,2 +1,4 @@
 <!--pages/dashangjishi/dashangjishi.wxml-->
-<web-view src="{{posttp}}{{postdir}}/wechat/html/dashangjishi.html?openid={{openid}}"></web-view>
+<!-- <web-view src="{{posttp}}{{postdir}}/wechat/html/dashangjishi.html?openid={{openid}}"></web-view> -->
+
+<web-view src="{{posttp}}{{postdir}}/wechat/html/jiangli.html"></web-view>
