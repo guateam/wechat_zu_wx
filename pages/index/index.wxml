@@ -28,31 +28,31 @@
     <view class="items">
       <view class='items-items' bindtap="phone">
         <view class='items-img first'>
-          <image src="../../src/技师预约.png" alt="" class='items-items-image'></image>
+          <image src="{{yuming+'/wechat/src/yuyue.png'}}" alt="" class='items-items-image'></image>
         </view>
         <view class='items-items-word'>预约</view>
       </view>
       <view class='items-items' bindtap='phone'>
         <view class='items-img second '>
-          <image src="../../src/包厢预约.png" alt=""></image>
+          <image src="{{yuming+'/wechat/src/baoxiang.png'}}" alt=""></image>
         </view>
         <view class='items-items-word'>电话</view>
       </view>
       <view class='items-items' bindtap='culture'>
         <view class='items-img third'>
-          <image src="../../src/茶艺预约.png" alt=""></image>
+          <image src="{{yuming+'/wechat/src/wenhua.png'}}" alt=""></image>
         </view>
         <view class='items-items-word'>企业</view>
       </view>
       <view class='items-items' bindtap='recharge'>
         <view class='items-img forth'>
-          <image src="../../src/会员充值.png" alt=""></image>
+          <image src="{{yuming+'/wechat/src/huiyuan.png'}}" alt=""></image>
         </view>
         <view class='items-items-word'>会员</view>
       </view>
       <view class='items-items' bindtap='dashangjishi'>
         <view class='items-img fifth'>
-          <image src="../../src/打赏技师.png" alt=""></image>
+          <image src="{{yuming+'/wechat/src/dashang.png'}}" alt=""></image>
         </view>
         <view class='items-items-word'>奖励</view>
       </view>

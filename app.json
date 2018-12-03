@@ -35,20 +35,20 @@
       {
         "pagePath": "pages/index/index",
         "text": "首页",
-        "selectedIconPath": "src/主页激活.png",
-        "iconPath": "src/主页.png"
+        "selectedIconPath": "src/main_c.png",
+        "iconPath": "src/main.png"
       },
       {
         "pagePath": "pages/order/order",
         "text": "订单",
-        "selectedIconPath": "src/订单激活.png",
-        "iconPath": "src/订单.png"
+        "selectedIconPath": "src/order_c.png",
+        "iconPath": "src/order.png"
       },
       {
         "pagePath": "pages/my/my",
         "text": "我的",
-        "selectedIconPath": "src/我的激活.png",
-        "iconPath": "src/我的.png"
+        "selectedIconPath": "src/my_c.png",
+        "iconPath": "src/my.png"
       }
     ]
   }
