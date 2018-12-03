@@ -80,11 +80,11 @@ Page({
     wx.getLocation({
       type: 'gcj02', //返回可以用于wx.openLocation的经纬度
       success(res) {
-        const latitude = res.latitude
-        const longitude = res.longitude
+        const latitude = Number(that.data.data.latitude)// res.latitude
+        const longitude = Number(that.data.data.longitude)// res.longitude
         wx.openLocation({
-          latitude: 30.3036750000,
-          longitude: 120.3032260000,
+          latitude: latitude,
+          longitude: longitude,
           scale: 18,
           name: that.data.data.name,
           address: that.data.data.position
