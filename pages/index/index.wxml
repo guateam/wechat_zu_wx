@@ -26,7 +26,7 @@
       <view class='phone' bindtap='phone'></view>
     </view>
     <view class="items">
-      <view class='items-items' bindtap="phone">
+      <view class='items-items' bindtap="jishiyuyue">
         <view class='items-img first'>
           <image src="{{yuming+'/wechat/src/yuyue.png'}}" alt="" class='items-items-image'></image>
         </view>
@@ -36,13 +36,13 @@
         <view class='items-img second '>
           <image src="{{yuming+'/wechat/src/baoxiang.png'}}" alt=""></image>
         </view>
-        <view class='items-items-word'>电话</view>
+        <view class='items-items-word'>包厢</view>
       </view>
       <view class='items-items' bindtap='culture'>
         <view class='items-img third'>
           <image src="{{yuming+'/wechat/src/wenhua.png'}}" alt=""></image>
         </view>
-        <view class='items-items-word'>企业</view>
+        <view class='items-items-word'>文化</view>
       </view>
       <view class='items-items' bindtap='recharge'>
         <view class='items-img forth'>
@@ -54,7 +54,7 @@
         <view class='items-img fifth'>
           <image src="{{yuming+'/wechat/src/dashang.png'}}" alt=""></image>
         </view>
-        <view class='items-items-word'>奖励</view>
+        <view class='items-items-word'>奖赏</view>
       </view>
     </view>
     <swiper class="swiper-word" vertical="true" circular="true" autoplay="true" interval="2000" duration="500">
@@ -75,7 +75,7 @@
           </block>
           <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
         </view>
-        <!-- <view class="weui-tab__panel">
+       <view class="weui-tab__panel">
           <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
             <i-row i-class="demo-row">
               <i-col span="8" i-class="demo-col">项目名称</i-col>
@@ -98,11 +98,11 @@
               <i-col span="12" i-class="demo-col">￥{{item.price}}</i-col>
             </i-row>
           </view>
-        </view> -->
+        </view> 
       </view>
     </view>
 	
-	<!--
+	  
     <view class="weui-panel weui-panel_access">
       <view class="weui-panel__hd">精品服务推荐</view>
       <view class="weui-panel__bd">
@@ -120,7 +120,8 @@
         </navigator>
       </view>
     </view>
-	-->
+    
+
     <movable-view class='share' x="{{x}}" y="{{y}}" direction="all">
       <button style='width: 100%;height: 100%;display:flex;align-items: center;justify-content: center;flex-direction: column;  background: white;border-radius: 50%;paddind-top:5px' open-type="share">
         <image src='data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABsAAAAZCAYAAADAHFVeAAADlElEQVRIS62WXWwUVRzFz7nbLcUgpiZi/Iho/EgDiRg/ojHEqAEiAYWkND4YwYCi7GybdKdA7YvrBynS7uyuu7Ng4ycxalCjoIAPJkb75JNGE000EKkvIAnCCjR0d+8xs9tOW9GEbneeJjP3/n/3/O85d4Zo4CU33maBbYQeA1iUtN/Mv2ork8lygGGjWErEOwR9ADLyr5pfMZVfQUANgSn5VIuK846CuIZAF8b4IZrs/SL3gphPi6eZzr/ZGFhP/EEJX0MYNl7+gQllcuO9Avol7I14+Q2NgSU614t6F8Eeef7aEBa0ltgH6ZDx/FWzhqk7tkI0WVBtEC8wwsUcyB1RLDZPc82nAJYReoEp/6W6YeruXCbqZRD3jSsJHNcE4RSonwHcDbAFwmnappuYyZyeMUw98YdlsWMSouMU+lEyw2rWAQDXT3Hjb7R8huncNxdZX1u7brUV+wSpOwX8aowGOVA4HgyUG1sqsB/g0mox4QShnSiZ3czlLlQf9W5pRTmyBJIFcAwpfySw/AQ8VCbX6RP4YrUV4Q7jJIXtop4E+VDtsf4ktAt2ToHp9OhMclqFqWfL7bLmh9pEfitqmOBKCneFSRRO0mgAxZLPoaHzM4FMU1ZJOHtIPisoFUn5PdUFbNt4uSpzjwFspfQazpaerxcyDWZdZzjYC1q7kunClxMvbcI5DPIRCuvo5T+pR83UOdU22oTzMch2SV7E891QWfmy30VcCWm3sdG+wL6zAdb2rDu+SQZvBFwBewBUCLQDuHayuM5IzJgSPeZyxXqgNRhAufHPAayaVkQ6SrBXVFdoeegMAQ9jJjNT6KT1g89Nwum04D0E5pB2P/4u7+PQUKmWM2e5gF0A7xiPwF9V6KgyLBTOhmnZvvkKlJtuQzl6AtnsH/+Zs0ttixLxdhGvAri5FjucIpVCJfq+NeWdJB6fktPvWYmsZTY7Ug3VpUKmjlNHRwQLr14vG5yNvG4cOgaieVz1jwCD+zYIIzQtizg4eK4uWNiyZEczigueE5EE0ApxlMK9TOd/ChakGxYcBrh81qf+NKVdzgZE+Y6EA8bLrwkX48bWCeYjAAdNKr96VsrCot3OGhl+BukX4/mLJmHxzQJel/RWxPM3NQbmOgslHAl+dgRkDcZegaJLqpklbyG5moO5gw2BBUoqrrODYN9FhpO+MJ7/aN1u/D8Hy425gtkI6UYA35F4Gyn/vYms/QNelJQpb8qNzwAAAABJRU5ErkJggg=='
