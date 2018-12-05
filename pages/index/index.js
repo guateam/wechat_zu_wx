@@ -9,6 +9,7 @@ Page({
     yuming: 'https://yzt.wangjiyu.cn',
     x: 300,
     y: 450,
+    loading_done:false,
     userInfo: "",
     top_pic: [],
     items1: {},
@@ -269,6 +270,9 @@ Page({
             data: back.shop.data
           })
         }
+        that.setData({
+          loading_done:true
+        })
       }
     })
   },

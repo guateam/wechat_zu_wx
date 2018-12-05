@@ -1,9 +1,9 @@
 <!-- <movable> -->
 <!--index.wxml-->
 <view class="page">
-  <view class='loading' wx:if="{{loading}}">
-    <image src='../../src/loading.gif'></image>
-  </view>
+  <loading hidden="{{loading_done}}">
+    加载中...
+  </loading>
   <movable-area style="width:100%;height:100%">
     <swiper class="swiper" indicator-dots="true" circular="true" autoplay="true" interval="5000" duration="1000">
       <block wx:for="{{top_pic}}" wx:for-index="index">
@@ -75,7 +75,7 @@
           </block>
           <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
         </view>
-       <view class="weui-tab__panel">
+        <view class="weui-tab__panel">
           <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
             <i-row i-class="demo-row">
               <i-col span="8" i-class="demo-col">项目名称</i-col>
@@ -98,11 +98,11 @@
               <i-col span="12" i-class="demo-col">￥{{item.price}}</i-col>
             </i-row>
           </view>
-        </view> 
+        </view>
       </view>
     </view>
-	
-	  
+
+
     <view class="weui-panel weui-panel_access">
       <view class="weui-panel__hd">精品服务推荐</view>
       <view class="weui-panel__bd">
@@ -120,7 +120,7 @@
         </navigator>
       </view>
     </view>
-    
+
 
     <movable-view class='share' x="{{x}}" y="{{y}}" direction="all">
       <button style='width: 100%;height: 100%;display:flex;align-items: center;justify-content: center;flex-direction: column;  background: white;border-radius: 50%;paddind-top:5px' open-type="share">

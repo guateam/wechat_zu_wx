@@ -6,18 +6,27 @@ Page({
    * 页面的初始数据
    */
   data: {
-    yuming:app.globalData.yuming
+    yuming:app.globalData.yuming,
+    hidden:true,
+    content:"获取用户信息中",
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   userinfo(e){
+    var that = this;
+    that.setData({
+      hidden:false
+    })
     if (e.detail.errMsg == "getUserInfo:fail auth deny"){
       wx.navigateBack({
         delta:-1
       })
     }else{
+      that.setData({
+        content: "检查是否注册"
+      })
       getApp().globalData.userinfo = e.detail.userinfo;
       wx.request({
         url: app.globalData.posttp + app.globalData.postdir + "/wechat/php/if_register.php",
@@ -32,6 +41,9 @@ Page({
           result = result.data;
           if (result.status == 0) {
             //保存用户信息到数据库
+            that.setData({
+              content: "正在注册"
+            })
             wx.request({
               url: app.globalData.posttp + app.globalData.postdir + "/wechat/php/upload_customer.php",
               data: {
@@ -52,6 +64,9 @@ Page({
               }
             })
           }else{
+            that.setData({
+              content: "正在跳转到主页"
+            })
             wx.switchTab({
               url: '../index/index'
             })
