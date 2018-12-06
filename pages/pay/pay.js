@@ -134,7 +134,7 @@ Page({
       success: (result) => {
         result = result.data;
         if (result.status == 1) {
-          that.pay_success();
+          that.pay_success('../index/index');
         }
       }
     })
@@ -170,12 +170,12 @@ Page({
             content: '中断支付，预约订单已经创建，请前往 【我的预约】页面查看详情',
             success: (then) => {
               wx.switchTab({
-                url: '../index/index',
+                url: '../my/my',
               })
             }
           })
         } else {
-          that.pay_success();
+          that.pay_success('../order/order');
         }
       }
     })
@@ -194,7 +194,7 @@ Page({
       success: (result) => {
         result = result.data;
         if (result.status == 1) {
-          that.pay_success();
+          that.pay_success('../order/order');
         }
       }
     })
@@ -212,7 +212,7 @@ Page({
       success: (res) => {
         res = res.data;
         if (res.status == 1) {
-          that.pay_success();
+          that.pay_success('../index/index');
         } else {
           wx.showModal({
             content: '充值失败，将返回首页',
@@ -226,12 +226,13 @@ Page({
       }
     })
   },
-  pay_success() {
+  pay_success(url) {
     wx.showModal({
-      content: '支付成功，将返回主页',
+      content: '支付成功',
       success: (then) => {
         wx.switchTab({
-          url: '../index/index',
+          //url: '../index/index',
+          url:url,
         })
       }
     })

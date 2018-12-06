@@ -22,8 +22,11 @@ Page({
     current: '1',
     tab1: true,
     tabs: ["项目分类", "优惠活动"],
+    tabs2:['全部','足浴三选一','spa三选一'],
+    tabs2_index:0,
     activeIndex: 0,
     sliderOffset: 0,
+    sliderOffset2:0,
     sliderLeft: 0
   },
   onShareAppMessage: function (res) {
@@ -280,6 +283,12 @@ Page({
     this.setData({
       sliderOffset: e.currentTarget.offsetLeft,
       activeIndex: e.currentTarget.id
+    });
+  },
+  tabClick2:function(e){
+    this.setData({
+      sliderOffset2: e.currentTarget.offsetLeft,
+      tabs2_index: e.currentTarget.id
     });
   },
   swipclick: function (e) {
