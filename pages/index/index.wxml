@@ -136,29 +136,28 @@
           <view class="weui-tab__content" hidden="{{!(tabs2_index == 1)}}">
 
             <view class="weui-panel__bd">
-              <view wx:for="{{items2}}"  hidden="{{item.name != '足浴1' && item.name != '足浴2' && item.name != '足浴3'}}">
-                <navigator  url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" bindtap="head_to" data-link="xiangmuxiangqing.html?id={{item.id}}">
+              <!-- item.name != '足浴1' && item.name != '足浴2' && item.name != '足浴3' -->
 
-                  <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-                    <image class="weui-media-box__thumb" src="{{yuming+item.img}}" />
+              <navigator wx:for="{{foot}}" url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" bindtap="head_to" data-link="xiangmuxiangqing.html?id={{item.id}}">
+                <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                  <image class="weui-media-box__thumb" src="{{yuming+item.img}}" />
+                </view>
+                <view class="weui-media-box__bd weui-media-box__bd_in-appmsg carditems">
+                  <view class='carditems-name'>{{item.name}}</view>
+                  <view class='carditems-other'>
+                    <view class='carditems-pay'>￥{{item.price}}</view>
+                    <view class='carditems-time'>{{item.time}}分钟</view>
                   </view>
-                  <view class="weui-media-box__bd weui-media-box__bd_in-appmsg carditems">
-                    <view class='carditems-name'>{{item.name}}</view>
-                    <view class='carditems-other'>
-                      <view class='carditems-pay'>￥{{item.price}}</view>
-                      <view class='carditems-time'>{{item.time}}分钟</view>
-                    </view>
-                  </view>
+                </view>
 
-                </navigator>
-              </view>
+              </navigator>
             </view>
 
           </view>
           <view class="weui-tab__content" hidden="{{tabs2_index != 2}}">
 
             <view class="weui-panel__bd">
-              <navigator wx:for="{{items2}}" hidden="{{item.name != 'SPA' && item.name != 'spa2' && item.name != 'spa3'}}" url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" bindtap="head_to" data-link="xiangmuxiangqing.html?id={{item.id}}">
+              <navigator wx:for="{{spa}}"  url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" bindtap="head_to" data-link="xiangmuxiangqing.html?id={{item.id}}">
                 <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
                   <image class="weui-media-box__thumb" src="{{yuming+item.img}}" />
                 </view>

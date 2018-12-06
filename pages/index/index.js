@@ -14,6 +14,8 @@ Page({
     top_pic: [],
     items1: {},
     items2: {},
+    foot:[],
+    spa:[],
     openid: '',
     data: {},
     value2: 0,
@@ -251,6 +253,10 @@ Page({
           console.log(back)
           console.log(that.data.data.userInfo);
         }
+        that.setData({
+          foot: back.foot,
+          spa:back.spa
+        })
         if (back.app1.status == 1) {
           that.setData({
             items1: back.app1.data
