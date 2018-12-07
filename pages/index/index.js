@@ -255,7 +255,8 @@ Page({
         }
         that.setData({
           foot: back.foot,
-          spa:back.spa
+          spa:back.spa,
+          tabs2:['全部',back.tab1,back.tab2],
         })
         if (back.app1.status == 1) {
           that.setData({
