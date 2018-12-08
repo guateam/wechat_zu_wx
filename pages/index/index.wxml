@@ -89,10 +89,10 @@
             </i-row>
           </view>
           <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
-            <i-row i-class="demo-row">
+            <!-- <i-row i-class="demo-row">
               <i-col span="12" i-class="demo-col">项目名称</i-col>
               <i-col span="12" i-class="demo-col">原价/元</i-col>
-            </i-row>
+            </i-row> -->
             <!-- <i-row i-class="demo-row" wx:for="{{items1}}">
               <i-col span="12" i-class="demo-col">{{item.name}}</i-col>
               <i-col span="12" i-class="demo-col">￥{{item.price}}</i-col>
