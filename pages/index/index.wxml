@@ -119,7 +119,7 @@
           <view class="weui-tab__content" hidden="{{!(tabs2_index == 0)}}">
             <!-- 全部 -->
             <view class="weui-panel__bd">
-              <navigator wx:for="{{items2}}" url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" bindtap="head_to" data-link="xiangmuxiangqing.html?id={{item.id}}">
+              <navigator wx:for="{{items2}}" wx:if="{{item.show == 1}}" url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" bindtap="head_to" data-link="xiangmuxiangqing.html?id={{item.id}}">
                 <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
                   <image class="weui-media-box__thumb" src="{{yuming+item.img}}" />
                 </view>
