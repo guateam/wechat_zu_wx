@@ -1,7 +1,8 @@
 //index.js
 //获取应用实例
 const app = getApp()
-var sliderWidth = 100 // 需要设置slider的宽度，用于计算中间位置
+var sliderWidth = 110 // 需要设置slider的宽度，用于计算中间位置
+var sliderWidth2 = 175 // 需要设置slider的宽度，用于计算中间位置
 Page({
   data: {
     loading: false,
@@ -204,6 +205,7 @@ Page({
       success: function (res) {
         that.setData({
           sliderLeft: (res.windowWidth / that.data.tabs.length - sliderWidth)/2,
+          sliderLeft2: (res.windowWidth / that.data.tabs.length - sliderWidth2) / 2,
           sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex
         });
       }
