@@ -189,14 +189,24 @@ Page({
               }
             })
           }
+          this.setData({
+            loading_done: true
+          });
         },
         fail: function () {
           app.globalData.userinfo_success = false;
           wx.navigateTo({
             url: '../welcome/welcome',
           })
+          this.setData({
+            loading_done: true
+          });
         }
       })
+    }else{
+      this.setData({
+        loading_done: true
+      });
     }
   },
   onLoad: function () {
