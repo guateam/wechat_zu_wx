@@ -7,13 +7,14 @@ Page({
    */
   data: {
       url:'',
+      openid:'',
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var dir = options.link + '?id=' + options.id;
+    var dir = options.link + '?id=' + options.id + '&openid=' + app.globalData.openid;
     this.setData({
       url: dir,
       postdir: app.globalData.postdir,
