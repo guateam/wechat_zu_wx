@@ -20,8 +20,9 @@ Page({
       hidden:false
     })
     if (e.detail.errMsg == "getUserInfo:fail auth deny"){
-      wx.navigateBack({
-        delta:-1
+      //拒绝授权的情况
+      that.setData({
+        hidden:true
       })
     }else{
       that.setData({
