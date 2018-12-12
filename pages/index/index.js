@@ -15,6 +15,7 @@ Page({
     top_pic: [],
     items1: {},
     items2: {},
+    promo:{},//优惠活动的信息
     foot:[],
     spa:[],
     openid: '',
@@ -329,6 +330,7 @@ Page({
           foot: back.foot,
           spa:back.spa,
           tabs2:['全部',back.tab1,back.tab2],
+          promo:back.promo,
         })
         if (back.app1.status == 1) {
           that.setData({

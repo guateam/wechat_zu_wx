@@ -88,15 +88,19 @@
               <i-col span="8" i-class="demo-col pay">￥{{item.price}}</i-col>
             </i-row>
           </view>
-          <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
-            <!-- <i-row i-class="demo-row">
-              <i-col span="12" i-class="demo-col">项目名称</i-col>
-              <i-col span="12" i-class="demo-col">原价/元</i-col>
-            </i-row> -->
-            <!-- <i-row i-class="demo-row" wx:for="{{items1}}">
-              <i-col span="12" i-class="demo-col">{{item.name}}</i-col>
-              <i-col span="12" i-class="demo-col">￥{{item.price}}</i-col>
-            </i-row> -->
+          <view class="weui-tab__content" hidden="{{activeIndex != 1}}" wx:if="{{promo.length > 0}}">
+            <i-row i-class="demo-row" wx:for="{{promo}}">
+              <i-col span="24" i-class="demo-col">{{item.content}}</i-col>
+            </i-row>
+          </view>
+          <view class="weui-tab__content" wx:else>
+            <i-row i-class="demo-row">
+              <i-col span="24" i-class="demo-col"></i-col>
+              <i-col span="24" i-class="demo-col"></i-col>
+              <i-col span="24" i-class="demo-col">暂无优惠</i-col>
+              <i-col span="24" i-class="demo-col"></i-col>
+              <i-col span="24" i-class="demo-col"></i-col>
+            </i-row>
           </view>
         </view>
       </view>
@@ -157,7 +161,7 @@
           <view class="weui-tab__content" hidden="{{tabs2_index != 2}}">
 
             <view class="weui-panel__bd">
-              <navigator wx:for="{{spa}}"  url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" bindtap="head_to" data-link="xiangmuxiangqing.html?id={{item.id}}">
+              <navigator wx:for="{{spa}}" url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" bindtap="head_to" data-link="xiangmuxiangqing.html?id={{item.id}}">
                 <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
                   <image class="weui-media-box__thumb" src="{{yuming+item.img}}" />
                 </view>
