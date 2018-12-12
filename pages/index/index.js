@@ -10,6 +10,7 @@ Page({
     yuming: 'https://yzt.wangjiyu.cn',
     x: 300,
     y: 450,
+    tabsheight: 280,
     loading_done:false,
     userInfo: "",
     top_pic: [],
@@ -31,7 +32,7 @@ Page({
     activeIndex: 0,
     sliderOffset: 0,
     sliderOffset2:0,
-    sliderLeft: 0
+    sliderLeft: 0,
   },
   onShareAppMessage: function (res) {
     if (res.from === 'button') {
@@ -281,6 +282,14 @@ Page({
         });
       }
     });
+    //创建节点选择器
+    const query = wx.createSelectorQuery()
+    query.select('.bigtabs').boundingClientRect()
+    query.exec(function (res) {
+      tabsheight = res[0].height
+      console.log(tabsheight)
+    })
+
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,

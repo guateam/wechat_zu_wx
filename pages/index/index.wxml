@@ -150,7 +150,7 @@
           </block>
           <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
         </view>
-        <view class="weui-tab__panel">
+        <view class="weui-tab__panel bigtabs">
           <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
             <i-row i-class="demo-row">
               <i-col span="8" i-class="demo-col">项目名称</i-col>
@@ -163,7 +163,7 @@
               <i-col span="8" i-class="demo-col pay">￥{{item.price}}</i-col>
             </i-row>
           </view>
-          <view class="weui-tab__content" hidden="{{activeIndex != 1}}" wx:if="{{promo.length > 0}}">
+          <view class="weui-tab__content littletabs" hidden="{{activeIndex != 1}}" wx:if="{{promo.length > 0}}" style="height:{{tabsheight}}px;">
             <i-row i-class="demo-row" wx:for="{{promo}}">
               <i-col span="24" i-class="demo-col">{{item.content}}</i-col>
             </i-row>
