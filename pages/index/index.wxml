@@ -157,7 +157,7 @@
               <i-col span="8" i-class="demo-col">时长/分</i-col>
               <i-col span="8" i-class="demo-col">门市价/元</i-col>
             </i-row>
-            <i-row i-class="demo-row" wx:for="{{items2}}" wx:if="{{item.show == 1}}">
+            <i-row i-class="demo-row" wx:for="{{items2_more}}" wx:if="{{item.show == 1}}">
               <i-col span="8" i-class="demo-col">{{item.name}}</i-col>
               <i-col span="8" i-class="demo-col">{{item.time}}</i-col>
               <i-col span="8" i-class="demo-col pay">￥{{item.price}}</i-col>
