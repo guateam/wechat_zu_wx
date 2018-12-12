@@ -16,6 +16,7 @@ Page({
     top_pic: [],
     items1: {},
     items2: {},
+    items2_more: {},
     promo:{},//优惠活动的信息
     foot:[],
     spa:[],
@@ -349,7 +350,8 @@ Page({
         }
         if (back.app2.status == 1) {
           that.setData({
-            items2: back.app2.data
+            items2: back.app2.data,
+            items2_more: back.app2_more.data
           })
         }
         if (back.notice.status == 1) {
