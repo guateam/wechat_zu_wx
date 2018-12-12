@@ -26,7 +26,7 @@ Page({
     current: '1',
     tab1: true,
     tabs: ["项目分类", "优惠活动"],
-    tabs2:['全部','足浴三选一','spa三选一'],
+    tabs2:['小项目','足浴三选一','spa三选一'],
     tabs2_index:0,
     activeIndex: 0,
     sliderOffset: 0,
@@ -329,7 +329,7 @@ Page({
         that.setData({
           foot: back.foot,
           spa:back.spa,
-          tabs2:['全部',back.tab1,back.tab2],
+          tabs2:['小项目',back.tab1,back.tab2],
           promo:back.promo,
         })
         if (back.app1.status == 1) {

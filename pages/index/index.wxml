@@ -65,51 +65,10 @@
       </block>
     </swiper>
     <view class='line'></view>
-    <view class="page__bd">
-      <view class="weui-tab">
-        <view class="weui-navbar">
-          <block wx:for="{{tabs}}" wx:key="*this">
-            <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
-              <view class="weui-navbar__title">{{item}}</view>
-            </view>
-          </block>
-          <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
-        </view>
-        <view class="weui-tab__panel">
-          <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
-            <i-row i-class="demo-row">
-              <i-col span="8" i-class="demo-col">项目名称</i-col>
-              <i-col span="8" i-class="demo-col">时长/分</i-col>
-              <i-col span="8" i-class="demo-col">门市价/元</i-col>
-            </i-row>
-            <i-row i-class="demo-row" wx:for="{{items2}}" wx:if="{{item.show == 1}}">
-              <i-col span="8" i-class="demo-col">{{item.name}}</i-col>
-              <i-col span="8" i-class="demo-col">{{item.time}}</i-col>
-              <i-col span="8" i-class="demo-col pay">￥{{item.price}}</i-col>
-            </i-row>
-          </view>
-          <view class="weui-tab__content" hidden="{{activeIndex != 1}}" wx:if="{{promo.length > 0}}">
-            <i-row i-class="demo-row" wx:for="{{promo}}">
-              <i-col span="24" i-class="demo-col">{{item.content}}</i-col>
-            </i-row>
-          </view>
-          <view class="weui-tab__content" wx:else>
-            <i-row i-class="demo-row">
-              <i-col span="24" i-class="demo-col"></i-col>
-              <i-col span="24" i-class="demo-col"></i-col>
-              <i-col span="24" i-class="demo-col">暂无优惠</i-col>
-              <i-col span="24" i-class="demo-col"></i-col>
-              <i-col span="24" i-class="demo-col"></i-col>
-            </i-row>
-          </view>
-        </view>
-      </view>
-    </view>
 
-
+    <!-- 精品服务 -->
     <view class="weui-panel weui-panel_access">
-      <view class="weui-panel__hd">精品服务推荐</view>
-
+      <view class="weui-panel__hd">项目推荐</view>
       <view class="weui-tab">
         <view class="weui-navbar">
           <block wx:for="{{tabs2}}" wx:key="*this">
@@ -180,6 +139,47 @@
       </view>
     </view>
 
+    <!-- 项目分类和优惠 -->
+    <view class="page__bd">
+      <view class="weui-tab">
+        <view class="weui-navbar">
+          <block wx:for="{{tabs}}" wx:key="*this">
+            <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+              <view class="weui-navbar__title">{{item}}</view>
+            </view>
+          </block>
+          <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+        </view>
+        <view class="weui-tab__panel">
+          <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+            <i-row i-class="demo-row">
+              <i-col span="8" i-class="demo-col">项目名称</i-col>
+              <i-col span="8" i-class="demo-col">时长/分</i-col>
+              <i-col span="8" i-class="demo-col">门市价/元</i-col>
+            </i-row>
+            <i-row i-class="demo-row" wx:for="{{items2}}" wx:if="{{item.show == 1}}">
+              <i-col span="8" i-class="demo-col">{{item.name}}</i-col>
+              <i-col span="8" i-class="demo-col">{{item.time}}</i-col>
+              <i-col span="8" i-class="demo-col pay">￥{{item.price}}</i-col>
+            </i-row>
+          </view>
+          <view class="weui-tab__content" hidden="{{activeIndex != 1}}" wx:if="{{promo.length > 0}}">
+            <i-row i-class="demo-row" wx:for="{{promo}}">
+              <i-col span="24" i-class="demo-col">{{item.content}}</i-col>
+            </i-row>
+          </view>
+          <view class="weui-tab__content" wx:else>
+            <i-row i-class="demo-row">
+              <i-col span="24" i-class="demo-col"></i-col>
+              <i-col span="24" i-class="demo-col"></i-col>
+              <i-col span="24" i-class="demo-col">暂无优惠</i-col>
+              <i-col span="24" i-class="demo-col"></i-col>
+              <i-col span="24" i-class="demo-col"></i-col>
+            </i-row>
+          </view>
+        </view>
+      </view>
+    </view>
 
     <movable-view class='share' x="{{x}}" y="{{y}}" direction="all">
       <button style='width: 100%;height: 100%;display:flex;align-items: center;justify-content: center;flex-direction: column;  background: white;border-radius: 50%;paddind-top:5px' open-type="share">
