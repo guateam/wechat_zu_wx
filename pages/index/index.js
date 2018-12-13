@@ -288,8 +288,9 @@ Page({
     const query = wx.createSelectorQuery()
     query.select('.bigtabs').boundingClientRect()
     query.exec(function (res) {
-      tabsheight = res[0].height
-      console.log(tabsheight)
+      that.setData({
+        tabsheight:res[0].height
+      })
     })
 
     if (app.globalData.userInfo) {
