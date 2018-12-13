@@ -144,6 +144,7 @@ Page({
     })
   },
   onShow:function(){
+    var that = this;
     this.setData({
       loading_done:false
     });
@@ -192,7 +193,7 @@ Page({
               }
             })
           }
-          this.setData({
+          that.setData({
             loading_done: true
           });
         },
@@ -201,13 +202,13 @@ Page({
           wx.navigateTo({
             url: '../welcome/welcome',
           })
-          this.setData({
+          that.setData({
             loading_done: true
           });
         }
       })
     }else{
-      this.setData({
+      that.setData({
         loading_done: true
       });
     }
