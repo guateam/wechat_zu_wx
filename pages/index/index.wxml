@@ -123,6 +123,9 @@
                 <view class="weui-media-box__bd weui-media-box__bd_in-appmsg carditems">
                   <view class='carditems-name'>{{item.name}}</view>
                   <view class='carditems-other'>
+                    <view class='carditems-pay'>￥{{item.cheat_price}}</view>
+                  </view>
+                  <view class='carditems-other'>
                     <view class='carditems-pay'>￥{{item.price}}</view>
                     <view class='carditems-time'>{{item.time}}分钟</view>
                   </view>
