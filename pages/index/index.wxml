@@ -93,7 +93,7 @@
                 </view>
                 <view class="weui-media-box__bd weui-media-box__bd_in-appmsg carditems">
                   <view class='carditems-name'>{{item.name}}</view>
-                  <view class='carditems-pay-ago'>￥{{item.price}}</view>
+                  <view class='carditems-pay-ago'>￥{{item.market_price}}</view>
                   <view class='carditems-other'>
                     <view class='carditems-pay'>￥{{item.price}}</view>
                     <view class='carditems-time'>{{item.time}}分钟</view>
@@ -116,7 +116,7 @@
                 </view>
                 <view class="weui-media-box__bd weui-media-box__bd_in-appmsg carditems">
                   <view class='carditems-name'>{{item.name}}</view>
-                  <view class='carditems-pay-ago'>￥{{item.price}}</view>
+                  <view class='carditems-pay-ago'>￥{{item.market_price}}</view>
                   <view class='carditems-other'>
                     <view class='carditems-pay'>￥{{item.price}}</view>
                     <view class='carditems-time'>{{item.time}}分钟</view>
@@ -140,7 +140,7 @@
                 <view class="weui-media-box__bd weui-media-box__bd_in-appmsg carditems">
                   <view class='carditems-name'>{{item.name}}</view>
                   <!-- 这里显示的是门市价 -->
-                  <view class='carditems-pay-ago'>￥{{item.price}}</view>
+                  <view class='carditems-pay-ago'>￥{{item.market_price}}</view>
                   <!-- 这里显示的是活动价，所有收费都按照活动价来收 -->
                   <view class='carditems-other'>
                     <view class='carditems-pay'>￥{{item.price}}</view>
