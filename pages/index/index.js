@@ -341,7 +341,7 @@ Page({
         that.setData({
           foot: back.foot,
           spa:back.spa,
-          tabs2:['小项目',back.tab1,back.tab2],
+          tabs2: [back.tab1, back.tab2, '小项目'],
           promo:back.promo,
         })
         if (back.app1.status == 1) {
