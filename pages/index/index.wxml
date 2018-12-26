@@ -122,9 +122,11 @@
                 </view>
                 <view class="weui-media-box__bd weui-media-box__bd_in-appmsg carditems">
                   <view class='carditems-name'>{{item.name}}</view>
+                  <!-- 这里显示的是门市价 -->
                   <view class='carditems-other'>
                     <view class='carditems-pay'>￥{{item.cheat_price}}</view>
                   </view>
+                  <!-- 这里显示的是活动价，所有收费都按照活动价来收 -->
                   <view class='carditems-other'>
                     <view class='carditems-pay'>￥{{item.price}}</view>
                     <view class='carditems-time'>{{item.time}}分钟</view>
@@ -159,7 +161,7 @@
             <i-row i-class="demo-row" wx:for="{{items2_more}}" wx:if="{{item.show == 1}}">
               <i-col span="8" i-class="demo-col">{{item.name}}</i-col>
               <i-col span="8" i-class="demo-col">{{item.time}}</i-col>
-              <i-col span="8" i-class="demo-col pay">￥{{item.price}}</i-col>
+              <i-col span="8" i-class="demo-col pay">￥{{item.cheat_price}}</i-col>
             </i-row>
           </view>
           <view class="weui-tab__content littletabs" hidden="{{activeIndex != 1}}" wx:if="{{promo.length > 0}}" style="height:{{tabsheight}}px;">
