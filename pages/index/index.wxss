@@ -253,10 +253,16 @@
 
 .carditems-name {
   display: flex;
-  flex: 0 0 70%;
+  flex: 0 0 30%;
   align-items: center;
 }
-
+.carditems-pay-ago{
+  display: flex;
+  flex: 0 0 30%;
+  color: #cea904ef;
+  align-content: center;
+  justify-content: center;
+}
 .carditems-pay {
   width: 100%;
   color: #8c8ef9;
