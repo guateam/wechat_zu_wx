@@ -171,12 +171,12 @@
             <i-row i-class="demo-row">
               <i-col span="8" i-class="demo-col">项目名称</i-col>
               <i-col span="8" i-class="demo-col">时长/分</i-col>
-              <i-col span="8" i-class="demo-col">门市价/元</i-col>
+              <i-col span="8" i-class="demo-col">价格/元</i-col>
             </i-row>
             <i-row i-class="demo-row" wx:for="{{items2_more}}" wx:if="{{item.show == 1}}">
               <i-col span="8" i-class="demo-col">{{item.name}}</i-col>
               <i-col span="8" i-class="demo-col">{{item.time}}</i-col>
-              <i-col span="8" i-class="demo-col pay">￥{{item.market_price}}</i-col>
+              <i-col span="8" i-class="demo-col pay">￥{{item.price}}</i-col>
             </i-row>
           </view>
           <view class="weui-tab__content littletabs" hidden="{{activeIndex != 1}}" wx:if="{{promo.length > 0}}" style="height:{{tabsheight}}px;">
