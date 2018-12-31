@@ -107,9 +107,9 @@
           <view class="weui-tab__content" hidden="{{tabs2_index != 1}}">
             <view class="weui-panel__bd">
             <view class="weui-media-box__bd weui-media-box__bd_in-appmsg carditems" style='line-height:1.5;height:58px'>
-                <view style='display: flex;align-items: center;justify-content: center;flex: 0 0 50%;font-weight:600;'>项目</view>
-                <view style='display: flex;align-items: center;justify-content: center;flex: 0 0 30%;font-weight:600;'>门市价</view>
-                <view style='display: flex;align-items: center;justify-content: center;flex: 0 0 20%;font-weight:600;'>活动价</view>
+                <view style='display: flex;align-items: center;justify-content: center;flex: 0 0 50%;font-weight:100;'>项目</view>
+                <view style='display: flex;align-items: center;justify-content: center;flex: 0 0 30%;font-weight:100;'>门市价</view>
+                <view style='display: flex;align-items: center;justify-content: center;flex: 0 0 20%;font-weight:100;'>活动价</view>
               </view>
               <navigator wx:for="{{spa}}" url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" bindtap="head_to" data-link="xiangmuxiangqing.html?id={{item.id}}">
                 <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
@@ -130,9 +130,9 @@
             <!-- 全部 -->
             <view class="weui-panel__bd">
             <view class="weui-media-box__bd weui-media-box__bd_in-appmsg carditems" style='line-height:1.5;height:58px'>
-                <view style='display: flex;align-items: center;justify-content: center;flex: 0 0 50%;font-weight:600;'>项目</view>
-                <view style='display: flex;align-items: center;justify-content: center;flex: 0 0 30%;font-weight:600;'>门市价</view>
-                <view style='display: flex;align-items: center;justify-content: center;flex: 0 0 20%;font-weight:600;'>活动价</view>
+                <view style='display: flex;align-items: center;justify-content: center;flex: 0 0 50%;font-weight:100;'>项目</view>
+                <view style='display: flex;align-items: center;justify-content: center;flex: 0 0 30%;font-weight:100;'>门市价</view>
+                <view style='display: flex;align-items: center;justify-content: center;flex: 0 0 20%;font-weight:100;'>活动价</view>
               </view>
               <navigator wx:for="{{items2}}" wx:if="{{item.show == 1}}" url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" bindtap="head_to" data-link="xiangmuxiangqing.html?id={{item.id}}">
                 <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
