@@ -84,9 +84,9 @@
           <view class="weui-tab__content" hidden="{{!(tabs2_index == 0)}}">
             <view class="weui-panel__bd">
               <view class="weui-media-box__bd weui-media-box__bd_in-appmsg carditems" style='line-height:1.5;height:58px'>
-                <view style='display: flex;align-items: center;justify-content: center;flex: 0 0 50%;font-weight:100;'>项目</view>
-                <view style='display: flex;align-items: center;justify-content: center;flex: 0 0 30%;font-weight:100;'>门市价</view>
-                <view style='display: flex;align-items: center;justify-content: center;flex: 0 0 20%;font-weight:100;'>活动价</view>
+                <view style='display: flex;align-items: center;justify-content: center;flex: 0 0 50%;font-weight:600;'>项目</view>
+                <view style='display: flex;align-items: center;justify-content: center;flex: 0 0 30%;font-weight:600;'>门市价</view>
+                <view style='display: flex;align-items: center;justify-content: center;flex: 0 0 20%;font-weight:600;'>活动价</view>
               </view>
               <navigator wx:for="{{foot}}" url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active" bindtap="head_to" data-link="xiangmuxiangqing.html?id={{item.id}}">
                 <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
@@ -94,7 +94,7 @@
                 </view>
                 <view class="weui-media-box__bd weui-media-box__bd_in-appmsg carditems">
                   <view class='carditems-name'>{{item.name}}</view>
-                  <view class='carditems-pay-ago'>￥{{item.market_price}}</view>
+                  <view class='carditems-pay-ago'><span style="text-decoration:line-through;">￥{{item.market_price}}</span></view>
                   <view class='carditems-other'>
                     <view class='carditems-pay'>￥{{item.price}}</view>
                     <view class='carditems-time'>{{item.time}}分钟</view>
@@ -117,7 +117,7 @@
                 </view>
                 <view class="weui-media-box__bd weui-media-box__bd_in-appmsg carditems">
                   <view class='carditems-name'>{{item.name}}</view>
-                  <view class='carditems-pay-ago'>￥{{item.market_price}}</view>
+                  <view class='carditems-pay-ago'><span style="text-decoration:line-through;">￥{{item.market_price}}</span></view>
                   <view class='carditems-other'>
                     <view class='carditems-pay'>￥{{item.price}}</view>
                     <view class='carditems-time'>{{item.time}}分钟</view>
@@ -141,7 +141,7 @@
                 <view class="weui-media-box__bd weui-media-box__bd_in-appmsg carditems">
                   <view class='carditems-name'>{{item.name}}</view>
                   <!-- 这里显示的是门市价 -->
-                  <view class='carditems-pay-ago'>￥{{item.market_price}}</view>
+                  <view class='carditems-pay-ago'><span style="text-decoration:line-through;">￥{{item.market_price}}</span></view>
                   <!-- 这里显示的是活动价，所有收费都按照活动价来收 -->
                   <view class='carditems-other'>
                     <view class='carditems-pay'>￥{{item.price}}</view>
@@ -157,6 +157,8 @@
     </view>
 
     <!-- 项目分类和优惠 -->
+
+    <!--
     <view class="page__bd">
       <view class="weui-tab">
         <view class="weui-navbar">
@@ -197,7 +199,7 @@
         </view>
       </view>
     </view>
-
+    -->
 
     <movable-view class='share' x="{{x}}" y="{{y}}" direction="all">
       <button style='width: 100%;height: 100%;display:flex;align-items: center;justify-content: center;flex-direction: column;  background: white;border-radius: 50%;paddind-top:5px' open-type="share">
