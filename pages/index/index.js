@@ -327,7 +327,7 @@ Page({
       header: {
         'content-type': 'application/x-www-form-urlencoded'
       },
-      url: app.globalData.posttp + app.globalData.postdir + '/wechat/php/getmainpage.php',
+      url: app.globalData.posttp + app.globalData.postdir + "/wechat/php/getmainpage.php",
       success: function (data) {
         data = data.data;
         if (data.status == 1) {

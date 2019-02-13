@@ -26,7 +26,7 @@ Page({
     } else {
       //解密密码
       wx.request({
-        url: app.globalData.posttp + app.globalData.postdir + '/wechat/php/phone_decode.php',
+        url: app.globalData.posttp + app.globalData.postdir + "/wechat/php/phone_decode.php",
         data: {
           appid: app.globalData.appid,
           session_key: app.globalData.session_key,
