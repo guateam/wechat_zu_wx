@@ -57,7 +57,7 @@
         <view class='items-items-word'>奖赏</view>
       </view>
     </view>
-    <swiper class="swiper-word" vertical="true" circular="true" autoplay="true" interval="2000" duration="500">
+    <swiper class="swiper-word" horizontal="true" circular="true" autoplay="true" interval="4000" duration="4000">
       <block wx:for="{{items3}}" wx:for-index="index">
         <swiper-item catchtouchmove="stopTouchMove">
           <p class="slide-word" mode="aspectFill">{{item.text}}</p>
