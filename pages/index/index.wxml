@@ -94,7 +94,7 @@
                 </view>
                 <view class="weui-media-box__bd weui-media-box__bd_in-appmsg carditems">
                   <view class='carditems-name'>{{item.name}}</view>
-                  <view class='carditems-pay-ago'><span style="text-decoration:line-through;">￥{{item.market_price}}</span></view>
+                  <view class='carditems-pay-ago'><span style="text-decoration:line-through;color:red"><span style="color:black">￥{{item.market_price}}</span></span></view>
                   <view class='carditems-other'>
                     <view class='carditems-pay'>￥{{item.price}}</view>
                     <view class='carditems-time'>{{item.time}}分钟</view>
@@ -117,7 +117,7 @@
                 </view>
                 <view class="weui-media-box__bd weui-media-box__bd_in-appmsg carditems">
                   <view class='carditems-name'>{{item.name}}</view>
-                  <view class='carditems-pay-ago'><span style="text-decoration:line-through;">￥{{item.market_price}}</span></view>
+                  <view class='carditems-pay-ago'><span style="text-decoration:line-through;color:red"><span style="color:black">￥{{item.market_price}}</span></span></view>
                   <view class='carditems-other'>
                     <view class='carditems-pay'>￥{{item.price}}</view>
                     <view class='carditems-time'>{{item.time}}分钟</view>
@@ -141,7 +141,7 @@
                 <view class="weui-media-box__bd weui-media-box__bd_in-appmsg carditems">
                   <view class='carditems-name'>{{item.name}}</view>
                   <!-- 这里显示的是门市价 -->
-                  <view class='carditems-pay-ago'><span style="text-decoration:line-through;">￥{{item.market_price}}</span></view>
+                  <view class='carditems-pay-ago'><span style="text-decoration:line-through;color:red"><span style="color:black">￥{{item.market_price}}</span></span></view>
                   <!-- 这里显示的是活动价，所有收费都按照活动价来收 -->
                   <view class='carditems-other'>
                     <view class='carditems-pay'>￥{{item.price}}</view>
