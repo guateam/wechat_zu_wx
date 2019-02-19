@@ -90,14 +90,14 @@ Page({
                     } else if (options.type == "recharge") {
                       that.recharge(options)
                     } else {
-                      that.yuyue(options, 4)
+                      that.yuyue(options, 1)
                     }
                   },
                   fail: (msg) => {
                     if (msg.errMsg == "requestPayment:fail cancel") {
                       console.log('取消支付')
                       if (options.type != 'dashang' && options.type != "pay_unpaid" && options.type != "recharge") {
-                        that.yuyue(options, 1);
+                        that.yuyue(options, 3);
                       } else {
                         wx.switchTab({
                           url: '../index/index',
@@ -142,7 +142,7 @@ Page({
   yuyue(options, state) {
     var that = this;
     var pay_way = 1;
-    if (state == 1) {
+    if (state == 3) {
       pay_way = 0;
     }
     wx.request({
@@ -150,12 +150,12 @@ Page({
       data: {
         id: app.globalData.openid,
         phone: options.phone,
-        pay_way: 1, //支付方式  1--微信   3--会员卡
+        pay_way: pay_way, //支付方式  1--微信   3--会员卡
         people_num: options.peoplenum,
         pay: options.total_fee,
         state: state, //产生的订单状态 4--支付完成  1--预约
         obj: options.list,
-        pay_way: 1,//1-微信支付  3--会员卡支付  0-未支付
+        //pay_way: 1,//1-微信支付  3--会员卡支付  0-未支付
         select_time: options.select_time,
         service_type: options.type, //产生的service_order的类型为服务还是茶水
       },
@@ -165,7 +165,7 @@ Page({
       method: "POST",
       success: (res) => {
         res = res.data;
-        if (state == 1) {
+        if (state == 3) {
           wx.showModal({
             content: '中断支付，预约订单已经创建，请前往 【我的预约】页面查看详情',
             success: (then) => {
