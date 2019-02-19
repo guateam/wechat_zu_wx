@@ -69,7 +69,7 @@ Page({
             },
             data: {
               appid: app.globalData.appid,
-              total_fee: options.total_fee,
+              total_fee: options.total_fee/100,
               openid: app.globalData.openid,
             },
             success: (result) => {
