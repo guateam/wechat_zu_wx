@@ -82,6 +82,11 @@ Page({
     this.setData({
       yuming:app.globalData.yuming
     })
+    //首页弹窗提示授权，便于之后点击地图按钮检查是否授权
+    wx.getLocation({
+      type: 'gcj02',
+      success(res) { }
+    })
   },
 
   /**

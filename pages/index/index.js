@@ -87,21 +87,54 @@ Page({
   //事件处理函数
   openmap: function () {
     var that = this
-    wx.getLocation({
-      type: 'gcj02', //返回可以用于wx.openLocation的经纬度
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    wx.getSetting({
       success(res) {
-        const latitude = Number(that.data.data.latitude)// res.latitude
-        const longitude = Number(that.data.data.longitude)// res.longitude
-        wx.openLocation({
-          latitude: latitude,
-          longitude: longitude,
-          scale: 18,
-          name: that.data.data.name,
-          address: that.data.data.position
-        })
-
+        //scope.userLocation是返回的是否打开位置权限，true为打开
+        if (!res.authSetting['scope.userLocation']) {
+          wx.openSetting({
+            //设置权限，这个列表中会包含用户已请求过的权限，可更改权限状态
+            success(res) {
+              //如果再次拒绝则返回页面并提示
+              if (!res.authSetting['scope.userLocation']) {
+                wx.showToast({
+                  title: '此功能需获取位置信息，请重新设置',
+                  duration: 3000,
+                  icon: 'none'
+                })
+              } else {
+                //允许授权，调用地图
+                wx.openLocation({
+                  latitude: Number(that.data.data.latitude),
+                  longitude: Number(that.data.data.longitude),
+                  scale: 18,
+                  name: that.data.data.name,
+                  address: that.data.data.position
+                })
+              }
+            }
+          })
+        } else {
+          wx.openLocation({
+            latitude: Number(that.data.data.latitude),
+            longitude: Number(that.data.data.longitude),
+            scale: 18,
+            name: that.data.data.name,
+            address: that.data.data.position
+          })
+        }
       }
     })
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // wx.getLocation({
+    //   type: 'gcj02', //返回可以用于wx.openLocation的经纬度
+    //   success(res) {
+    //     const latitude = Number(that.data.data.latitude)// res.latitude
+    //     const longitude = Number(that.data.data.longitude)// res.longitude
+        
+
+    //   }
+    // })
   },
   phone: function () {
     wx.makePhoneCall({
@@ -370,6 +403,7 @@ Page({
         that.setData({
           loading_done:true
         })
+        
       }
     })
   },
