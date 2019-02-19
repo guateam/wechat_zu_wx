@@ -144,59 +144,59 @@ Page({
     })
   },
   onShow:function(){
-    var that = this;
-    this.setData({
-      loading_done:false
-    });
-    if (app.globalData.userinfo_success != true) {
-      wx.getUserInfo({
-        success: function (res) {
-          if (res.errMsg == "getUserInfo:fail auth deny") {
-            app.globalData.userinfo_success = false;
-            //获取用户失败，跳转到welcome
-            wx.navigateTo({
-              url: '../welcome/welcome',
-            })
-          } else {
-            getApp().globalData.userinfo = res.userinfo;
-            app.globalData.userinfo_success = true;
-            wx.request({
-              url: app.globalData.posttp + app.globalData.postdir + "/wechat/php/if_register.php",
-              data: {
-                openid: app.globalData.openid,
-              },
-              header: {
-                'content-type': 'application/x-www-form-urlencoded'
-              },
-              method: "POST",
-              success: function (result) {
-                result = result.data;
-                if (result.status == 0) {
-                  //保存用户信息到数据库
-                  wx.request({
-                    url: app.globalData.posttp + app.globalData.postdir + "/wechat/php/upload_customer.php",
-                    data: {
-                      openid: app.globalData.openid,
-                      username: res.userinfo.nickName,
-                      gender: res.userinfo.gender,
-                      head: res.userinfo.avatarUrl
-                    },
-                    header: {
-                      'content-type': 'application/x-www-form-urlencoded'
-                    },
-                    method: "POST",
-                    success: function (res) {
-                      res = res.data;
-                    }
-                  })
-                }
-              }
-            })
-          }
-          that.setData({
-            loading_done: true
-          });
-        },
+    // var that = this;
+    // this.setData({
+    //   loading_done:false
+    // });
+    // if (app.globalData.userinfo_success != true) {
+    //   wx.getUserInfo({
+    //     success: function (res) {
+    //       if (res.errMsg == "getUserInfo:fail auth deny") {
+    //         app.globalData.userinfo_success = false;
+    //         //获取用户失败，跳转到welcome
+    //         wx.navigateTo({
+    //           url: '../welcome/welcome',
+    //         })
+    //       } else {
+    //         getApp().globalData.userinfo = res.userinfo;
+    //         app.globalData.userinfo_success = true;
+    //         wx.request({
+    //           url: app.globalData.posttp + app.globalData.postdir + "/wechat/php/if_register.php",
+    //           data: {
+    //             openid: app.globalData.openid,
+    //           },
+    //           header: {
+    //             'content-type': 'application/x-www-form-urlencoded'
+    //           },
+    //           method: "POST",
+    //           success: function (result) {
+    //             result = result.data;
+    //             if (result.status == 0) {
+    //               //保存用户信息到数据库
+    //               wx.request({
+    //                 url: app.globalData.posttp + app.globalData.postdir + "/wechat/php/upload_customer.php",
+    //                 data: {
+    //                   openid: app.globalData.openid,
+    //                   username: res.userinfo.nickName,
+    //                   gender: res.userinfo.gender,
+    //                   head: res.userinfo.avatarUrl
+    //                 },
+    //                 header: {
+    //                   'content-type': 'application/x-www-form-urlencoded'
+    //                 },
+    //                 method: "POST",
+    //                 success: function (res) {
+    //                   res = res.data;
+    //                 }
+    //               })
+    //             }
+    //           }
+    //         })
+    //       }
+    //       that.setData({
+    //         loading_done: true
+    //       });
+    //     },
         // fail: function () {
         //   app.globalData.userinfo_success = false;
         //   wx.navigateTo({
@@ -206,12 +206,12 @@ Page({
         //     loading_done: true
         //   });
         // }
-      })
-    }else{
-      that.setData({
-        loading_done: true
-      });
-    }
+    //   })
+    // }else{
+    //   that.setData({
+    //     loading_done: true
+    //   });
+    // }
   },
   onLoad: function () {
     var that = this;
