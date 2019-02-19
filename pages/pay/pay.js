@@ -204,7 +204,8 @@ Page({
     wx.request({
       url: app.globalData.posttp + app.globalData.postdir + "/wechat/php/recharge.php",
       data: {
-        charge: options.total_fee + options.back_fee,
+        charge: options.total_fee ,
+        back: options.back_fee,
         user_id: app.globalData.openid, //user_id为open_id
         job_number: options.jobnumber,
         pay: 1
