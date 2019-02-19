@@ -1,0 +1,82 @@
+Directory : e:\PhpStudy\WWW\wechat_zu_wx\pages
+Date : 2018-12-26 19:18:29
+Total : 38 files,  1458 codes, 588 comments, 324 blanks, all 2370 lines
+
+Languages
++------------+------------+------------+------------+------------+------------+
+| language   | files      | code       | comment    | blank      | total      |
++------------+------------+------------+------------+------------+------------+
+| JavaScript |         19 |      1,384 |        588 |        324 |      2,296 |
+| JSON       |         19 |         74 |          0 |          0 |         74 |
++------------+------------+------------+------------+------------+------------+
+
+Directories
++----------------------------------------+------------+------------+------------+------------+------------+
+| path                                   | files      | code       | comment    | blank      | total      |
++----------------------------------------+------------+------------+------------+------------+------------+
+| .                                      |         38 |      1,458 |        588 |        324 |      2,370 |
+| pay                                    |          2 |        441 |         85 |         38 |        564 |
+| index                                  |          2 |        392 |         24 |          4 |        420 |
+| welcome                                |          2 |         88 |         27 |         16 |        131 |
+| getphone                               |          2 |         82 |         32 |         17 |        131 |
+| order                                  |          2 |         36 |         28 |         15 |         79 |
+| my                                     |          2 |         34 |         28 |         16 |         78 |
+| many                                   |          2 |         32 |         28 |         16 |         76 |
+| tea                                    |          2 |         31 |         28 |         16 |         75 |
+| jishiyuyue                             |          2 |         30 |         28 |         16 |         74 |
+| dingdanxiangqing                       |          2 |         30 |         28 |         17 |         75 |
+| yuyueStatus                            |          2 |         30 |         28 |         17 |         75 |
+| nopay_order                            |          2 |         29 |         28 |         17 |         74 |
+| history-tip                            |          2 |         29 |         28 |         17 |         74 |
+| dashangjishi                           |          2 |         29 |         28 |         17 |         74 |
+| recharge                               |          2 |         29 |         28 |         17 |         74 |
+| culture                                |          2 |         29 |         28 |         17 |         74 |
+| recharge-record                        |          2 |         29 |         28 |         17 |         74 |
+| customer-info                          |          2 |         29 |         28 |         17 |         74 |
+| card                                   |          2 |         29 |         28 |         17 |         74 |
++----------------------------------------+------------+------------+------------+------------+------------+
+
+Files
++----------------------------------------+------------+------------+------------+------------+------------+
+| filename                               | language   | code       | comment    | blank      | total      |
++----------------------------------------+------------+------------+------------+------------+------------+
+| card\card.js                           | JavaScript |         26 |         28 |         17 |         71 |
+| card\card.json                         | JSON       |          3 |          0 |          0 |          3 |
+| culture\culture.js                     | JavaScript |         26 |         28 |         17 |         71 |
+| culture\culture.json                   | JSON       |          3 |          0 |          0 |          3 |
+| customer-info\customer-info.js         | JavaScript |         26 |         28 |         17 |         71 |
+| customer-info\customer-info.json       | JSON       |          3 |          0 |          0 |          3 |
+| dashangjishi\dashangjishi.js           | JavaScript |         26 |         28 |         17 |         71 |
+| dashangjishi\dashangjishi.json         | JSON       |          3 |          0 |          0 |          3 |
+| dingdanxiangqing\dingdanxiangqing.js   | JavaScript |         27 |         28 |         17 |         72 |
+| dingdanxiangqing\dingdanxiangqing.json | JSON       |          3 |          0 |          0 |          3 |
+| getphone\getphone.js                   | JavaScript |         79 |         32 |         17 |        128 |
+| getphone\getphone.json                 | JSON       |          3 |          0 |          0 |          3 |
+| history-tip\history-tip.js             | JavaScript |         26 |         28 |         17 |         71 |
+| history-tip\history-tip.json           | JSON       |          3 |          0 |          0 |          3 |
+| index\index.js                         | JavaScript |        372 |         24 |          4 |        400 |
+| index\index.json                       | JSON       |         20 |          0 |          0 |         20 |
+| jishiyuyue\jishiyuyue.js               | JavaScript |         27 |         28 |         16 |         71 |
+| jishiyuyue\jishiyuyue.json             | JSON       |          3 |          0 |          0 |          3 |
+| many\many.js                           | JavaScript |         29 |         28 |         16 |         73 |
+| many\many.json                         | JSON       |          3 |          0 |          0 |          3 |
+| my\my.js                               | JavaScript |         31 |         28 |         16 |         75 |
+| my\my.json                             | JSON       |          3 |          0 |          0 |          3 |
+| nopay_order\nopay_order.js             | JavaScript |         26 |         28 |         17 |         71 |
+| nopay_order\nopay_order.json           | JSON       |          3 |          0 |          0 |          3 |
+| order\order.js                         | JavaScript |         33 |         28 |         15 |         76 |
+| order\order.json                       | JSON       |          3 |          0 |          0 |          3 |
+| pay\pay.js                             | JavaScript |        438 |         85 |         38 |        561 |
+| pay\pay.json                           | JSON       |          3 |          0 |          0 |          3 |
+| recharge-record\recharge-record.js     | JavaScript |         26 |         28 |         17 |         71 |
+| recharge-record\recharge-record.json   | JSON       |          3 |          0 |          0 |          3 |
+| recharge\recharge.js                   | JavaScript |         26 |         28 |         17 |         71 |
+| recharge\recharge.json                 | JSON       |          3 |          0 |          0 |          3 |
+| tea\tea.js                             | JavaScript |         28 |         28 |         16 |         72 |
+| tea\tea.json                           | JSON       |          3 |          0 |          0 |          3 |
+| welcome\welcome.js                     | JavaScript |         85 |         27 |         16 |        128 |
+| welcome\welcome.json                   | JSON       |          3 |          0 |          0 |          3 |
+| yuyueStatus\yuyueStatus.js             | JavaScript |         27 |         28 |         17 |         72 |
+| yuyueStatus\yuyueStatus.json           | JSON       |          3 |          0 |          0 |          3 |
+| Total                                  |            |      1,458 |        588 |        324 |      2,370 |
++----------------------------------------+------------+------------+------------+------------+------------+

@@ -1,11 +1,11 @@
 //app.js
 App({
   globalData: {
-    //postdir:'172.20.10.3',
+    postdir:'172.20.10.3',
     //postdir: 'a.lobopay.cn',
-    postdir: 'yzt.wangjiyu.cn',
-    //posttp:"http://",
-    posttp: "https://",
+    //postdir: 'yzt.wangjiyu.cn',
+    posttp:"http://",
+    //posttp: "https://",
     personInfo: "",
     openid: "",
     userinfo_success: "",
