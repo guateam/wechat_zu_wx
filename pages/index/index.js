@@ -197,15 +197,15 @@ Page({
             loading_done: true
           });
         },
-        fail: function () {
-          app.globalData.userinfo_success = false;
-          wx.navigateTo({
-            url: '../welcome/welcome',
-          })
-          that.setData({
-            loading_done: true
-          });
-        }
+        // fail: function () {
+        //   app.globalData.userinfo_success = false;
+        //   wx.navigateTo({
+        //     url: '../welcome/welcome',
+        //   })
+        //   that.setData({
+        //     loading_done: true
+        //   });
+        // }
       })
     }else{
       that.setData({
