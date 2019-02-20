@@ -5,6 +5,7 @@ var sliderWidth = 110 // 需要设置slider的宽度，用于计算中间位置
 var sliderWidth2 = 175 // 需要设置slider的宽度，用于计算中间位置
 Page({
   data: {
+    no_right:-1,//地图是否授权，-1初始情况  0无授权  1授权
     loading: false,
     //yuming: 'http://a.lobopay.cn', //图片的域名
     yuming: 'https://yzt.wangjiyu.cn',
@@ -87,11 +88,67 @@ Page({
   //事件处理函数
   openmap: function () {
     var that = this
+    wx.getLocation({
+      type: 'gcj02',
+      success(res) {
+        that.setData({
+          no_right:1
+        })
+        wx.openLocation({
+          latitude: Number(that.data.data.latitude),
+          longitude: Number(that.data.data.longitude),
+          scale: 18,
+          name: that.data.data.name,
+          address: that.data.data.position
+        })
+       },
+       fail(res){
+         that.setData({
+           no_right: 0
+         })
+        //  wx.openSetting({
+        //     success(res) {
+        //       //如果再次拒绝则返回页面并提示
+        //       if (!res.authSetting['scope.userLocation']) {
+        //         wx.showToast({
+        //           title: '此功能需获取位置信息，请重新设置',
+        //           duration: 3000,
+        //           icon: 'none'
+        //         })
+        //         that.setData({
+        //           no_right:0
+        //         })
+        //       } else {
+        //         //允许授权，调用地图
+        //         that.setData({
+        //           no_right: 1
+        //         })
+        //         wx.openLocation({
+        //           latitude: Number(that.data.data.latitude),
+        //           longitude: Number(that.data.data.longitude),
+        //           scale: 18,
+        //           name: that.data.data.name,
+        //           address: that.data.data.position
+        //         })
+        //       }
+        //     },
+        //     fail(res){
+        //       test = res
+        //     }
+        //  })
+       }
+    })
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     wx.getSetting({
       success(res) {
         //scope.userLocation是返回的是否打开位置权限，true为打开
-        if (!res.authSetting['scope.userLocation']) {
+        if (!res.authSetting['scope.userLocation'] ) {
+              wx.getLocation({
+                type: 'gcj02',
+                success(res) { }
+              })
+
+          if (that.data.no_right != 0)return;
           wx.openSetting({
             //设置权限，这个列表中会包含用户已请求过的权限，可更改权限状态
             success(res) {
@@ -104,6 +161,9 @@ Page({
                 })
               } else {
                 //允许授权，调用地图
+                that.setData({
+                  no_right: 1
+                })
                 wx.openLocation({
                   latitude: Number(that.data.data.latitude),
                   longitude: Number(that.data.data.longitude),
@@ -125,16 +185,6 @@ Page({
         }
       }
     })
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    // wx.getLocation({
-    //   type: 'gcj02', //返回可以用于wx.openLocation的经纬度
-    //   success(res) {
-    //     const latitude = Number(that.data.data.latitude)// res.latitude
-    //     const longitude = Number(that.data.data.longitude)// res.longitude
-        
-
-    //   }
-    // })
   },
   phone: function () {
     wx.makePhoneCall({
@@ -403,7 +453,10 @@ Page({
         that.setData({
           loading_done:true
         })
-        
+        // wx.getLocation({
+        //   type: 'gcj02',
+        //   success(res) { }
+        // })
       }
     })
   },
