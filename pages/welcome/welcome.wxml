@@ -1,6 +1,6 @@
 <!--pages/welcome/welcome.wxml-->
 <view class='pic-box'>
-<image src="{{yuming}}/photo/LB2.jpg" style="width:100%"></image>
+<image src="{{yuming}}/photo/pgy_1.jpg" style="width:100%"></image>
 </view>
 <button open-type="getUserInfo" bindgetuserinfo="userinfo" class="weui-btn" type="primary"> 请授权</button>
 <loading hidden="{{hidden}}">
