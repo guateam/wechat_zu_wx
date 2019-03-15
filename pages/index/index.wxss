@@ -127,8 +127,10 @@
   background-color: #6cf;
 }
 
-.fifth {
-  background-color: #ff7171;
+.fifth image{  
+  height: 100%;
+  width: 100%;
+  border-radius: 50%;
 }
 
 .demo-row {

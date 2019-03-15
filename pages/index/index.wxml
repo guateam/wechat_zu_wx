@@ -32,6 +32,12 @@
         </view>
         <view class='items-items-word'>预约</view>
       </view>
+      <view class='items-items' bindtap='dashangjishi'>
+        <view class='items-img fifth'>
+          <image src="{{yuming+'/wechat/src/dashang.png'}}" alt="" ></image>
+        </view>
+        <view class='items-items-word'>奖赏</view>
+      </view>
       <view class='items-items' bindtap='phone'>
         <view class='items-img second '>
           <image src="{{yuming+'/wechat/src/baoxiang.png'}}" alt=""></image>
@@ -50,12 +56,7 @@
         </view>
         <view class='items-items-word'>会员</view>
       </view>
-      <view class='items-items' bindtap='dashangjishi'>
-        <view class='items-img fifth'>
-          <image src="{{yuming+'/wechat/src/dashang.png'}}" alt=""></image>
-        </view>
-        <view class='items-items-word'>奖赏</view>
-      </view>
+      
     </view>
     <swiper class="swiper-word" horizontal="true" circular="true" autoplay="true" interval="8000" duration="8000">
       <block wx:for="{{items3}}" wx:for-index="index">

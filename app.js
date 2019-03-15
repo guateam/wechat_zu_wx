@@ -3,14 +3,19 @@ App({
   globalData: {
     //postdir:'172.20.10.3',
     //postdir: 'a.lobopay.cn',
+    
     postdir: 'yzt.wangjiyu.cn',
-    //posttp:"http://",
+    //postdir: 'houtai.bfstreet.cn',    
+
+    //posttp:"http://",    
     posttp: "https://",
+    
     personInfo: "",
     openid: "",
     userinfo_success: "",
     appid: "wxe1e434222057b10e",
     appsecret: "c5283cabffbbe714ba1c333fcead2487",
+    
     //yuming: 'http://a.lobopay.cn', //图片的域名
     yuming: 'https://yzt.wangjiyu.cn', //图片的域名
   },
