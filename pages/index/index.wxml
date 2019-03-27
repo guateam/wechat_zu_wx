@@ -23,7 +23,7 @@
       <view class='address' bindtap="openmap">
         {{data.position}}
       </view>
-      <view class='phone' bindtap='phone'></view>
+      <view class='phone' style="background-image: url('{{yuming+'/wechat/src/phone.svg'}}');" bindtap='phone'></view>
     </view>
     <view class="items">
       <view class='items-items' bindtap="jishiyuyue">

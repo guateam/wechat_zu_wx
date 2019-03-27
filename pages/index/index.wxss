@@ -65,7 +65,7 @@
   display: flex;
   flex: 0 0 20%;
   height: 100%;
-  background-image: url("https://yzt.wangjiyu.cn/wechat/src/phone.svg");
+  /*background-image: url("https://yzt.wangjiyu.cn/wechat/src/phone.svg");*/
   background-repeat: no-repeat;
   background-position: 30%;
 }
